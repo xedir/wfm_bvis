@@ -34,7 +34,7 @@ public class CustomerLookup implements JavaDelegate {
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
 		
 		
-		ResultSet rs = connection.askQuery(name);
+		ResultSet rs = connection.askQuery(val1, val2);
 		
 		if (rs.next() == false) {
 			execution.setVariable("CustExists", false);

@@ -7,6 +7,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import java.util.logging.Logger;
 
+import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.db.connection;
 import com.bvis.wip.objects.BusinessCustomer;
 import com.bvis.wip.objects.Customer;
@@ -28,7 +29,7 @@ public class SaveNewBusinessCustomer implements JavaDelegate {
 		
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
-		connection.putBusinessQuery(company_name, address);
+		ConnectionManager.putBusinessCustomer(company_name, address);
 		
 	}
 }

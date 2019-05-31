@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.db.connection;
 import com.bvis.wip.objects.BusinessCustomer;
 import com.bvis.wip.objects.Customer;
@@ -27,13 +28,13 @@ public class SelectCustomer implements JavaDelegate {
 		
 		ResultSet rs;
 		if(business) {
-			rs = connection.askQuery("BUSINESS_CUSTOMER", val1, val2, val3);
+			rs = ConnectionManager.askForBusinessCustomer(val3);
 			
 			rs.next();
 			BusinessCustomer test = new BusinessCustomer(rs.getString("COMPANY_NAME"));	
 			
 		} else {
-			rs = connection.askQuery("CUSTOMER", val1, val2, val3);
+			rs = ConnectionManager.askForCustomer(val1, val2);
 			
 			rs.next();
 			Customer test = new Customer(rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"));	

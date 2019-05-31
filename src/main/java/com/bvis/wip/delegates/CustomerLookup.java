@@ -3,7 +3,7 @@ package com.bvis.wip.delegates;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import com.bvis.wip.db.connection;
+import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Customer;
 
 import java.sql.Connection;
@@ -37,7 +37,7 @@ public class CustomerLookup implements JavaDelegate {
 				
 		
 		if(!business) {
-			ResultSet rs = connection.askQuery("CUSTOMER", val1, val2, val3);
+			ResultSet rs = ConnectionManager.askForCustomer(val1, val2);
 			execution.setVariable("Business", false);
 			if (rs.next() == false) {
 				execution.setVariable("CustExists", false);
@@ -47,7 +47,7 @@ public class CustomerLookup implements JavaDelegate {
 				LOGGER.info("Customer found ...");
 			}	
 		} else {
-			ResultSet rs = connection.askQuery("BUSINESS_CUSTOMER", val1, val2, val3);
+			ResultSet rs = ConnectionManager.askForBusinessCustomer(val3);
 			execution.setVariable("Business", true);
 			if (rs.next() == false) {
 				execution.setVariable("CustExists", false);

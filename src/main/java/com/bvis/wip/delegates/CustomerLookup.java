@@ -3,8 +3,8 @@ package com.bvis.wip.delegates;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Customer;
+import com.bvis.wip.db.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,6 +23,8 @@ public class CustomerLookup implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws SQLException {
 		// TODO Auto-generated method stub
+		
+		ConnectionManager.createDefaults();
 		
 		String val1 = (String) execution.getVariable("first_name");
 		String val2 = (String) execution.getVariable("last_name");

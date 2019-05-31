@@ -14,6 +14,7 @@ public class ConnectionManager {
 	// Querie generation and call for Customers and BusinessCustomers, generate queries for askQuery(queryText) here.
 	
 	public static ResultSet askForCustomer(String first_name, String last_name) throws SQLException {
+		
 		String queryText = "SELECT * FROM CUSTOMER WHERE FIRST_NAME= '" 
 								+ first_name + "' AND LAST_NAME='" + last_name +"'; ";
 		return connection.askQuery(queryText);
@@ -41,4 +42,16 @@ public class ConnectionManager {
 		
 		//return rs;
 	}
+	
+	
+	public static void createDefaults() throws SQLException {
+		
+		String createQuery = "CREATE TABLE IF NOT EXISTS CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address varchar(255))";
+		connection.putQuery(createQuery);
+		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
+		connection.putQuery(createBusinessQuery);
+	}
+	
+	
+	
 }

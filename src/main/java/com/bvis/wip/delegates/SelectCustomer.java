@@ -8,6 +8,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import com.bvis.wip.db.connection;
+import com.bvis.wip.objects.BusinessCustomer;
 import com.bvis.wip.objects.Customer;
 
 public class SelectCustomer implements JavaDelegate {
@@ -20,17 +21,28 @@ public class SelectCustomer implements JavaDelegate {
 
 		String val1 = (String) execution.getVariable("first_name");
 		String val2 = (String) execution.getVariable("last_name");
+		String val3 = (String) execution.getVariable("company_name");
+		boolean business = (boolean) execution.getVariable("business");
 		
-		String name = val1 + " " + val2;
 		
-		ResultSet rs = connection.askQuery(val1, val2);
-		rs.next();
+		ResultSet rs;
+		if(business) {
+			rs = connection.askQuery("BUSINESS_CUSTOMER", val1, val2, val3);
+			
+			rs.next();
+			BusinessCustomer test = new BusinessCustomer(rs.getString("COMPANY_NAME"));	
+			
+		} else {
+			rs = connection.askQuery("CUSTOMER", val1, val2, val3);
+			
+			rs.next();
+			Customer test = new Customer(rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"));	
+			test.setAddress(rs.getString("ADDRESS"));
+		}
+		
 
-		Customer test = new Customer(rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"));	
-		test.setAddress(rs.getString("ADDRESS"));
 
 		LOGGER.info("Customer Selected:" + rs.getString("FIRST_NAME"));
 		
 	}
-
 }

@@ -1,15 +1,23 @@
 <form>
 
-  <label for="customerId">Customer Id:</label>
+       <label for="firstName">First Name</label>
+       <input type="text" id="firstName" cam-variable-name="first_name" cam-variable-type="String">
 
-  <input type="text" id="firstAmount"
-         cam-variable-name="first_name"
-         cam-variable-type="String">
 
-  <label for="customerRevenue">Customer Revenue:</label>
+       <label for="lastName">Last Name</label>
+       <input type="text" id="lastName" cam-variable-name="last_name" cam-variable-type="String">
 
-  <input type="text" id="secondAmount"
-         cam-variable-name="last_name"
-         cam-variable-type="String">
+       <div class="form-group">
+              <label class="control-label">Business?</label>
+              <div class="controls">
+                     <input type="checkbox" cam-variable-name="business" cam-variable-type="Boolean" name="business"
+                            class="form-control" />
+              </div>
+       </div>
+
+       <label for="companyName">Company Name</label>
+       <input type="text" id="companyName" cam-variable-name="company_name" cam-variable-type="String">
+
+
 
 </form>

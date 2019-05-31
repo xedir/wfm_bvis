@@ -3,5 +3,10 @@ C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\delegates\SelectCu
 C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\LoggerDelegate.java
 C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\delegates\SaveNewCustomer.java
 C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\db\connection.java
+C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\objects\Car.java
 C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\delegates\CustomerLookup.java
+C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\objects\BusinessCustomer.java
 C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\objects\Customer.java
+C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\objects\Rent.java
+C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\objects\Contract.java
+C:\Users\Nic\eclipse-workspace\wip\src\main\java\com\bvis\wip\delegates\SaveNewBusinessCustomer.java

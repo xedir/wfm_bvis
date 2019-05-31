@@ -1,10 +1,13 @@
 package com.bvis.wip.objects;
 
+import java.util.List;
+
 public class Customer {
 
 	String first_name;
 	String last_name;
 	String address;
+	List<Rent> rents;
 		
 	
 	public Customer(String first_name, String last_name){

@@ -26,22 +26,36 @@ public class CustomerLookup implements JavaDelegate {
 		
 		String val1 = (String) execution.getVariable("first_name");
 		String val2 = (String) execution.getVariable("last_name");
+		boolean business = (boolean) execution.getVariable("business");
+		String val3 = (String) execution.getVariable("company_name");
 		
 		Customer customer = new Customer(val1, val2);
 		
 		String name = customer.getName();
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
+				
 		
-		
-		ResultSet rs = connection.askQuery(val1, val2);
-		
-		if (rs.next() == false) {
-			execution.setVariable("CustExists", false);
-			LOGGER.info("No Customer found ...");	
+		if(!business) {
+			ResultSet rs = connection.askQuery("CUSTOMER", val1, val2, val3);
+			execution.setVariable("Business", false);
+			if (rs.next() == false) {
+				execution.setVariable("CustExists", false);
+				LOGGER.info("No Customer found ...");	
+			} else {
+				execution.setVariable("CustExists", true);
+				LOGGER.info("Customer found ...");
+			}	
 		} else {
-			execution.setVariable("CustExists", true);
-			LOGGER.info("Customer found ...");
-		}
+			ResultSet rs = connection.askQuery("BUSINESS_CUSTOMER", val1, val2, val3);
+			execution.setVariable("Business", true);
+			if (rs.next() == false) {
+				execution.setVariable("CustExists", false);
+				LOGGER.info("No BusinessCustomer found ...");	
+			} else {
+				execution.setVariable("CustExists", true);
+				LOGGER.info("BusinessCustomer found ...");
+			}
+		}		
 	}
 }

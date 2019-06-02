@@ -6,19 +6,30 @@
   <code>embedded:app:forms/start-form.html</code>
 </p>
 
-<form class="form-horizontal">
-  <div class="form-group">
-    <label class="control-label">Your Name</label>
-    <div class="controls">
-      <input type="text" 
-             cam-variable-name="name"
-             cam-variable-type="String"
-             required
-             class="form-control" />
-    </div>
-  </div>
+<table>
+  <thead>
+  <tr>
+    <th>Column A</th>
+    <th>Column B</th>
+  </tr>
+  </thead>
+  <tbody ng-repeat="data in $scope.dataList track by $index">
+    <tr>                          
+      <td><input type="text" value="{{data.valueA}}" readonly /></td>           
+      <td><input type="text" value="{{data.valueB}}" readonly /></td>
+    </tr>
+  </tbody>
+</table>
 
   <script cam-script type="text/form-script">
-  // custom JavaScript goes here
-  </script>
+    camForm.on('form-loaded', function() {
+      // tell the form SDK to fetch the variable named 'xxx'
+      camForm.variableManager.fetchVariable('data');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // work with the variable (bind it to the current AngularJS $scope)
+      $scope.dataList = camForm.variableManager.variableValue('data);
+    });
+ </script>
 </form>

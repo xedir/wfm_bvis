@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class ConnectionManager {
@@ -27,6 +28,14 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 		
 	}
+	
+	public static ResultSet askForId(String type, String first_name, String last_name) throws SQLException {
+		
+		String queryText = "SELECT ID FROM " + type + " WHERE FIRST_NAME = '"+ first_name + "' AND LAST_NAME='" + last_name + "'" ; 
+		
+		return connection.askQuery(queryText);
+	}
+	
 	
 	public static ResultSet getAllFreeCars() throws SQLException {
 		
@@ -70,6 +79,22 @@ public class ConnectionManager {
 		//return rs;
 	}
 	
+	public static void putContract(String first_name, String last_name, int customerId, String address, String car, String insurance, String start, String end, long duration, double price) throws SQLException {
+		String queryText = "INSERT INTO PRIVATE_CONTRACTS VALUES(default, '" + first_name 
+				+ "', '" + last_name 
+				+ "', '" + customerId 
+				+ "', '" + address 
+				+ "', '" + car 
+				+ "', '" + insurance 
+				+ "', '" + start 
+				+ "', '" + end 
+				+ "', '" + duration 
+				+ "', '" + price 
+				+ "')";
+		
+		connection.putQuery(queryText);
+	}
+	
 	
 	public static void createDefaults() throws SQLException {
 		
@@ -77,8 +102,14 @@ public class ConnectionManager {
 		connection.putQuery(createQuery);
 		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
 		connection.putQuery(createBusinessQuery);
+		
 		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255))";
 		connection.putQuery(createCarsQuery);
+		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
+																		+ "first_name varchar(255), last_name varchar(255), customerId int, "
+																		+ "address varchar(255), car varchar(255), insurance varchar(255), "
+																		+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double)";
+		connection.putQuery(createContractsQuery);
 	}
 	
 	

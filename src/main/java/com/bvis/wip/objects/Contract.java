@@ -1,8 +1,11 @@
 package com.bvis.wip.objects;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
+import com.bvis.wip.db.ConnectionManager;
 
 public class Contract {
 	
@@ -11,14 +14,15 @@ public class Contract {
 
 	Customer customer;
 	Car car;
-	Date start;
-	Date end;
+	String start;
+	String end;
 	String insurance;
 	long duration;
-	long price;
+	double price;
+	int customerId;
 	
 	
-	public Contract(Customer customer, Car car, Date start, Date end, long duration,String insurance, long price) {
+	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {
 		this.customer = customer;
 		this.car = car;
 		this.start = start;
@@ -26,6 +30,7 @@ public class Contract {
 		this.duration = duration;
 		this.insurance = insurance;
 		this.price = price;
+		this.customerId = customer.getId();
 		
 		// LOGGER.info(this.getDetails());
 	}
@@ -42,6 +47,14 @@ public class Contract {
 	
 	public Contract getContract() {
 		return this;
+	}
+	
+	public void save() throws SQLException {
+		
+			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.insurance, this.start, this.end, this.duration, this.price);
+		
+		
+		
 	}
 	
 	public void setInsurance(String insurance) {

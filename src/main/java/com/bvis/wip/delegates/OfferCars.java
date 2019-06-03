@@ -32,6 +32,22 @@ public class OfferCars implements JavaDelegate {
 	                .serializationDataFormat(SerializationDataFormats.JSON)
 	                .create();
 		execution.setVariable("Available_Cars", cars);
+		
+		
+		
+		List<String> availableInsurance = new ArrayList();
+			availableInsurance.add("A");
+			availableInsurance.add("B");
+			availableInsurance.add("C");
+		
+		
+		ObjectValue insurances = Variables.objectValue(availableInsurance)
+	                .serializationDataFormat(SerializationDataFormats.JSON)
+	                .create();
+		execution.setVariable("Available_Insurance", insurances);
+				
+		
+		
 	}
 	
 }

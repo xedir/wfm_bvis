@@ -30,13 +30,10 @@ public class CustomerLookup implements JavaDelegate {
 		String val2 = (String) execution.getVariable("last_name");
 		boolean business = (boolean) execution.getVariable("business");
 		String val3 = (String) execution.getVariable("company_name");
-		
 		Customer customer = new Customer(val1, val2);
-		
 		String name = customer.getName();
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
-				
 		
 		if(!business) {
 			ResultSet rs = ConnectionManager.askForCustomer(val1, val2);

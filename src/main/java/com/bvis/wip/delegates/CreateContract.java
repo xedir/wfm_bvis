@@ -28,18 +28,16 @@ public class CreateContract implements JavaDelegate {
 		String last_name = (String) execution.getVariable("last_name");
 		String address = (String) execution.getVariable("address");
 		
-		LOGGER.info("Ich bin hier, vor dem Block");
-		
+		// Get data from select forms
 		StringValue typedVal2 = execution.getVariableTyped("selected_car");
 		String car_name = (String) typedVal2.getValue();
+
+		StringValue typedVal3 = execution.getVariableTyped("selected_insurance");
+		String insurance = (String) typedVal3.getValue();
 		
-		//String car_name = OfferCars.getMap().get(typedVal2.getValue());
-		
-		//String car_name = (String) execution.getVariable("selected_car");
-		LOGGER.info("Und jetzt hier, nach dem Auto: " + car_name);
 		Date startForm = (Date) execution.getVariable("CONTRACT_START_DATE");
 		Date endForm = (Date) execution.getVariable("CONTRACT_END_DATE");
-		String insurance = (String) execution.getVariable("insurance");
+		
 		long duration = TimeUnit.MILLISECONDS.toDays(endForm.getTime() - startForm.getTime());
 		
 		String pattern = "yyyy-MM-dd";
@@ -47,24 +45,27 @@ public class CreateContract implements JavaDelegate {
 		String start = simpleFormatter.format(startForm);
 		String end = simpleFormatter.format(endForm);
 		
-		
-		
 		Customer customer = new Customer(first_name, last_name);
-		Car car = new Car(car_name);
 		
-		
-		ResultSet rs; 
-		rs = ConnectionManager.askForPrice(car_name);
+		ResultSet rs = ConnectionManager.getFreeCar(car_name);
 		rs.next();
 		
+		Car car = Car.createFromID(rs.getInt("ID"));
+		
+		 
+		
 		double price = duration * rs.getInt("PRICE_PER_DAY");
+		if(insurance.equalsIgnoreCase("A")) {
+			price = price * 1.2;
+		} else if (insurance.equalsIgnoreCase("B")) {
+			price = price * 1.1;
+		}
 		
 		customer.setAddress(address);
+		ConnectionManager.putCarAsRented(car.getId());
 		
 		Contract contract = new Contract(customer, car, start, end, duration, insurance , price);
 		contract.save();
-		
-		contract.saveContract();
 		
 	}
 

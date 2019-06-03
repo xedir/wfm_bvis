@@ -12,9 +12,17 @@
     <input type="text" id="customerAddress"
      cam-variable-name="address" cam-variable-type="String">
 
+    <label for="car">Car</label>
     <select cam-variable-name="selected_car" 
             cam-variable-type="String" 
             cam-choices="Available_Cars">
+    </select>
+
+
+    <label for="insurance">Insurance</label>
+    <select cam-variable-name="selected_insurance" 
+    cam-variable-type="String" 
+    cam-choices="Available_Insurance">
     </select>
 
 
@@ -54,9 +62,6 @@
         </span>
       </p>
 
-      <label for="insurance">Insurance</label>
-      <input type="text" id="insurance"
-       cam-variable-name="insurance" cam-variable-type="String">
 
 
        <script cam-script type="text/form-script">

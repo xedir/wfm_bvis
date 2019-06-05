@@ -13,24 +13,35 @@ public class connection {
 	
 	// Only call askQuery(queryText) or putQuery(queryText) define methods and queries in ConnectionManager
 	
-	public static ResultSet askQuery(String queryText) throws SQLException {
+	public static ResultSet askQuery(String queryText) {
 
-		//create db statement create table CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address_name varchar(255));
-
-		Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+		ResultSet rs = null;
+		Connection conn;
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
 		Statement stmt = conn.createStatement();
 		String query = queryText;
-		ResultSet rs = stmt.executeQuery(query);
-		
+		rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return rs;
 	}
 	
-	public static void putQuery(String queryText) throws SQLException {
+	public static void putQuery(String queryText)  {
 		
-		Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
 		Statement stmt = conn.createStatement();
 		String query = queryText;
 		int rs = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//return rs;
 	}

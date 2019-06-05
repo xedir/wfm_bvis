@@ -24,6 +24,8 @@ public class CustomerLookup implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws SQLException {
 		// TODO Auto-generated method stub
 		
+		
+		// Create default database setups for first installation
 		ConnectionManager.createDefaults();
 		
 		String val1 = (String) execution.getVariable("first_name");
@@ -31,7 +33,6 @@ public class CustomerLookup implements JavaDelegate {
 		boolean business = (boolean) execution.getVariable("business");
 		String val3 = (String) execution.getVariable("company_name");
 		Customer customer = new Customer(val1, val2);
-		String name = customer.getName();
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
 		

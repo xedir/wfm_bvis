@@ -137,6 +137,59 @@ public class ConnectionManager {
 		connection.putQuery(queryText);
 	}
 	
+	// new Andre
+	public static ResultSet askForPrivateContractByCustomerID(int id) {
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE CUSTOMERID= " 
+				+ id;
+		return connection.askQuery(queryText);
+	}
+	// new Andre
+	public static ResultSet askForClaimByID(int id) {
+		String queryText = "SELECT * FROM CLAIMS WHERE ID= " 
+								+ id + "; ";
+		return connection.askQuery(queryText);
+	}
+	// new Andre
+	public static ResultSet askForQuotById(int id) {
+		String queryText = "SELECT * FROM QUOTATIONS WHERE ID= "
+				+ id + "; ";
+		return connection.askQuery(queryText);
+	}
+	// new Andre
+	public static ResultSet getClaimIDdatabase(int customerID, String claimType) {
+		String queryText = "SELECT ID FROM CLAIMS WHERE customerId= '" 
+								+ customerID + "' AND claimType= '"+ claimType + "';";
+		return connection.askQuery(queryText);
+	}
+	
+	// new Andre
+	public static int putClaim(int contractID, String first_name, String last_name, int customerID, String car, int carID, String insurance, String claimType, String isCovered, String status, String problemDesc, String carLocation) {
+		String queryText = "INSERT INTO CLAIMS VALUES(default, '" + contractID 
+				+ "', '" + first_name 
+				+ "', '" + last_name 
+				+ "', '" + customerID 
+				+ "', '" + car
+				+ "', '" + carID 
+				+ "', '" + insurance 
+				+ "', '" + claimType
+				+ "', '" + isCovered
+				+ "', '" + status
+				+ "', '" + problemDesc
+				+ "', '" + carLocation
+				+ "')";
+		int generatedKey = connection.putQuery(queryText);
+		return generatedKey;
+	}
+	// new Andre
+	public static void putQuot(int claimID, String damageDesc, double damageCost, String damagedParts, double partCosts) {
+		String queryText = "INSERT INTO Quotations VALUES(default, '" + claimID 
+				+ "', '" + damageDesc
+				+ "', '" + damageCost
+				+ "', '" + damagedParts 
+				+ "', '" + partCosts
+				+ "')";
+		connection.putQuery(queryText);
+	}
 	
 	public static void createDefaults(){
 		
@@ -147,11 +200,19 @@ public class ConnectionManager {
 		
 		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255))";
 		connection.putQuery(createCarsQuery);
-		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
-																		+ "first_name varchar(255), last_name varchar(255), customerId int, "
-																		+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
-																		+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double, status varchar(255))";
+		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "															+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double, status varchar(255))";
 		connection.putQuery(createContractsQuery);
+		
+		// new Andre
+		String createClaimsQuery = "CREATE TABLE IF NOT EXISTS CLAIMS(ID bigint auto_increment, "
+									+ "contractID int, first_name varchar(255), last_name varchar(255), customerId int, "
+									+ " car varchar(255), carId int,insurance varchar(255), "
+									+ " claimType varchar(255), isCovered varchar(255), status varchar(255), "
+									+ "damageDesc varchar(255), carLocation varchar(255))";
+		connection.putQuery(createClaimsQuery);
+		String createQuotationsQuery = "CREATE TABLE IF NOT EXISTS Quotations(ID bigint auto_increment, "
+				+ "claimID int, damage_desc varchar(255), damage_cost double, "
+				+ " damaged_parts varchar(255), part_costs double)";
 	}
 	
 	

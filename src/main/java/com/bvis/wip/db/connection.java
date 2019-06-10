@@ -30,7 +30,7 @@ public class connection {
 		return rs;
 	}
 	
-	public static void putQuery(String queryText)  {
+	public static int putQuery(String queryText)  {
 		
 		Connection conn;
 		try {
@@ -38,11 +38,23 @@ public class connection {
 		Statement stmt = conn.createStatement();
 		String query = queryText;
 		int rs = stmt.executeUpdate(query);
+		
+		 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                int generatedKey = generatedKeys.getInt(1);
+	                return generatedKey;
+	            }
+	            else {
+	                throw new SQLException("Creating user failed, no ID obtained.");
+	            }
+	        }
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		
+
 		//return rs;
 	}
 	

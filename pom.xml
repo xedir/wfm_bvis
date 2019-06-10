@@ -182,9 +182,6 @@
       <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
-            <configuration>
-                <outputDirectory>C:\WFM\camunda\server\apache-tomcat-9.0.12\webapps\</outputDirectory>
-            </configuration>
        </plugin>
       
       

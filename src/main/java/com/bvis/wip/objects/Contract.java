@@ -2,7 +2,9 @@ package com.bvis.wip.objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -62,6 +64,18 @@ public class Contract {
 		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
 	}
 	
+	public static List<Contract> findAllContracts() throws SQLException {
+		LOGGER.info("inside findAllContracts()");
+		List<Contract> result = new ArrayList<>();
+		ResultSet rs = ConnectionManager.findAllContracts();
+		while (rs.next()) {
+			
+			Contract currentContract = new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
+			LOGGER.info("Adding contract=" + currentContract.getId());
+			result.add(currentContract);
+		}
+		return result;
+	}
 	
 	/**
 	 * @return the customer

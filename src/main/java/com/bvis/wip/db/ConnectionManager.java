@@ -81,6 +81,11 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 
+	public static ResultSet findAllContracts() {
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS";
+		return connection.askQuery(queryText);
+	}
+	
 	public static void putCustomer(String first_name, String last_name, String address) {
 		String queryText = "INSERT INTO CUSTOMER VALUES(default, '" + first_name + "', '"+ last_name + "', '"+ address + " ')";
 		connection.putQuery(queryText);

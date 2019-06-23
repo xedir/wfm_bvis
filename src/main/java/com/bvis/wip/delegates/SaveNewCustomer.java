@@ -22,6 +22,8 @@ public class SaveNewCustomer implements JavaDelegate {
 		String first_name = (String) execution.getVariable("first_name");
 		String last_name = (String) execution.getVariable("last_name");
 		String address = (String) execution.getVariable("address");
+		Integer phone = (Integer) execution.getVariable("phone");
+		String email = (String) execution.getVariable("email");
 		
 		Customer customer = new Customer(first_name, last_name);
 		customer.setAddress(address);
@@ -29,8 +31,7 @@ public class SaveNewCustomer implements JavaDelegate {
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
 		
-		
-		ConnectionManager.putCustomer(first_name, last_name, address);
+		ConnectionManager.putCustomer(first_name, last_name, address, phone, email);
 		
 	}
 }

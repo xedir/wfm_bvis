@@ -52,8 +52,6 @@ public class CreateContract implements JavaDelegate {
 		
 		Car car = Car.createFromID(rs.getInt("ID"));
 		
-		 
-		
 		double price = duration * rs.getInt("PRICE_PER_DAY");
 		if(insurance.equalsIgnoreCase("A")) {
 			price = price * 1.2;

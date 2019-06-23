@@ -1,14 +1,16 @@
 <form>
 
-    <label for="name">Name</label>
-    <input type="text" id="carName"
+	<table>
+		<tr>
+			<th>Car Name:&nbsp;</th>
+			<td>    <input type="text" id="carName"
            cam-variable-name="car_name"
-           cam-variable-type="String">
-  
-
-           <label for="price">Price per day</label>
-           <input type="text" id="price"
-                  cam-variable-name="price_per_day"
-                  cam-variable-type="Integer">           
+           cam-variable-type="String" class="form-control"></td>
+			<th>&nbsp;&nbsp;&nbsp;Price per Day (EUR):&nbsp;</th>
+			<td>    <input type="text" id="price_per_day"
+           cam-variable-name="price_per_day"
+           cam-variable-type="Integer" class="form-control">  </td>
+		</tr>
+	</table>
   
 </form>

@@ -12,8 +12,6 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Car;
@@ -21,8 +19,6 @@ import com.bvis.wip.objects.Contract;
 import com.bvis.wip.objects.Customer;
 
 public class AllContractsLookup implements JavaDelegate {
-	
-	private final static Logger LOGGER = LoggerFactory.getLogger(AllContractsLookup.class);
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {

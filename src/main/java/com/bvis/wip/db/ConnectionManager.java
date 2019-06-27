@@ -138,34 +138,20 @@ public class ConnectionManager {
 
 	public static void putFinalizeContract(int id) {
 		String queryText = "UPDATE PRIVATE_CONTRACTS SET STATUS='finalized' WHERE id=" + id + ";";
-		try {
 			connection.putQuery(queryText);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public static void putCarAsFree(int id) {
 		String queryText = "UPDATE CARS SET STATUS='free' WHERE id=" + id + ";";
-		try {
+
 			connection.putQuery(queryText);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public static void putNewBusAgreement(String companyName, double discount10, double discount1030,
 			double discount30) {
 		String queryText = "INSERT INTO BUSINESS_AGREEMENT VALUES(DEFAULT, SELECT ID FROM BUSINESS_CUSTOMER WHERE COMPANY_NAME = '"
 				+ companyName + "', " + discount10 + ", " + discount1030 + " , " + discount30 + ", CURRENT_TIMESTAMP);";
-		try {
-			connection.putQuery(queryText);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(queryText);
 	}
 
 	
@@ -222,6 +208,7 @@ public class ConnectionManager {
 		int generatedKey = connection.putQuery(queryText);
 		return generatedKey;
 	}
+	
 	// new Andre
 	public static void putQuot(int claimID, String damageDesc, double damageCost, String damagedParts, double partCosts) {
 		String queryText = "INSERT INTO Quotations VALUES(default, '" + claimID 
@@ -258,6 +245,7 @@ public class ConnectionManager {
 			}
 		}
 		return maintid;
+	}
 	
 	
 	public static ResultSet getCarInMaint(int maintid) throws SQLException {
@@ -273,55 +261,30 @@ public class ConnectionManager {
 	public static void createDefaults() {
 
 		String createQuery = "CREATE TABLE IF NOT EXISTS CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address varchar(255), phone bigint, email varchar(255))";
-		try {
-			connection.putQuery(createQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createQuery);
+
 		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
-		try {
-			connection.putQuery(createBusinessQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createBusinessQuery);
+
 
 		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), next_maintenance SMALLDATETIME)";
-		try {
-			connection.putQuery(createCarsQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createCarsQuery);
+
 		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "
 				+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
 				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double, status varchar(255))";
-		try {
-			connection.putQuery(createContractsQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createContractsQuery);
+
 
 		String createMaintenanceQuery = "CREATE TABLE IF NOT EXISTS MAINTENANCE(maint_id bigint auto_increment, "
 				+ "car_id bigint, created_on SMALLDATETIME DEFAULT CURRENT_TIMESTAMP, pick_up_date SMALLDATETIME,"
 				+ "status varchar(100), invoice_number varchar(50), invoice_amount double)";
-		try {
-			connection.putQuery(createMaintenanceQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createMaintenanceQuery);
 
 		String createAgreementQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_AGREEMENT(AGREEMENT_ID bigint auto_increment, BUSINESS_CUSTOMER_ID bigint, DISCOUNT_10 DOUBLE, DISCOUNT_10TO30 DOUBLE, DISCOUNT_30UP DOUBLE, created_on SMALLDATETIME DEFAULT CURRENT_TIMESTAMP);";
-		try {
-			connection.putQuery(createAgreementQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createAgreementQuery);
+
 		
 				// new Andre
 		String createClaimsQuery = "CREATE TABLE IF NOT EXISTS CLAIMS(ID bigint auto_increment, "

@@ -49,9 +49,10 @@ public class Claim {
 	}
 	
 	// save in data base
-	public void save() throws SQLException {
-		ConnectionManager.putClaim(this.contractID, this.customer.first_name, this.customer.last_name, this.customer.getId(), this.car.getName(), this.car.getId(), this.contract.getInsurance(), this.claimType, this.isCovered, this.status, this.damageDesc, this.carLocation);
+	public int save() throws SQLException {
+		int generatedKey = ConnectionManager.putClaim(this.contractID, this.customer.first_name, this.customer.last_name, this.customer.getId(), this.car.getName(), this.car.getId(), this.contract.getInsurance(), this.claimType, this.isCovered, this.status, this.damageDesc, this.carLocation);
 		LOGGER.info("Claim created: " + this.customer.getName() + " Car: " + this.car.getName() + " Claim type" + this.claimType);
+		return generatedKey;
 	}
 	
 	public static Claim createFromID(int id) throws SQLException {

@@ -15,41 +15,36 @@ import com.bvis.wip.objects.Customer;
 
 public class CreateClaim implements JavaDelegate {
 	
-	private final static Logger LOGGER = Logger.getLogger("LoggingClaimCreation");
+
+	private final static Logger LOGGER = Logger.getLogger("CreateClaim");
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
+		String contractIdString = (String) execution.getVariable("selectedContract");
+		int contractId = Integer.parseInt(contractIdString);
+		Contract claimContract = Contract.createFromID(contractId);
+		LOGGER.info("claimContract.id=" + claimContract.getId());
 		
-		// get the name and address from text fields
-		String first_name = (String) execution.getVariable("first_name");
-		String last_name = (String) execution.getVariable("last_name");
-		String address = (String) execution.getVariable("address");
-		String damageDesc= (String) execution.getVariable("damageDesc");
+		String complaintDetails = (String) execution.getVariable("complaintDetails");
+		LOGGER.info("complaintDetails=" + complaintDetails);
+		
 		String carLocation = (String) execution.getVariable("carLocation");
-		// get claimType from selectfield
-		StringValue typedValue = execution.getVariableTyped("selected_claimType");
-		String claimType = (String) typedValue.getValue();
-		// get the customer based on previous values
-		ResultSet rsCustomer = ConnectionManager.getCertainCustomer(first_name, last_name /*, address*/);
-		rsCustomer.next();
-		Customer customer = Customer.createFromID(rsCustomer.getInt("ID"));
+		LOGGER.info("carLocation=" + carLocation);
 		
-		// get the contract for that customer
-		ResultSet rsContract = ConnectionManager.askForPrivateContractByCustomerID(customer.getId());
-		rsContract.next();
-		Contract contract = Contract.createFromID(rsContract.getInt("ID"));
-		// get the car that is considered in the claim
-		Car car = contract.getCar();
+		Car car = claimContract.getCar();
+		LOGGER.info("car.name=" + car.getName());
+		
+		Customer customer = claimContract.getCustomer();
+		LOGGER.info("customer.name=" + customer.getName());
+		
 		int customerID = customer.getId();
 		// create and set Claim to ongoing based on the previous sourced values
-		Claim claim = new Claim(contract, customer, car, claimType, "to be clarified", "ongoing", damageDesc, carLocation);
-		claim.save();
-		// set claimID for later tasks
-		ResultSet rsClaim = ConnectionManager.getClaimIDdatabase(customerID, claimType);
-		rsClaim.next();
-		int claimID = rsClaim.getInt("ID");
-		execution.setVariable("ClaimID", claimID);
+		Claim claim = new Claim(claimContract, customer, car, "some claim type", "to be clarified", "ongoing", complaintDetails, carLocation);
+		int claimId = claim.save();
+		LOGGER.info("claimId=" + claimId);
+		
+		
+		execution.setVariable("claimId", claimId);
 	}
 
 }

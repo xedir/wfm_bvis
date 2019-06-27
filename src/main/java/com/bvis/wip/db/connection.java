@@ -25,13 +25,29 @@ public class connection {
 		return rs;
 	}
 	
-	public static void putQuery(String queryText) throws SQLException {
+	public static int putQuery(String queryText)  {
 		
 		Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
 		Statement stmt = conn.createStatement();
 		String query = queryText;
 		int rs = stmt.executeUpdate(query);
 		
+		 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                int generatedKey = generatedKeys.getInt(1);
+	                return generatedKey;
+	            }
+	            else {
+	                throw new SQLException("Creating user failed, no ID obtained.");
+	            }
+	        }
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+
 		//return rs;
 	}
 	

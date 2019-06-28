@@ -43,6 +43,10 @@ public class Car {
 		this.id = id;
 	}
 	
+	public void setPickedUp() {
+		this.status = "picked up";
+	}
+	
 	public int getId() {
 		return this.id;
 	}

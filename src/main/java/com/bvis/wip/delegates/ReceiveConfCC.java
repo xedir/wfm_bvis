@@ -19,7 +19,7 @@ public class ReceiveConfCC implements JavaDelegate {
 		if (status == "will be picked up") {
 			Claim claim = Claim.createFromID(claimID);
 			// I added the method setStatus to class Car
-			claim.getCar().setStatus("picked up");
+			claim.getCar().setPickedUp();
 		}
 		else {
 			execution.isCanceled();

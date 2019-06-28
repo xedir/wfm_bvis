@@ -1,25 +1,34 @@
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\objects\Rent.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\RequestMaintenance.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\DisplayCustomers.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\objects\BusinessCustomer.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\objects\Contract.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\MaintenanceReturn.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\MaintenancePickUp.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\FinalizeContract.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\CustomerLookup.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\db\ConnectionManager.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\LoggerDelegate.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\OfferCars.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\SaveNewCar.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\objects\Car.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\SelectCustomer.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\ContractLookup.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\MaintenanceCheck.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\objects\Customer.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\SaveNewCustomer.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\SaveNewBusinessAgreement.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\SaveNewBusinessCustomer.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\objects\Maintenance.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\CamundaBpmProcessApplication.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\db\connection.java
-D:\Masters\4. SS 2019\Workflow management\Group 3 Work\GHRepo\wfm_bvis-master\wfm_bvis-master\src\main\java\com\bvis\wip\delegates\CreateContract.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\RequestCC.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SelectCustomer.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\ClaimTypes.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\ReceiveConfCC.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SaveNewCustomer.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Maintenance.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\CamundaBpmProcessApplication.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\CreateContract.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\CreateClaim.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\OfferCars.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\InformCC.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\ContractLookup.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SaveNewCar.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Car.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Customer.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\ReceiveQuotationCC.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\MaintenancePickUp.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\BusinessCustomer.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\LoggerDelegate.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\DisplayCustomers.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\MaintenanceCheck.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Contract.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Rent.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\db\ConnectionManager.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SaveNewBusinessAgreement.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SaveNewBusinessCustomer.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\db\connection.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\CustomerLookup.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Claim.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\MaintenanceReturn.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\RequestMaintenance.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Quotation.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\FinalizeContract.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SendClaimCapitol.java

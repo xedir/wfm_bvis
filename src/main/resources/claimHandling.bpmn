@@ -5,9 +5,9 @@
       <bpmn:outgoing>SequenceFlow_0bxruma</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="EndEvent_1lh8j28">
-      <bpmn:incoming>SequenceFlow_11jx625</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0pil7x3</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0pil7x3" sourceRef="Task_1mozv7p" targetRef="Task_05prgvl" />
+    <bpmn:sequenceFlow id="SequenceFlow_0pil7x3" sourceRef="Task_1mozv7p" targetRef="EndEvent_1lh8j28" />
     <bpmn:serviceTask id="Task_1dqk2x3" name="Create Claim Types" camunda:class="com.bvis.wip.delegates.ClaimTypes">
       <bpmn:incoming>SequenceFlow_0bxruma</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lzjzmp</bpmn:outgoing>
@@ -23,21 +23,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_0bxruma" sourceRef="StartEvent_1" targetRef="Task_1dqk2x3" />
     <bpmn:sequenceFlow id="SequenceFlow_1lzjzmp" sourceRef="Task_1dqk2x3" targetRef="Task_0v1p84s" />
     <bpmn:sequenceFlow id="SequenceFlow_1mwtdr4" sourceRef="Task_0v1p84s" targetRef="Task_1mozv7p" />
-    <bpmn:sequenceFlow id="SequenceFlow_11jx625" sourceRef="Task_0aj72zw" targetRef="EndEvent_1lh8j28" />
-    <bpmn:serviceTask id="Task_0aj72zw" name="send Claim to Capitol" camunda:class="com.bvis.wip.delegates.sendClaimCC">
-      <bpmn:incoming>SequenceFlow_0pv9rz1</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_11jx625</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0pv9rz1" sourceRef="Task_0huxb7y" targetRef="Task_0aj72zw" />
-    <bpmn:serviceTask id="Task_0huxb7y" name="receive Confirmation from CC">
-      <bpmn:incoming>SequenceFlow_0focsc0</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0pv9rz1</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0focsc0" sourceRef="Task_05prgvl" targetRef="Task_0huxb7y" />
-    <bpmn:serviceTask id="Task_05prgvl" name="Inform CC">
-      <bpmn:incoming>SequenceFlow_0pil7x3</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0focsc0</bpmn:outgoing>
-    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ClaimHandling">
@@ -45,11 +30,11 @@
         <dc:Bounds x="156" y="103" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1lh8j28_di" bpmnElement="EndEvent_1lh8j28">
-        <dc:Bounds x="1255" y="103" width="36" height="36" />
+        <dc:Bounds x="784" y="103" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0pil7x3_di" bpmnElement="SequenceFlow_0pil7x3">
         <di:waypoint x="704" y="121" />
-        <di:waypoint x="765" y="121" />
+        <di:waypoint x="784" y="121" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0lsw4ck_di" bpmnElement="Task_1dqk2x3">
         <dc:Bounds x="254" y="81" width="100" height="80" />
@@ -72,27 +57,6 @@
         <di:waypoint x="526" y="121" />
         <di:waypoint x="604" y="121" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_11jx625_di" bpmnElement="SequenceFlow_11jx625">
-        <di:waypoint x="1206" y="121" />
-        <di:waypoint x="1255" y="121" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_05e3161_di" bpmnElement="Task_0aj72zw">
-        <dc:Bounds x="1106" y="81" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0pv9rz1_di" bpmnElement="SequenceFlow_0pv9rz1">
-        <di:waypoint x="1034" y="121" />
-        <di:waypoint x="1106" y="121" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_1fxkzp5_di" bpmnElement="Task_0huxb7y">
-        <dc:Bounds x="934" y="81" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0focsc0_di" bpmnElement="SequenceFlow_0focsc0">
-        <di:waypoint x="865" y="121" />
-        <di:waypoint x="934" y="121" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_1j2taqd_di" bpmnElement="Task_05prgvl">
-        <dc:Bounds x="765" y="81" width="100" height="80" />
-      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

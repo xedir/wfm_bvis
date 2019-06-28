@@ -60,6 +60,60 @@ public class ConnectionManager {
 
 		return connection.askQuery(queryText);
 	}
+	
+	public static ResultSet getCertainCustomer (String first_name, String last_name/* , String address*/) {
+		String queryText = "SELECT * FROM CUSTOMER WHERE FIRST_NAME= '" + first_name + "' AND LAST_NAME= '" + last_name + /*"' ADDRESS= '" + address +*/ "';";
+		return connection.askQuery(queryText);
+	}
+	
+
+	public static ResultSet askForBusinessCustomer(String company_name) {
+		String queryText = "SELECT * FROM BUSINESS_CUSTOMER WHERE COMPANY_NAME= '" 
+								+ company_name + "' ";
+		return connection.askQuery(queryText);
+	}
+
+	public static ResultSet askForPrice(String name) {
+		String queryText = "SELECT PRICE_PER_DAY FROM CARS WHERE CAR_NAME= '" 
+								+ name + "' ";
+		return connection.askQuery(queryText);
+	}
+
+	public static ResultSet askForPrivateContractByID(int id) {
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE ID= '" 
+								+ id + "' ";
+
+		return connection.askQuery(queryText);
+	}
+	
+	// new Andre
+	public static ResultSet askForClaimByID(int id) {
+		String queryText = "SELECT * FROM CLAIMS WHERE ID= " 
+								+ id + "; ";
+		return connection.askQuery(queryText);
+	}
+	
+	// new Andre
+	public static ResultSet askForQuotById(int id) {
+		String queryText = "SELECT * FROM QUOTATIONS WHERE ID= "
+				+ id + "; ";
+		return connection.askQuery(queryText);
+	}
+	
+	
+	public static ResultSet askForPrivateContractByCustomerID(int id) {
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE CUSTOMERID= " 
+				+ id;
+		return connection.askQuery(queryText);
+	}
+	
+	// new Andre
+	public static ResultSet getClaimIDdatabase(int customerID, String claimType) {
+		String queryText = "SELECT ID FROM CLAIMS WHERE customerId= '" 
+								+ customerID + "' AND claimType= '"+ claimType + "';";
+		return connection.askQuery(queryText);
+	}
+	
 
 	public static ResultSet getNeedMaintenanceCars() throws SQLException {
 
@@ -79,20 +133,7 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 
-	public static ResultSet askForBusinessCustomer(String company_name) throws SQLException {
-		String queryText = "SELECT * FROM BUSINESS_CUSTOMER WHERE COMPANY_NAME= '" + company_name + "' ";
-		return connection.askQuery(queryText);
-	}
 
-	public static ResultSet askForPrice(String name) throws SQLException {
-		String queryText = "SELECT PRICE_PER_DAY FROM CARS WHERE CAR_NAME= '" + name + "' ";
-		return connection.askQuery(queryText);
-	}
-
-	public static ResultSet askForPrivateContractByID(int id) throws SQLException {
-		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE ID= '" + id + "' ";
-		return connection.askQuery(queryText);
-	}
 
 	public static void putCustomer(String first_name, String last_name, String address, Integer phone, String email)
 			throws SQLException {
@@ -126,37 +167,51 @@ public class ConnectionManager {
 				+ "' , DATEADD(MONTH, 3, CURRENT_DATE))";
 		connection.putQuery(queryText);
 	}
+	
+	
+	
+	// new Andre
+	public static void putClaim(int contractID, String first_name, String last_name, int customerID, String car, int carID, String insurance, String claimType, String isCovered, String status, String problemDesc, String carLocation) {
+		String queryText = "INSERT INTO CLAIMS VALUES(default, '" + contractID 
+				+ "', '" + first_name 
+				+ "', '" + last_name 
+				+ "', '" + customerID 
+				+ "', '" + car
+				+ "', '" + carID 
+				+ "', '" + insurance 
+				+ "', '" + claimType
+				+ "', '" + isCovered
+				+ "', '" + status
+				+ "', '" + problemDesc
+				+ "', '" + carLocation
+				+ "')";
+		connection.putQuery(queryText);
+	}
+	// new Andre
+	public static void putQuot(int claimID, String damageDesc, double damageCost, String damagedParts, double partCosts) {
+		String queryText = "INSERT INTO Quotations VALUES(default, '" + claimID 
+				+ "', '" + damageDesc
+				+ "', '" + damageCost
+				+ "', '" + damagedParts 
+				+ "', '" + partCosts
+				+ "')";
+	}
 
 	public static void putFinalizeContract(int id) {
 		String queryText = "UPDATE PRIVATE_CONTRACTS SET STATUS='finalized' WHERE id=" + id + ";";
-		try {
-			connection.putQuery(queryText);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(queryText);
 	}
 
 	public static void putCarAsFree(int id) {
 		String queryText = "UPDATE CARS SET STATUS='free' WHERE id=" + id + ";";
-		try {
-			connection.putQuery(queryText);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(queryText);
 	}
 
 	public static void putNewBusAgreement(String companyName, double discount10, double discount1030,
 			double discount30) {
 		String queryText = "INSERT INTO BUSINESS_AGREEMENT VALUES(DEFAULT, SELECT ID FROM BUSINESS_CUSTOMER WHERE COMPANY_NAME = '"
 				+ companyName + "', " + discount10 + ", " + discount1030 + " , " + discount30 + ", CURRENT_TIMESTAMP);";
-		try {
-			connection.putQuery(queryText);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(queryText);
 	}
 
 	
@@ -211,55 +266,25 @@ public class ConnectionManager {
 	public static void createDefaults() {
 
 		String createQuery = "CREATE TABLE IF NOT EXISTS CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address varchar(255), phone bigint, email varchar(255))";
-		try {
-			connection.putQuery(createQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createQuery);
 		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
-		try {
-			connection.putQuery(createBusinessQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createBusinessQuery);
 
 		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), next_maintenance SMALLDATETIME)";
-		try {
-			connection.putQuery(createCarsQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createCarsQuery);
 		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "
 				+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
 				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double, status varchar(255))";
-		try {
-			connection.putQuery(createContractsQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createContractsQuery);
 
 		String createMaintenanceQuery = "CREATE TABLE IF NOT EXISTS MAINTENANCE(maint_id bigint auto_increment, "
 				+ "car_id bigint, created_on SMALLDATETIME DEFAULT CURRENT_TIMESTAMP, pick_up_date SMALLDATETIME,"
 				+ "status varchar(100), invoice_number varchar(50), invoice_amount double)";
-		try {
-			connection.putQuery(createMaintenanceQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createMaintenanceQuery);
 
 		String createAgreementQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_AGREEMENT(AGREEMENT_ID bigint auto_increment, BUSINESS_CUSTOMER_ID bigint, DISCOUNT_10 DOUBLE, DISCOUNT_10TO30 DOUBLE, DISCOUNT_30UP DOUBLE, created_on SMALLDATETIME DEFAULT CURRENT_TIMESTAMP);";
-		try {
-			connection.putQuery(createAgreementQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connection.putQuery(createAgreementQuery);
 
 	}
 

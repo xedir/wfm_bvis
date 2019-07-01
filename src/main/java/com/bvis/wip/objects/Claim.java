@@ -13,7 +13,6 @@ public class Claim {
 	Customer customer;
 	Contract contract;
 	Car car;
-	Quotation quotation;
 	int ID;
 	int contractID;
 	String claimType;
@@ -21,6 +20,10 @@ public class Claim {
 	String status;
 	String damageDesc;
 	String carLocation;
+	Quotation quotation;
+	double damageCost;
+	String damagedParts;
+	double partCosts;
 	
 	// for "CreateClaim"
 	public Claim(Contract contract, Customer customer, Car car, String claimType, String isCovered, String status, String damageDesc, String carLocation) {
@@ -57,9 +60,9 @@ public class Claim {
 	public static Claim createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForClaimByID(id);
 		rs.next();
-		return new Claim(id, Contract.createFromID(rs.getInt("contractID")),Customer.createFromID(rs.getInt("customerId")), Car.createFromID(rs.getInt("carId")), rs.getString("claimType"), rs.getString("isCovered"), rs.getString("status"), rs.getString("damageDesc"), rs.getString("carLocation"));
+		return new Claim(id, Contract.createFromID(rs.getInt("contractID")), Customer.createFromID(rs.getInt("customerId")), Car.createFromID(rs.getInt("carId")), rs.getString("claimType"), rs.getString("isCovered"), rs.getString("status"), rs.getString("damageDesc"), rs.getString("carLocation"));
 	}
-	
+
 	// getter and setter
 	
 	public Customer getCustomer() {
@@ -90,8 +93,11 @@ public class Claim {
 		return this.quotation;
 	}
 	
-	public void setQuotation(Quotation quotation) {
-		this.quotation = quotation;
+	public void setQuotation(Quotation givenQuotation) {
+		this.quotation = givenQuotation;
+		this.damageCost = givenQuotation.getDamageCost();
+		this.damagedParts = givenQuotation.getDamagedParts();
+		this.partCosts = givenQuotation.getPartCosts();
 	}
 	
 	public int getClaimID() {

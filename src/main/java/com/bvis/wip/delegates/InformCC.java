@@ -23,8 +23,7 @@ public class InformCC implements JavaDelegate {
 		Claim claim = Claim.createFromID(claimID);
 		// create a request with the information of the claim
 		RequestCC request = new RequestCC(claim);
-		LOGGER.info("Car ID of the Request: '" + request.getCarID() + "'...");
-		
+		request.save();
 		/* here, the request must be sent */
 	}
 

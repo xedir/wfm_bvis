@@ -61,8 +61,8 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 	
-	public static ResultSet getCertainCustomer (String first_name, String last_name/* , String address*/) {
-		String queryText = "SELECT * FROM CUSTOMER WHERE FIRST_NAME= '" + first_name + "' AND LAST_NAME= '" + last_name + /*"' ADDRESS= '" + address +*/ "';";
+	public static ResultSet getCertainCustomer (String first_name, String last_name , String address) {
+		String queryText = "SELECT * FROM CUSTOMER WHERE FIRST_NAME= '" + first_name + "' AND LAST_NAME= '" + last_name + "' AND ADDRESS= '" + address + "';";
 		return connection.askQuery(queryText);
 	}
 	
@@ -113,7 +113,6 @@ public class ConnectionManager {
 								+ customerID + "' AND claimType= '"+ claimType + "';";
 		return connection.askQuery(queryText);
 	}
-	
 
 	public static ResultSet getNeedMaintenanceCars() throws SQLException {
 
@@ -144,6 +143,11 @@ public class ConnectionManager {
 
 	public static void putCarAsRented(int id) throws SQLException {
 		String queryText = "UPDATE CARS SET STATUS = 'rented' WHERE ID = '" + id + "' ";
+		connection.putQuery(queryText);
+	}
+	
+	public static void putCarAsPickedUp(int id) throws SQLException {
+		String queryText = "UPDATE CARS SET STATUS = 'picked up' WHERE ID = '" + id + "' ";
 		connection.putQuery(queryText);
 	}
 
@@ -187,6 +191,7 @@ public class ConnectionManager {
 				+ "')";
 		connection.putQuery(queryText);
 	}
+	
 	// new Andre
 	public static void putQuot(int claimID, String damageDesc, double damageCost, String damagedParts, double partCosts) {
 		String queryText = "INSERT INTO Quotations VALUES(default, '" + claimID 
@@ -195,6 +200,24 @@ public class ConnectionManager {
 				+ "', '" + damagedParts 
 				+ "', '" + partCosts
 				+ "')";
+		connection.putQuery(queryText);
+	}
+	
+	public static void putInvoice (int claimID, double costs) {
+		String queryText = "INSERT INTO INVOICES VALUES(default, '" + claimID 
+				+ "', '" + costs
+				+ "')";
+		connection.putQuery(queryText);
+	}
+	
+	public static void putRequest(int claimID, int carID, String jobType, String damageDesc, String carLocation) {
+		String queryText = "INSERT INTO REQUESTS VALUES(default, '" + claimID 
+				+ "', '" + carID
+				+ "', '" + jobType
+				+ "', '" + damageDesc
+				+ "', '" + carLocation 
+				+ "')";
+		connection.putQuery(queryText);
 	}
 
 	public static void putFinalizeContract(int id) {
@@ -259,9 +282,6 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 	
-	
-	
-	
 
 	public static void createDefaults() {
 
@@ -285,7 +305,26 @@ public class ConnectionManager {
 
 		String createAgreementQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_AGREEMENT(AGREEMENT_ID bigint auto_increment, BUSINESS_CUSTOMER_ID bigint, DISCOUNT_10 DOUBLE, DISCOUNT_10TO30 DOUBLE, DISCOUNT_30UP DOUBLE, created_on SMALLDATETIME DEFAULT CURRENT_TIMESTAMP);";
 		connection.putQuery(createAgreementQuery);
-
+		
+		String createClaimsQuery = "CREATE TABLE IF NOT EXISTS CLAIMS(ID bigint auto_increment, " 
+									+ "contractID int, first_name varchar(255), last_name varchar(255), customerId int, " 
+									+ " car varchar(255), carId int,insurance varchar(255), " 
+									+ " claimType varchar(255), isCovered varchar(255), status varchar(255), " 
+									+ "damageDesc varchar(255), carLocation varchar(255))"; 
+		connection.putQuery(createClaimsQuery); 
+		
+		String createRequestQuery = "CREATE TABLE IF NOT EXISTS REQUESTS(ID bigint auto_increment, " 
+				+ "carID int, jobType varchar(255), damageDesc varchar(255), carLocation varchar(255))"; 
+		connection.putQuery(createRequestQuery);
+		
+		String createQuotationQuery = "CREATE TABLE IF NOT EXISTS Quotations(ID bigint auto_increment, " 
+				+ "claimID int, damage_desc varchar(255), damage_cost double, " 
+				+ " damaged_parts varchar(255), part_costs double)"; 
+		connection.putQuery(createQuotationQuery);
+		
+		String createInvoiceQuery = "CREATE TABLE IF NOT EXISTS Invoices(ID bigint auto_increment, " 
+				+ "claimID int, costs double)"; 
+		connection.putQuery(createInvoiceQuery);
 	}
 
 }

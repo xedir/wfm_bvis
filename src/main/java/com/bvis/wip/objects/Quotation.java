@@ -10,9 +10,8 @@ import com.bvis.wip.db.ConnectionManager;
 public class Quotation {
 	int id;
 	int claimID;
-	//damage description
 	String damageDesc;
-	double damageCost;
+	double damageCost; // delete part costs and just make it total costs
 	String damagedParts;
 	double partCosts;
 	
@@ -57,10 +56,20 @@ public class Quotation {
 		return this.damagedParts;
 	}
 	
-	public void setPartCosts(int partCosts) {
+	public void setPartCosts(double partCosts) {
 		this.partCosts = partCosts;
 	}
-	 public double partCosts() {
+	
+	public double getPartCosts() {
 		 return this.partCosts;
-	 } 
+	 }
+	
+	public void setDamageCost(double damageCost) {
+		this.damageCost = damageCost;
+	}
+	
+	public double getDamageCost() {
+		return this.damageCost;
+	}
+	
 }

@@ -164,12 +164,11 @@ public class ConnectionManager {
 		connection.putQuery(queryText);
 	}
 
-	public static void putNewCar(String car_name, int price, String status) throws SQLException {
-		String queryText = "INSERT INTO CARS VALUES(default, '" + car_name + "', " + price + " ,'" + status
-				+ "' , DATEADD(MONTH, 3, CURRENT_DATE))";
+	public static void putNewCar(String car_name, int price, String status, String carLoc, int carValue ) throws SQLException {
+		String queryText = "INSERT INTO CARS VALUES(default, '" + car_name + "', " + price + " ,'" + status	+"', '"+carLoc+"', DATEADD(MONTH, 3, CURRENT_DATE), "+carValue+")";
 		connection.putQuery(queryText);
 	}
-	
+		
 	// new Andre
 	public static void putClaim(int contractID, String first_name, String last_name, int customerID, String car, int carID, String insurance, String claimType, String isCovered, String status, String problemDesc, String carLocation) {
 		String queryText = "INSERT INTO CLAIMS VALUES(default, '" + contractID 
@@ -284,7 +283,7 @@ public class ConnectionManager {
 		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
 		connection.putQuery(createBusinessQuery);
 
-		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), location varchar(255), next_maintenance SMALLDATETIME)";
+		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), location varchar(255), next_maintenance SMALLDATETIME, car_value int)";
 		connection.putQuery(createCarsQuery);
 		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "

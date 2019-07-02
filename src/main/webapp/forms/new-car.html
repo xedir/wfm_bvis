@@ -2,7 +2,7 @@
 
 	<table>
 		<tr>
-			<th>Car Name:&nbsp;</th>
+			<th>Car Model:&nbsp;</th>
 			<td>    <input type="text" id="carName"
            cam-variable-name="car_name"
            cam-variable-type="String" class="form-control"></td>
@@ -10,6 +10,30 @@
 			<td>    <input type="text" id="price_per_day"
            cam-variable-name="price_per_day"
            cam-variable-type="Integer" class="form-control">  </td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height: 5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Car Value (EUR):&nbsp;</th>
+			<td>    <input type="Integer" id="carValue"
+           cam-variable-name="car_value"
+           cam-variable-type="Integer" class="form-control"></td>
+			<th>&nbsp;&nbsp;&nbsp;Car Location:&nbsp;</th>
+			<td>
+			<select class="form-control" cam-variable-type="String" cam-variable-name="carloc">
+            <option value="Berlin">Berlin</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Budapest">Budapest</option>
+            <option value="Bielefeld">Bielefeld</option>
+            <option value="Cologne">Cologne</option>
+            <option value="Hamburg">Hamburg</option>
+            <option value="Muenster">Muenster</option>
+            <option value="Riga">Riga</option>
+            <option value="Paris">Paris</option>
+            <option value="Prague">Prague</option>
+            <option value="Riga">Riga</option>
+            <option value="Venice">Venice</option>
+          	</select>
+			</td>
 		</tr>
 	</table>
   

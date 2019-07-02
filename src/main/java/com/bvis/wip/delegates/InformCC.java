@@ -9,7 +9,7 @@ import org.camunda.bpm.engine.variable.value.IntegerValue;
 import com.bvis.wip.objects.Claim;
 import com.bvis.wip.objects.RequestCC;
 
-public class InformCC implements JavaDelegate {
+public class InformCC extends AbstractClient {
 	
 	private final static Logger LOGGER = Logger.getLogger("LoggingClaimCreation");
 
@@ -27,5 +27,12 @@ public class InformCC implements JavaDelegate {
 		
 		/* here, the request must be sent */
 	}
+
+	@Override
+	String restEndpoint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

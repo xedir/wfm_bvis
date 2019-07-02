@@ -1,5 +1,6 @@
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\RequestCC.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SelectCustomer.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\spring\LoggerDelegate.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\ClaimTypes.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\ReceiveConfCC.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SaveNewCustomer.java
@@ -31,4 +32,5 @@ C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\Mai
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\RequestMaintenance.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\objects\Quotation.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\FinalizeContract.java
+C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\spring\CamundaApplication.java
 C:\Users\Nic\eclipse-workspace\wfm_bvis\src\main\java\com\bvis\wip\delegates\SendClaimCapitol.java

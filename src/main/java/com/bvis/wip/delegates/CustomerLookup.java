@@ -24,7 +24,7 @@ public class CustomerLookup implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		ConnectionManager.createDefaults();
+
 		
 		String val1 = (String) execution.getVariable("first_name");
 		String val2 = (String) execution.getVariable("last_name");

@@ -14,7 +14,7 @@
       <bpmn:outgoing>SequenceFlow_0oohjw0</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1ldbk5j" sourceRef="Task_1m7rd7n" targetRef="Task_1pt0dmd" />
-    <bpmn:userTask id="Task_1m7rd7n" name="user-task" camunda:formKey="embedded:app:forms/user-task.html" camunda:assignee="demo">
+    <bpmn:userTask id="Task_1m7rd7n" name="Rent: Search Customer" camunda:formKey="embedded:app:forms/user-task.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ldbk5j</bpmn:outgoing>
     </bpmn:userTask>

@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import org.camunda.bpm.engine.variable.value.StringValue;
+
 public class ConnectionManager {
 	private final static Logger LOGGER = Logger.getLogger("LoggingQueries");
 
@@ -154,11 +156,11 @@ public class ConnectionManager {
 	}
 
 	public static void putContract(String first_name, String last_name, int customerId, String address, String car,
-			int carId, String insurance, String start, String end, long duration, double price, String status)
+			int carId, String insurance, String start, String end, long duration, double price, String status, double extra_charge, int extra_days, String return_date, int companyid)
 			throws SQLException {
 		String queryText = "INSERT INTO PRIVATE_CONTRACTS VALUES(default, '" + first_name + "', '" + last_name + "', '"
 				+ customerId + "', '" + address + "', '" + car + "', '" + carId + "', '" + insurance + "', '" + start
-				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status + "')";
+				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+")";
 		connection.putQuery(queryText);
 	}
 
@@ -167,8 +169,6 @@ public class ConnectionManager {
 				+ "' , DATEADD(MONTH, 3, CURRENT_DATE))";
 		connection.putQuery(queryText);
 	}
-	
-	
 	
 	// new Andre
 	public static void putClaim(int contractID, String first_name, String last_name, int customerID, String car, int carID, String insurance, String claimType, String isCovered, String status, String problemDesc, String carLocation) {
@@ -213,7 +213,6 @@ public class ConnectionManager {
 				+ companyName + "', " + discount10 + ", " + discount1030 + " , " + discount30 + ", CURRENT_TIMESTAMP);";
 		connection.putQuery(queryText);
 	}
-
 	
 	public static void putMaintPickeUp(int maintid, String pickupdae) throws SQLException {
 		String queryText = "UPDATE MAINTENANCE SET PICK_UP_DATE  = '" + pickupdae
@@ -223,15 +222,15 @@ public class ConnectionManager {
 		connection.putQuery(queryText1);
 	}
 	
-	public static void putMaintReturn(int maintid) throws SQLException {
+	public static void putMaintReturn(int maintid, String location) throws SQLException {
 		String queryText = "UPDATE MAINTENANCE SET STATUS = 'Done' WHERE MAINT_ID = " + maintid + ";";
 		connection.putQuery(queryText);
-		String queryText1 = "UPDATE CARS SET STATUS = 'free', NEXT_MAINTENANCE = DATEADD(MONTH, 5, CURRENT_DATE) WHERE ID = (SELECT CAR_ID FROM MAINTENANCE WHERE MAINT_ID = " + maintid + ");";
+		String queryText1 = "UPDATE CARS SET STATUS = 'free', NEXT_MAINTENANCE = DATEADD(MONTH, 5, CURRENT_DATE), location = '"+location+"' WHERE ID = (SELECT CAR_ID FROM MAINTENANCE WHERE MAINT_ID = " + maintid + ");";
 		connection.putQuery(queryText1);
 	}
 
 	public static Integer putNewMaintenanceReturnID(int car_id, String status) throws SQLException {
-		String queryText1 = "UPDATE CARS SET STATUS = 'free (Maintenance check)' WHERE ID = " + car_id + ";";
+		String queryText1 = "UPDATE CARS SET STATUS = 'Waiting Maintenance' WHERE ID = " + car_id + ";";
 		connection.putQuery(queryText1);
 		
 		String queryText = "INSERT INTO MAINTENANCE (CAR_ID, STATUS) VALUES (" + car_id + ", '" + status + "')";
@@ -252,16 +251,31 @@ public class ConnectionManager {
 		return maintid;
 	}
 	
-	
+	public static ResultSet getCarPirceByClaimId(int claimId) {
+		String queryText = "SELECT * FROM CARS WHERE ID = (SELECT CARID FROM PRIVATE_CONTRACTS WHERE ID = "+ claimId + ");"; 
+		return connection.askQuery(queryText);
+	}
+		
 	public static ResultSet getCarInMaint(int maintid) throws SQLException {
-
 		String queryText = "SELECT * FROM CARS WHERE ID = (SELECT CAR_ID FROM MAINTENANCE WHERE MAINT_ID = " + maintid + ");";
 		return connection.askQuery(queryText);
 	}
 	
+	public static void putNoDamageReturn(int carid, String selectedloc) throws SQLException {
+		String queryText = "UPDATE CARS SET STATUS = 'free', location = '"+selectedloc+"' WHERE ID = " + carid + ";";
+		connection.putQuery(queryText);
+	}
 	
+	public static void putDamageReturn(int carid, String location) throws SQLException {
+		String queryText = "UPDATE CARS SET STATUS = 'Needs Repair', location = '"+location+"' WHERE ID = " + carid + ";";
+		connection.putQuery(queryText);
+	}
 	
-	
+	public static void putExtraCharge(int contractid, double extra, int extradays, Date returnDate) throws SQLException {
+		String queryText = "UPDATE PRIVATE_CONTRACTS  SET EXTRA_CHARGE = "+extra+", EXTRA_DAYS = "+extradays+",   RETURN_DATE = '"+returnDate+"' WHERE ID = " + contractid + ";";
+		connection.putQuery(queryText);
+	}
+
 
 	public static void createDefaults() {
 
@@ -270,12 +284,12 @@ public class ConnectionManager {
 		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
 		connection.putQuery(createBusinessQuery);
 
-		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), next_maintenance SMALLDATETIME)";
+		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), location varchar(255), next_maintenance SMALLDATETIME)";
 		connection.putQuery(createCarsQuery);
 		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "
 				+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
-				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double, status varchar(255))";
+				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double,status varchar(255), extra_charge double, extra_days int, return_date SMALLDATETIME, companyid int)";
 		connection.putQuery(createContractsQuery);
 
 		String createMaintenanceQuery = "CREATE TABLE IF NOT EXISTS MAINTENANCE(maint_id bigint auto_increment, "
@@ -285,7 +299,5 @@ public class ConnectionManager {
 
 		String createAgreementQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_AGREEMENT(AGREEMENT_ID bigint auto_increment, BUSINESS_CUSTOMER_ID bigint, DISCOUNT_10 DOUBLE, DISCOUNT_10TO30 DOUBLE, DISCOUNT_30UP DOUBLE, created_on SMALLDATETIME DEFAULT CURRENT_TIMESTAMP);";
 		connection.putQuery(createAgreementQuery);
-
 	}
-
 }

@@ -1,37 +1,38 @@
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/MaintenanceReturn.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/SaveNewCar.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Maintenance.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/SendClaimCapitol.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Car.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/db/connection.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/CamundaBpmProcessApplication.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/MaintenancePickUp.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/ClaimTypes.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/spring/CamundaApplication.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/SelectCustomer.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/ReceiveConfCC.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/LoggerDelegate.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/FinalizeContract.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/RequestCC.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Rent.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/SaveNewCustomer.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/SaveNewBusinessAgreement.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/CreateClaim.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/db/ConnectionManager.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/SaveNewBusinessCustomer.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/spring/LoggerDelegate.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/BusinessCustomer.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/OfferCars.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/ReceiveQuotationCC.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/CustomerLookup.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/ContractLookup.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/RequestMaintenance.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Claim.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Contract.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Quotation.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/objects/Customer.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/CreateContract.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/InformCC.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/spring/api/TestController.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/MaintenanceCheck.java
-/Users/niclas/Desktop/wfm/wfm_bvis/src/main/java/com/bvis/wip/delegates/DisplayCustomers.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\BusinessCustomer.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Contract.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\DisplayCustomers.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ContractLookup.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\CreateContract.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\MaintenanceCheck.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Rent.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\CustomerLookup.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\SaveNewBusinessAgreement.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\InformCC.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ReceiveQuotationCC.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\MaintenanceReturn.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ReturnDamage.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\SaveNewBusinessCustomer.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\RequestCC.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\db\connection.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\CreateClaim.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Car.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\CamundaBpmProcessApplication.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\SaveNewCustomer.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Quotation.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ExtraCharge.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\MaintenancePickUp.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\OfferCars.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\SaveNewCar.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Maintenance.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ReturnNoDamage.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Claim.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\objects\Customer.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\FinalizeContract.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ClaimTypes.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\db\ConnectionManager.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\CheckRentalPeriod.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\ReceiveConfCC.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\SelectCustomer.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\SendClaimCapitol.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\delegates\RequestMaintenance.java
+D:\Masters\4. SS 2019\Workflow management\Group 3 Work\lastworking\wfm_bvis-LastWorking\wfm_bvis-LastWorking\src\main\java\com\bvis\wip\LoggerDelegate.java

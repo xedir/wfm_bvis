@@ -12,10 +12,6 @@ public class Car {
 	int id;
 	String status;
 	
-	public Car() {
-		
-	}
-	
 	public Car(String name) {
 		this.name = name;
 		this.status = "free";

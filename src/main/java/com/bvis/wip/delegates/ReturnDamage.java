@@ -12,15 +12,17 @@ import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
 
-public class MaintenanceReturn implements JavaDelegate {
+public class ReturnDamage implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 			
-		int maintid = (int) execution.getVariable("maintcar");
-		String loc = (String) execution.getVariable("returnloc");
+		int contractID = (Integer) execution.getVariable("contractID");
+		int carID = (Integer) execution.getVariable("carID");
+		String loc = (String) execution.getVariable("rentreturnloc");
+	
+		System.out.println("Returned Car ID: "+carID+" - Damage Found: Yes - Location: "+loc);
 		
-		ConnectionManager.putMaintReturn(maintid, loc);
-		System.out.println("Car Return for Maint ID: "+maintid+" to location: "+loc);
+		ConnectionManager.putDamageReturn(carID, loc);
 		
 	}
 }

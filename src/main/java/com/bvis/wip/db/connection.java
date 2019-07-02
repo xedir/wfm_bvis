@@ -45,7 +45,8 @@ public class connection {
 	                return generatedKey;
 	            }
 	            else {
-	                throw new SQLException("Creating user failed, no ID obtained.");
+	                // throw new SQLException("Creating user failed, no ID obtained.");
+	            	return -1;
 	            }
 	        }
 		} catch (SQLException e) {

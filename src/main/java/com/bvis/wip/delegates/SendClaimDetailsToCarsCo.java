@@ -30,7 +30,7 @@ public class SendClaimDetailsToCarsCo implements JavaDelegate {
 		
 		int claimId = (int) execution.getVariable("claimId");
 		LOGGER.info("claimId=" + claimId);
-		
+		// {''}
 		Runnable runnable = () -> {
 			LOGGER.info("inside thread");
 			try {

@@ -1,9 +1,13 @@
 package com.bvis.wip.objects;
 
+import java.util.List;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.bvis.wip.db.ConnectionManager;
+
 
 public class Car {
 	
@@ -30,6 +34,10 @@ public class Car {
 		return this.name;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	
 	public void setFree() {
 		ConnectionManager.putCarAsFree(this.getId());
 		this.status = "free";
@@ -37,6 +45,10 @@ public class Car {
 	
 	public void setRented() {
 		this.status = "rented";
+	}
+	
+	public void setPickedUp() {
+		this.status = "pickedup";
 	}
 	
 	public void setId(int id) {
@@ -53,5 +65,8 @@ public class Car {
 		
 		return new Car(rs.getString("CAR_NAME"), rs.getInt("PRICE_PER_DAY"), rs.getInt("ID"), rs.getString("STATUS"));
 	}
+	
+
+	
 	
 }

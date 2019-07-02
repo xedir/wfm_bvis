@@ -214,7 +214,16 @@ public class ConnectionManager {
 				+ "claimID int, damage_desc varchar(255), damage_cost double, "
 				+ " damaged_parts varchar(255), part_costs double)";
 	}
+
+	//Irina. Find a car following the information about customer's last name and set up its status as pickedup
+	public static ResultSet findAllCars(String customerName) {
+		String queryText = "SELECT * FROM CARS JOIN PRIVATE_CONTRACTS ON id = carID WHERE last_name = '"+ customerName +"'";
+		return connection.askQuery(queryText);
+	}
 	
-	
+	public static void updateCarStatusToPickedup(int carId) throws SQLException {
+		String queryText = "UPDATE CARS SET STATUS = 'pickedup' WHERE ID = '" + carId + "' ";
+		connection.putQuery(queryText);
+	}
 	
 }

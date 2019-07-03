@@ -16,13 +16,17 @@ public class RequestCC {
 	public RequestCC (Claim claim) {
 		this.claimID = claim.getClaimID(); 
 		this.carID = claim.getCar().getId();
-		this.jobType = claim.getClaimType();
+		this.jobType = claim.getClaimType(); //maintenance or repair
 		this.damageDesc = claim.getDesc();
 		this.location = claim.getLocation();
 	}
 	
 	public void save() throws SQLException {
 		ConnectionManager.putRequest(this.claimID, this.carID, this.jobType, this.damageDesc, this.location);
+	}
+	
+	public int getClaimID() {
+		return this.claimID;
 	}
 	
 	public int getCarID() {

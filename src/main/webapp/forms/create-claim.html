@@ -1,28 +1,28 @@
 <form>
-	 <label for="firstName">First Name</label>
-     <input type="text" id="firstName"
-      cam-variable-name="first_name" cam-variable-type="String">
-     
-     <label for="lastName">Last Name</label>
-     <input type="text" id="lastName"
-      cam-variable-name="last_name" cam-variable-type="String">
-     
-     <label for="address">Address</label>
-     <input type="text" id="customerAddress1"
-      cam-variable-name="address" cam-variable-type="String">
-     
-     <label for="claimType">Claimtype</label>
-      <select cam-variable-name="selected_claimType" 
-			cam-variable-type="String" 
-            cam-choices="Available_claimTypes">
-    	</select>
-    	
-     <label for="damageDesc">Damage Description</label>
-     <input type="text" id="damageDesc"
-      cam-variable-name="damageDesc" cam-variable-type="String">
-      
-     <label for="carLocation">Car Location</label>
-     <input type="text" id="carLocation"
-      cam-variable-name="carLocation" cam-variable-type="String">
-
+	<table>
+		<tr>
+	 		<th>First Name:&nbsp;</th>
+	 		<td><input type="text" id="firstName" cam-variable-name="first_name" cam-variable-type="String" class="form-control"></td>
+	 		<th>Last Name:&nbsp;</th>
+	 		<td><input type="text" id="lastName" cam-variable-name="last_name" cam-variable-type="String" class="form-control"></td>
+	 	</tr>
+	 	<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr>
+			<th>Address:&nbsp;</th>
+			<td><input type="text" id="customerAddress1" cam-variable-name="address" cam-variable-type="String" class="form-control"></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+     	<tr>
+     		<th>Claimtype:&nbsp;</th>
+     		<td><select cam-variable-name="selected_claimType"
+				cam-variable-type="String" cam-choices="Available_claimTypes" class="form-control"></select></td>
+			<th>Damage Description:&nbsp;</th>
+			<td><input type="text" id="damageDesc" cam-variable-name="damageDesc" cam-variable-type="String" class="form-control"></td>
+		</tr>
+      	<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+     	<tr>
+     		<th>Car Location:&nbsp;</th>
+			<td><input type="text" id="carLocation" cam-variable-name="carLocation" cam-variable-type="String" class="form-control"></td>
+     	</tr>
+	</table>
 </form>

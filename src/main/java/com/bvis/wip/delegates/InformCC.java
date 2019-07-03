@@ -24,7 +24,12 @@ public class InformCC implements JavaDelegate {
 		// create a request with the information of the claim
 		RequestCC request = new RequestCC(claim);
 		request.save();
-		/* here, the request must be sent */
+		/* here, the request must be sent with the following data*/
+		int sendClaimID = claimID;
+		int carID = request.getCarID();
+		String jobType = request.getJobType();
+		String damageDesc = request.getDescription();
+		String location = request.getLocation();
 	}
 
 }

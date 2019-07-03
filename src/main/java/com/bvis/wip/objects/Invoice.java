@@ -8,14 +8,20 @@ public class Invoice {
 	
 	int id;
 	int claimID;
-	double costs;
+	String jobType;
+	String Services;
+	double partCosts;
+	double totalCosts;
 	
-	public Invoice(double costs) {
-		this.costs = costs;
+	public Invoice(String jobType, String Services, double partCosts, double totalCosts) {
+		this.jobType = jobType;
+		this.Services = Services;
+		this.partCosts = partCosts;
+		this.totalCosts = totalCosts;
 	}
 	
 	public void save() throws SQLException {
-		ConnectionManager.putInvoice(this.claimID, this.costs);
+		ConnectionManager.putInvoice(this.claimID, this.jobType, this.Services, this.partCosts, this.totalCosts);
 	}
 	
 	public int getClaimID() {
@@ -26,11 +32,19 @@ public class Invoice {
 		this.claimID = newClaimID;
 	}
 	
-	public double getCosts() {
-		return this.costs;
+	public double getPartCosts() {
+		return this.partCosts;
 	}
 	
-	public void setClaimID(double newCosts) {
-		this.costs = newCosts;
+	public void setPartCosts(double partCosts) {
+		this.partCosts = partCosts;
+	}
+	
+	public double getTotalCosts() {
+		return this.totalCosts;
+	}
+	
+	public void setTotalCosts(double newTotalCosts) {
+		this.totalCosts = newTotalCosts;
 	}
 }

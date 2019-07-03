@@ -15,9 +15,14 @@ public class ReceiveInvoiceCC implements JavaDelegate {
 		// following data just examplary - should be provided with the invoice
 		IntegerValue typedVal = execution.getVariableTyped("ClaimID");  // we get that
 		int claimID = (int) typedVal.getValue();						// from the invoice
+		String jobType = "Claim";
+		String Services = "engine";
+		double partCosts = 100;
+		double totalCosts = 300;
 		
-		Invoice invoice = new Invoice(200);		// this
-		invoice.setClaimID(claimID);			// too
+		
+		Invoice invoice = new Invoice(jobType, Services, partCosts, totalCosts);		
+		invoice.setClaimID(claimID);			
 		
 		invoice.save();
 	}

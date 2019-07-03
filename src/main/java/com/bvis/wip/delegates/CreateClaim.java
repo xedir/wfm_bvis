@@ -51,6 +51,9 @@ public class CreateClaim implements JavaDelegate {
 		int claimID = rsClaim.getInt("ID");
 		execution.setVariable("ClaimID", claimID);
 		LOGGER.info("ClaimID: " + claimID);
+		
+		// Contract ID noch einfügen, weil sonst nur eine miete möglich ist
+		
 	}
 
 }

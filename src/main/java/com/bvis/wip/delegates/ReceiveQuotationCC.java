@@ -1,5 +1,7 @@
 package com.bvis.wip.delegates;
 
+import java.util.List;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.value.IntegerValue;
@@ -12,14 +14,15 @@ public class ReceiveQuotationCC implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
-		// wait for the quotation
-		// execution.wait(); how to implement that?
 		// here we receive the quotation from CC - the claimID and other values are just examplary and actually should be sent from CC
 		// we will get a Quotation that contains the claimID 
 		IntegerValue typedVal = execution.getVariableTyped("ClaimID");
 		int claimID = (int) typedVal.getValue();
+		int serviceID = 1;
+		String damagedParts = "engine";
+		double partCosts = 11;
 		// claimID, damageDesc, totalCosts, damagedParts, partCosts - will damagedParts and partCosts be arrays?
-		Quotation quotation = new Quotation(claimID, "example damage", 100, "broken window", 11);
+		Quotation quotation = new Quotation(claimID, serviceID, damagedParts, partCosts);
 		quotation.save();
 		// take its ClaimID to create the claim accordingly
 		claimID = quotation.getClaimID();

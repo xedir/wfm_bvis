@@ -21,9 +21,9 @@ public class Claim {
 	String damageDesc;
 	String carLocation;
 	Quotation quotation;
-	double damageCost;
 	String damagedParts;
 	double partCosts;
+	double totalCosts;
 	
 	// for "CreateClaim"
 	public Claim(Contract contract, Customer customer, Car car, String claimType, String isCovered, String status, String damageDesc, String carLocation) {
@@ -95,9 +95,9 @@ public class Claim {
 	
 	public void setQuotation(Quotation givenQuotation) {
 		this.quotation = givenQuotation;
-		this.damageCost = givenQuotation.getDamageCost();
 		this.damagedParts = givenQuotation.getDamagedParts();
 		this.partCosts = givenQuotation.getPartCosts();
+		this.totalCosts = givenQuotation.getTotalCosts();
 	}
 	
 	public int getClaimID() {
@@ -155,6 +155,11 @@ public class Claim {
 	public void setLocation(String carLocation) {
 		this.carLocation = carLocation;
 	}
+	
+	public String getDamagedParts() {
+		return this.damagedParts;
+	}
+	
 	public Claim getClaim() {
 		return this;
 	}

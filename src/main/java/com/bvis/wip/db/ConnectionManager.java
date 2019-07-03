@@ -193,19 +193,22 @@ public class ConnectionManager {
 	}
 	
 	// new Andre
-	public static void putQuot(int claimID, String damageDesc, double damageCost, String damagedParts, double partCosts) {
+	public static void putQuot(int claimID, int serviceID, String damagedParts, double partCosts, double totalCosts) {
 		String queryText = "INSERT INTO Quotations VALUES(default, '" + claimID 
-				+ "', '" + damageDesc
-				+ "', '" + damageCost
-				+ "', '" + damagedParts 
-				+ "', '" + partCosts
+				+ "', '" + serviceID
+				+ "', '" + damagedParts
+				+ "', '" + partCosts 
+				+ "', '" + totalCosts
 				+ "')";
 		connection.putQuery(queryText);
 	}
-	
-	public static void putInvoice (int claimID, double costs) {
+
+	public static void putInvoice (int claimID, String jobType, String services, double partCosts, double totalCosts) {
 		String queryText = "INSERT INTO INVOICES VALUES(default, '" + claimID 
-				+ "', '" + costs
+				+ "', '" + jobType
+				+ "', '" + services
+				+ "', '" + partCosts
+				+ "', '" + totalCosts
 				+ "')";
 		connection.putQuery(queryText);
 	}
@@ -314,16 +317,16 @@ public class ConnectionManager {
 		connection.putQuery(createClaimsQuery); 
 		
 		String createRequestQuery = "CREATE TABLE IF NOT EXISTS REQUESTS(ID bigint auto_increment, " 
-				+ "carID int, jobType varchar(255), damageDesc varchar(255), carLocation varchar(255))"; 
+				+ "claimID int, carID int, jobType varchar(255), damageDesc varchar(255), carLocation varchar(255))"; 
 		connection.putQuery(createRequestQuery);
 		
 		String createQuotationQuery = "CREATE TABLE IF NOT EXISTS Quotations(ID bigint auto_increment, " 
-				+ "claimID int, damage_desc varchar(255), damage_cost double, " 
-				+ " damaged_parts varchar(255), part_costs double)"; 
+				+ "claimID int, serviceID int, damagedParts varchar(255), partCosts double, " 
+				+ " totalCosts double)"; 
 		connection.putQuery(createQuotationQuery);
 		
 		String createInvoiceQuery = "CREATE TABLE IF NOT EXISTS Invoices(ID bigint auto_increment, " 
-				+ "claimID int, costs double)"; 
+				+ "claimID int, jobType varchar(255), services varchar(255), partCosts double, totalCosts double)"; 
 		connection.putQuery(createInvoiceQuery);
 	}
 

@@ -19,25 +19,28 @@ public class ReceiveInfoCapitol implements JavaDelegate {
 		IntegerValue typedVal = execution.getVariableTyped("ClaimID");
 		int claimID = (int) typedVal.getValue();
 		String isCovered = "Partially"; // other 2 options: "Covered" or "not Covered"
-		String partsNotCovered = "window, engine";
+		String partsNotCovered = "engine";
 		double costsNotCovered = 300;
 		double totalCosts = 800;
+		double costsCovered = totalCosts - costsNotCovered;
+		
 		// extend claim data table with costs that are covered by capitol
 		// total costs in quotation already 
 		Claim claim = Claim.createFromID(claimID);
 		String name = claim.getCustomer().getName();
 		
 		if(isCovered == "Covered") {
-			execution.setVariable("isCovered", true);
+			execution.setVariable("isCoveredPV", true);
 			} 
 		else {
-			execution.setVariable("isCovered", false);
+			execution.setVariable("isCoveredPV", false);
 			}
-		
+
 		execution.setVariable("name", name);
 		execution.setVariable("isCovered", isCovered);
 		execution.setVariable("partsNotCovered", partsNotCovered);
 		execution.setVariable("costsNotCovered", costsNotCovered);
+		execution.setVariable("costsCovered", costsCovered);
 		execution.setVariable("totalCosts", totalCosts);
 		
 		// just show total costs and then show costs to be paid by BVIS and by Capitol

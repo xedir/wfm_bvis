@@ -23,9 +23,13 @@ public class InformCC extends AbstractClient {
 		Claim claim = Claim.createFromID(claimID);
 		// create a request with the information of the claim
 		RequestCC request = new RequestCC(claim);
-		LOGGER.info("Car ID of the Request: '" + request.getCarID() + "'...");
-		
-		/* here, the request must be sent */
+		request.save();
+		/* here, the request must be sent with the following data*/
+		int sendClaimID = claimID;
+		int carID = request.getCarID();
+		String jobType = request.getJobType();
+		String damageDesc = request.getDescription();
+		String location = request.getLocation();
 	}
 
 	@Override

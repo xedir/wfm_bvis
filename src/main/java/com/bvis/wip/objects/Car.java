@@ -51,6 +51,10 @@ public class Car {
 		this.status = "picked up";
 	}
 	
+	public String getStatus() {
+		return this.status;
+	}
+	
 	public int getId() {
 		return this.id;
 	}

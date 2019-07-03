@@ -31,7 +31,7 @@ public class CreateClaim implements JavaDelegate {
 		StringValue typedValue = execution.getVariableTyped("selected_claimType");
 		String claimType = (String) typedValue.getValue();
 		// get the customer based on previous values
-		ResultSet rsCustomer = ConnectionManager.getCertainCustomer(first_name, last_name /*, address*/);
+		ResultSet rsCustomer = ConnectionManager.getCertainCustomer(first_name, last_name , address);
 		rsCustomer.next();
 		Customer customer = Customer.createFromID(rsCustomer.getInt("ID"));
 		
@@ -50,6 +50,10 @@ public class CreateClaim implements JavaDelegate {
 		rsClaim.next();
 		int claimID = rsClaim.getInt("ID");
 		execution.setVariable("ClaimID", claimID);
+		LOGGER.info("ClaimID: " + claimID);
+		
+		// Contract ID noch einfügen, weil sonst nur eine miete möglich ist
+		
 	}
 
 }

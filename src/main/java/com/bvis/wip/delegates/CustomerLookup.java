@@ -35,6 +35,9 @@ public class CustomerLookup implements JavaDelegate {
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
 		
+		String customer_id = execution.getProcessInstanceId();
+		LOGGER.info("Prozeess ID ist: " + customer_id);
+		
 		if(!business) {
 			ResultSet rs = ConnectionManager.askForCustomer(val1, val2);
 			execution.setVariable("Business", false);

@@ -28,5 +28,4 @@ public class ApplicationConfiguration {
     restTemplate.setMessageConverters(messageConverters);
     return restTemplate;
   }
-  
 }

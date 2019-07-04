@@ -22,7 +22,7 @@ public class ExtraCharge implements JavaDelegate {
 		//add the extra charge in the contract
 		int contractID = (Integer) execution.getVariable("contractID");
 		double extraCharge = (double) execution.getVariable("ExtraCharge");
-		int extradays = (int) execution.getVariable("ContractExceeded");  
+		int extradays = (Integer) execution.getVariable("ContractExceeded");  
 		Date returnDate = (Date) execution.getVariable("CAR_RETURN_DATE");
 		
 		//ADD a new column "Extra Charges" in contract table and write the extraCharge there

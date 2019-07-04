@@ -1,0 +1,34 @@
+<form>
+
+	<table>
+		<tr>
+			<th>Name:&nbsp;</th>
+			<td><input type="text" id="NameTotal" cam-variable-name="name" cam-variable-type="String" class="form-control"></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr>
+			<th>Claim decision:&nbsp;</th>
+			<td><input type="text" id="isCovered" cam-variable-name="isCovered" cam-variable-type="String" class="form-control"></td>
+			<th>&nbsp;&nbsp;&nbsp;Parts not covered:&nbsp;</th>
+			<td><input type="text" id="partsNotCovered" cam-variable-name="partsNotCovered" cam-variable-type="String" class="form-control"></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr>
+			<th>&nbsp;&nbsp;&nbsp;Total costs:&nbsp;</th>
+			<td><input type="number" id="totalCosts" cam-variable-name="totalCosts" cam-variable-type="Double"  class="form-control"></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr>
+			<th>To be paid by BVIS:&nbsp;</th>
+			<td><input type="price" id="paidByBVIS" cam-variable-name="costsNotCovered" cam-variable-type="Double" class="form-control"></td>
+			<th>&nbsp;&nbsp;&nbsp;To be paid by Capitol:&nbsp;</th>
+			<td><input type="price" id="paidByCapitol" cam-variable-name="costsCovered" cam-variable-type="Double" class="form-control"></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr>
+			<th>Repair? &nbsp;</th>
+			<td><input type="checkbox" cam-variable-name="decideRepair" cam-variable-type="Boolean" name="decideRepair" class="form-control" /></td>
+		</tr>
+	</table>
+
+</form>

@@ -22,8 +22,8 @@ public class CheckRentalPeriod implements JavaDelegate {
 		Date endDate = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(contract.getEnd()); 
 		Date returnDate = (Date) execution.getVariable("CAR_RETURN_DATE");
 		System.out.println(returnDate+" --- Contract End Date: "+contract.getEnd()+" --- Current Date: " + endDate );
-		long diff = returnDate.getTime() - endDate.getTime();
-	    long daysDiff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		long diff = (returnDate.getTime() - endDate.getTime());
+	    int daysDiff = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 		ResultSet rs = ConnectionManager.getCarPirceByClaimId(contractID);
 		rs.next();    
 	    int pricePerDay = rs.getInt("PRICE_PER_DAY");

@@ -1,16 +1,19 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bvis.wip.db.ConnectionManager;
 
-public class Car {
+public class Car implements Serializable {
 	
 	String name;
 	int dayPrice;
 	int id;
 	String status;
+	
+	public Car() {}
 	
 	public Car(String name) {
 		this.name = name;

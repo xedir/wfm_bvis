@@ -1,10 +1,11 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 
 import com.bvis.wip.db.ConnectionManager;
 
-public class Invoice {
+public class Invoice implements Serializable {
 	
 	int id;
 	int claimID;

@@ -1,5 +1,6 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
 
 import com.bvis.wip.db.ConnectionManager;
 
-public class Contract {
+public class Contract implements Serializable{
 	
 	private final static Logger LOGGER = Logger.getLogger("LoggingContract");
 	
@@ -30,6 +31,9 @@ public class Contract {
 	String return_date;
 	int companyid;
 	// 
+	
+	
+	public Contract() {}
 	
 	
 	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {

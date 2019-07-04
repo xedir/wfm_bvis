@@ -1,8 +1,9 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BusinessCustomer {
+public class BusinessCustomer implements Serializable {
 	String company_name;
 	String address;
 	List<Rent> rents;

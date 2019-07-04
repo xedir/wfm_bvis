@@ -1,6 +1,5 @@
 package com.bvis.wip.delegates;
 
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.util.logging.Logger;
 
@@ -8,7 +7,6 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import com.bvis.wip.db.ConnectionManager;
-import com.bvis.wip.db.connection;
 import com.bvis.wip.objects.BusinessCustomer;
 import com.bvis.wip.objects.Customer;
 

@@ -1,12 +1,13 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 import com.bvis.wip.db.ConnectionManager;
 
-public class Claim {
+public class Claim implements Serializable {
 	
 	private final static Logger LOGGER = Logger.getLogger("LoggingClaim");
 	

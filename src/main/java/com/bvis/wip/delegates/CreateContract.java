@@ -64,6 +64,7 @@ public class CreateContract implements JavaDelegate {
 		
 		Contract contract = new Contract(customer, car, start, end, duration, insurance , price);
 		contract.save();
+		execution.setVariable("testAPIobject", contract);
 		
 	}
 

@@ -1,12 +1,13 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.bvis.wip.db.ConnectionManager;
 
-public class Customer {
+public class Customer implements Serializable {
 
 	String first_name;
 	String last_name;
@@ -15,6 +16,9 @@ public class Customer {
 	int id;
 	List<Rent> rents;
 		
+	
+	public Customer() {}
+	
 	
 	public Customer(String first_name, String last_name){
 		this.first_name = first_name;

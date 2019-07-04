@@ -1,0 +1,35 @@
+<strong>Here you would put the actual form to start the process</strong>
+
+<p>
+  You can use this form through Camunda Tasklist
+  by setting the formKey of a BPMN Start Event to:
+  <code>embedded:app:forms/start-form.html</code>
+</p>
+
+<table>
+  <thead>
+  <tr>
+    <th>Column A</th>
+    <th>Column B</th>
+  </tr>
+  </thead>
+  <tbody ng-repeat="data in $scope.dataList track by $index">
+    <tr>                          
+      <td><input type="text" value="{{data.valueA}}" readonly /></td>           
+      <td><input type="text" value="{{data.valueB}}" readonly /></td>
+    </tr>
+  </tbody>
+</table>
+
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      // tell the form SDK to fetch the variable named 'xxx'
+      camForm.variableManager.fetchVariable('data');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // work with the variable (bind it to the current AngularJS $scope)
+      $scope.dataList = camForm.variableManager.variableValue('data);
+    });
+ </script>
+</form>

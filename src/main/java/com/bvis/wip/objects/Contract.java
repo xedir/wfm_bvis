@@ -2,6 +2,7 @@ package com.bvis.wip.objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -24,6 +25,11 @@ public class Contract {
 	int customerId;
 	String status;
 	int contractID;
+	double extra_charge;
+	int extra_days;
+	String return_date;
+	int companyid;
+	// 
 	
 	
 	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {
@@ -37,6 +43,10 @@ public class Contract {
 		this.price = price;
 		this.customerId = customer.getId();
 		this.status = "ongoing";
+		this.extra_charge =extra_charge;
+		this.extra_days = extra_days;
+		this.return_date =return_date;
+		this.companyid = companyid;
 		// LOGGER.info(this.getDetails());
 	}
 	
@@ -115,7 +125,7 @@ public class Contract {
 	public String getEnd() {
 		return end;
 	}
-
+	
 	/**
 	 * @param end the end to set
 	 */
@@ -207,7 +217,7 @@ public class Contract {
 	}
 	
 	public void save() throws SQLException {
-			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status);
+			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid);
 			LOGGER.info("Contract created: " + this.customer.getName() + " Car: " + this.car.getName() + " Duration: " + this.duration + " days, for a price of " + this.price);	
 	}
 	

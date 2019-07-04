@@ -17,15 +17,12 @@ public class ContractLookup implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 
 		// Get contractID from form
 		int contractID = (Integer) execution.getVariable("contractID");
 		
-		
 		// Create contract object from db pull
 		Contract contract = Contract.createFromID(contractID);
-		
 		
 		// Generate Variables for preview form
 		execution.setVariable("contractID", contract.getId());

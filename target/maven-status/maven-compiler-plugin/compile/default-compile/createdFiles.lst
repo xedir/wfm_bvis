@@ -1,4 +1,5 @@
 com\bvis\wip\CamundaBpmProcessApplication.class
+<<<<<<< HEAD
 com\bvis\spring\api\SampleObjectOtherGroup.class
 com\bvis\wip\delegates\MaintenanceCheck.class
 com\bvis\wip\delegates\SaveNewBusinessCustomer.class
@@ -14,6 +15,13 @@ com\bvis\wip\delegates\CreateClaim.class
 com\bvis\wip\delegates\ReceiveQuotationCC.class
 com\bvis\wip\delegates\AbstractClient.class
 com\bvis\wip\delegates\ContractLookup.class
+=======
+com\bvis\wip\delegates\ReceiveQuotationCC.class
+com\bvis\wip\delegates\ReturnDamage.class
+com\bvis\wip\delegates\ContractLookup.class
+com\bvis\wip\delegates\MaintenanceCheck.class
+com\bvis\wip\delegates\SaveNewBusinessCustomer.class
+>>>>>>> LastWorkinAK
 com\bvis\wip\objects\Quotation.class
 com\bvis\wip\objects\Customer.class
 com\bvis\wip\delegates\SaveNewCustomer.class
@@ -22,6 +30,7 @@ com\bvis\wip\LoggerDelegate.class
 com\bvis\wip\delegates\MaintenancePickUp.class
 com\bvis\wip\delegates\CreateContract.class
 com\bvis\wip\delegates\SendClaimCapitol.class
+<<<<<<< HEAD
 com\bvis\spring\CamundaApplication.class
 com\bvis\wip\delegates\OfferCars.class
 com\bvis\wip\db\connection.class
@@ -39,3 +48,29 @@ com\bvis\wip\delegates\RequestMaintenance.class
 com\bvis\spring\api\TestController.class
 com\bvis\wip\delegates\CustomerLookup.class
 com\bvis\spring\api\ContractResponse.class
+=======
+com\bvis\wip\delegates\SaveNewBusinessAgreement.class
+com\bvis\wip\delegates\ReturnNoDamage.class
+com\bvis\wip\objects\RequestCC.class
+com\bvis\wip\delegates\OfferCars.class
+com\bvis\wip\objects\Maintenance.class
+com\bvis\wip\db\connection.class
+com\bvis\wip\delegates\FinalizeContract.class
+com\bvis\wip\delegates\ClaimTypes.class
+com\bvis\wip\delegates\DisplayCustomers.class
+com\bvis\wip\objects\Car.class
+com\bvis\wip\db\ConnectionManager.class
+com\bvis\wip\delegates\SelectCustomer.class
+com\bvis\wip\objects\Contract.class
+com\bvis\wip\delegates\ReceiveConfCC.class
+com\bvis\wip\objects\Rent.class
+com\bvis\wip\objects\Claim.class
+com\bvis\wip\objects\BusinessCustomer.class
+com\bvis\wip\delegates\ExtraCharge.class
+com\bvis\wip\delegates\InformCC.class
+com\bvis\wip\delegates\MaintenanceReturn.class
+com\bvis\wip\delegates\RequestMaintenance.class
+com\bvis\wip\delegates\CheckRentalPeriod.class
+com\bvis\wip\delegates\CreateClaim.class
+com\bvis\wip\delegates\CustomerLookup.class
+>>>>>>> LastWorkinAK

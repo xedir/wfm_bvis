@@ -321,8 +321,8 @@ public class ConnectionManager {
 		connection.putQuery(queryText);
 	}
 	
-	public static void putExtraCharge(int contractid, double extra, int extradays, Date returnDate) throws SQLException {
-		String queryText = "UPDATE PRIVATE_CONTRACTS  SET EXTRA_CHARGE = "+extra+", EXTRA_DAYS = "+extradays+",   RETURN_DATE = '"+returnDate+"' WHERE ID = " + contractid + ";";
+	public static void putExtraCharge(int contractid, double extra, int extradays, String returnedOn) throws SQLException {
+		String queryText = "UPDATE PRIVATE_CONTRACTS  SET EXTRA_CHARGE = "+extra+", EXTRA_DAYS = "+extradays+",   RETURN_DATE = '"+returnedOn+"' WHERE ID = " + contractid + ";";
 		connection.putQuery(queryText);
 	}
 

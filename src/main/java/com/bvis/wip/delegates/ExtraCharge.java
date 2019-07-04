@@ -2,6 +2,7 @@ package com.bvis.wip.delegates;
 
 import java.util.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,17 @@ public class ExtraCharge implements JavaDelegate {
 		double extraCharge = (double) execution.getVariable("ExtraCharge");
 		int extradays = (Integer) execution.getVariable("ContractExceeded");  
 		Date returnDate = (Date) execution.getVariable("CAR_RETURN_DATE");
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
+		String returnedOn = simpleFormatter.format(returnDate);
 		
 		//ADD a new column "Extra Charges" in contract table and write the extraCharge there
-		ConnectionManager.putExtraCharge(contractID, extraCharge, extradays, returnDate);	
-		
+		try {
+			ConnectionManager.putExtraCharge(contractID, extraCharge, extradays, returnedOn);	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 }
 	

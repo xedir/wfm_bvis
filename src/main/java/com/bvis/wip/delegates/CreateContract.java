@@ -51,6 +51,7 @@ public class CreateContract implements JavaDelegate {
 		rs.next();
 		
 		Car car = Car.createFromID(rs.getInt("ID"));
+		execution.setVariable("CarToBeRented", rs.getInt("ID"));
 		
 		double price = duration * rs.getInt("PRICE_PER_DAY");
 		if(insurance.equalsIgnoreCase("A")) {
@@ -60,11 +61,12 @@ public class CreateContract implements JavaDelegate {
 		}
 		
 		customer.setAddress(address);
-		ConnectionManager.putCarAsRented(car.getId());
+		//ConnectionManager.putCarAsRented(car.getId()); //needs to run only when contract is accepted 
 		
 		Contract contract = new Contract(customer, car, start, end, duration, insurance , price);
-		contract.save();
-		
+		Integer createdContractId = contract.save();
+		execution.setVariable("contractId", createdContractId);
+	
 	}
 
 }

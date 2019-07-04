@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Logger;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import org.camunda.bpm.engine.variable.value.StringValue;
 
@@ -159,15 +161,38 @@ public class ConnectionManager {
 		connection.putQuery(queryText);
 	}
 
-	public static void putContract(String first_name, String last_name, int customerId, String address, String car,
+	public static Integer putContract(String first_name, String last_name, int customerId, String address, String car,
 			int carId, String insurance, String start, String end, long duration, double price, String status, double extra_charge, int extra_days, String return_date, int companyid)
 			throws SQLException {
 		String queryText = "INSERT INTO PRIVATE_CONTRACTS VALUES(default, '" + first_name + "', '" + last_name + "', '"
 				+ customerId + "', '" + address + "', '" + car + "', '" + carId + "', '" + insurance + "', '" + start
 				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+")";
-		connection.putQuery(queryText);
+		
+		Integer contractid = null;
+		try (Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+				PreparedStatement statement = connection.prepareStatement(queryText,
+						Statement.RETURN_GENERATED_KEYS);) {
+
+			statement.executeUpdate();
+			ResultSet rs = statement.getGeneratedKeys();
+			while (rs.next()) 
+			{
+			   contractid = rs.getInt(1);
+			}
+		}
+		return contractid;
 	}
 
+	public static void putContractAsOngoing(int contractid) throws SQLException {
+		String queryText = "UPDATE PRIVATE_CONTRACTS  SET STATUS = 'ongoing' WHERE ID = " + contractid + ";";
+		connection.putQuery(queryText);
+	}
+	
+	public static void putContractAsRejected(int contractid) throws SQLException {
+		String queryText = "UPDATE PRIVATE_CONTRACTS  SET STATUS = 'rejected' WHERE ID = " + contractid + ";";
+		connection.putQuery(queryText);
+	}
+	
 	public static void putNewCar(String car_name, int price, String status, String carLoc, int carValue ) throws SQLException {
 		String queryText = "INSERT INTO CARS VALUES(default, '" + car_name + "', " + price + " ,'" + status	+"', '"+carLoc+"', DATEADD(MONTH, 3, CURRENT_DATE), "+carValue+")";
 		connection.putQuery(queryText);

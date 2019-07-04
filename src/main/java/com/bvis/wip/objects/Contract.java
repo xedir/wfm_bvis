@@ -42,7 +42,7 @@ public class Contract {
 		this.insurance = insurance;
 		this.price = price;
 		this.customerId = customer.getId();
-		this.status = "ongoing";
+		this.status = "pending";
 		this.extra_charge =extra_charge;
 		this.extra_days = extra_days;
 		this.return_date =return_date;
@@ -216,9 +216,10 @@ public class Contract {
 		
 	}
 	
-	public void save() throws SQLException {
-			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid);
-			LOGGER.info("Contract created: " + this.customer.getName() + " Car: " + this.car.getName() + " Duration: " + this.duration + " days, for a price of " + this.price);	
+	public Integer save() throws SQLException {
+			Integer contID = ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid);
+			LOGGER.info("Contract created: " + this.customer.getName() + " Car: " + this.car.getName() + " Duration: " + this.duration + " days, for a price of " + this.price);
+			return contID;	
 	}
 	
 	public void setInsurance(String insurance) {

@@ -73,7 +73,7 @@ public class CreateContract implements JavaDelegate {
 				double discount = agreement.getDouble("DISCOUNT_10")/100;
 				System.out.println("---------------------");
 				System.out.println("Total before Discount:   "+price);
-				System.out.println("Discount "+agreement.getDouble("DISCOUNT_10")+" % :        "+price*discount);
+				System.out.println("Discount "+agreement.getDouble("DISCOUNT_10")+" % :         "+price*discount);
 				price = price * (1-discount);
 				System.out.println("Total after Discount:     "+price);
 				System.out.println("---------------------");
@@ -82,7 +82,7 @@ public class CreateContract implements JavaDelegate {
 				double discount = agreement.getDouble("DISCOUNT_10TO30")/100;
 				System.out.println("---------------------");
 				System.out.println("Total before Discount:   "+price);
-				System.out.println("Discount "+agreement.getDouble("DISCOUNT_10TO30")+" % :        "+price*discount);
+				System.out.println("Discount "+agreement.getDouble("DISCOUNT_10TO30")+" % :         "+price*discount);
 				price = price * (1-discount);
 				System.out.println("Total after Discount:     "+price);
 				System.out.println("---------------------");
@@ -91,7 +91,7 @@ public class CreateContract implements JavaDelegate {
 				double discount = agreement.getDouble("DISCOUNT_30UP")/100;
 				System.out.println("---------------------");
 				System.out.println("Total before Discount:   "+price);
-				System.out.println("Discount "+agreement.getDouble("DISCOUNT_30UP")+" % :        "+price*discount);
+				System.out.println("Discount "+agreement.getDouble("DISCOUNT_30UP")+" % :         "+price*discount);
 				price = price * (1-discount);
 				System.out.println("Total after Discount:     "+price);
 				System.out.println("---------------------");

@@ -40,7 +40,6 @@ public class TestController {
 		} else {
 			runtimeService.setVariable(processInstanceId, "contractAccepted", false);
 		}
-
 	}
 
 

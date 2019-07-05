@@ -32,8 +32,9 @@ public class Contract {
 	// 
 	
 	
-	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {
+	public Contract(Customer customer, int companyid, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {
 		this.customer = customer;
+		this.companyid = companyid;
 		this.car = car;
 		this.carId = car.getId();
 		this.start = start;
@@ -43,14 +44,10 @@ public class Contract {
 		this.price = price;
 		this.customerId = customer.getId();
 		this.status = "pending";
-		this.extra_charge =extra_charge;
-		this.extra_days = extra_days;
-		this.return_date =return_date;
-		this.companyid = companyid;
 		// LOGGER.info(this.getDetails());
 	}
 	
-	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price, int contractID) throws SQLException {
+	public Contract(Customer customer, int companyid, Car car, String start, String end, long duration,String insurance, double price, int contractID) throws SQLException {
 		this.customer = customer;
 		this.car = car;
 		this.carId = car.getId();
@@ -62,6 +59,7 @@ public class Contract {
 		this.customerId = customer.getId();
 		this.status = "ongoing";
 		this.contractID = contractID;
+		this.companyid = companyid;
 		// LOGGER.info(this.getDetails());
 	}
 	
@@ -69,7 +67,7 @@ public class Contract {
 	public static Contract createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForPrivateContractByID(id);
 		rs.next();
-		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
+		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")),rs.getInt("COMPANYID"), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
 	}
 	
 	
@@ -226,6 +224,37 @@ public class Contract {
 		this.insurance = insurance;
 	}
 	
+	public double getExtra_charge() {
+		return extra_charge;
+	}
+
+	public void setExtra_charge(double extra_charge) {
+		this.extra_charge = extra_charge;
+	}
+
+	public int getExtra_days() {
+		return extra_days;
+	}
+
+	public void setExtra_days(int extra_days) {
+		this.extra_days = extra_days;
+	}
+
+	public String getReturn_date() {
+		return return_date;
+	}
+
+	public void setReturn_date(String return_date) {
+		this.return_date = return_date;
+	}
+
+	public int getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(int companyid) {
+		this.companyid = companyid;
+	}
 
 	
 	

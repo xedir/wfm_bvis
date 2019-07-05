@@ -25,25 +25,18 @@ public class SelectCustomer implements JavaDelegate {
 		String val3 = (String) execution.getVariable("company_name");
 		boolean business = (boolean) execution.getVariable("business");
 		
-		
 		ResultSet rs;
 		if(business) {
 			rs = ConnectionManager.askForBusinessCustomer(val3);
-			
 			rs.next();
-			BusinessCustomer test = new BusinessCustomer(rs.getString("COMPANY_NAME"));	
-			
+			BusinessCustomer test = new BusinessCustomer();	
+			test.setCompany_name(rs.getString("COMPANY_NAME"));
 		} else {
 			rs = ConnectionManager.askForCustomer(val1, val2);
-			
 			rs.next();
 			Customer test = new Customer(rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"));	
 			test.setAddress(rs.getString("ADDRESS"));
+			LOGGER.info("Customer Selected:" + rs.getString("FIRST_NAME")); //throwing error outside
 		}
-		
-
-
-		LOGGER.info("Customer Selected:" + rs.getString("FIRST_NAME"));
-		
 	}
 }

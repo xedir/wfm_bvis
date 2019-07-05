@@ -77,19 +77,28 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 
+	public static ResultSet askForBusinessCustomerByID(int compid) {
+		String queryText = "SELECT * FROM BUSINESS_CUSTOMER WHERE ID= " + compid + "; ";
+		return connection.askQuery(queryText);
+	}
+	
+	public static ResultSet askForBusinessAgreement(int companyid) {
+		String queryText = "SELECT * FROM BUSINESS_AGREEMENT WHERE BUSINESS_CUSTOMER_ID = "+companyid+";";
+		return connection.askQuery(queryText);
+	}
+	
 	public static ResultSet askForPrice(String name) {
 		String queryText = "SELECT PRICE_PER_DAY FROM CARS WHERE CAR_NAME= '" 
-								+ name + "' ";
+								+ name + "'; ";
 		return connection.askQuery(queryText);
 	}
 
 	public static ResultSet askForPrivateContractByID(int id) {
-		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE ID= '" 
-								+ id + "' ";
-
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE ID="+ id + " AND STATUS = 'ongoing'; ";
 		return connection.askQuery(queryText);
 	}
 	
+
 	// new Andre
 	public static ResultSet askForClaimByID(int id) {
 		String queryText = "SELECT * FROM CLAIMS WHERE ID= " 
@@ -144,7 +153,7 @@ public class ConnectionManager {
 				+ "', " + phone + ", '" + email + " ')";
 		connection.putQuery(queryText);
 	}
-
+	
 	public static void putCarAsRented(int id) throws SQLException {
 		String queryText = "UPDATE CARS SET STATUS = 'rented' WHERE ID = '" + id + "' ";
 		connection.putQuery(queryText);
@@ -155,9 +164,9 @@ public class ConnectionManager {
 		connection.putQuery(queryText);
 	}
 
-	public static void putBusinessCustomer(String company_name, String address) throws SQLException {
+	public static void putBusinessCustomer(String company_name, String address, Integer bphone, String bemail) throws SQLException {
 
-		String queryText = "INSERT INTO BUSINESS_CUSTOMER VALUES(default, '" + company_name + "', '" + address + " ')";
+		String queryText = "INSERT INTO BUSINESS_CUSTOMER VALUES(default, '" + company_name + "', '" + address +"', " + bphone +", '" + bemail + "')";
 		connection.putQuery(queryText);
 	}
 
@@ -291,7 +300,6 @@ public class ConnectionManager {
 
 			statement.executeUpdate();
 			ResultSet rs = statement.getGeneratedKeys();
-			long id = -1;
 			while (rs.next()) 
 			{
 				maintid = rs.getInt(1);
@@ -300,6 +308,20 @@ public class ConnectionManager {
 		}
 		return maintid;
 	}
+		
+	public static Integer askForActiveContracts(int companyid) {
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE COMPANYID = "+companyid+" AND STATUS = 'ongoing'";
+		ResultSet contracts = connection.askQuery(queryText);
+		Integer count = 0;
+		try {
+			contracts.last();
+			count = contracts.getRow();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}	
 	
 	public static ResultSet getCarPirceByClaimId(int claimId) {
 		String queryText = "SELECT * FROM CARS WHERE ID = (SELECT CARID FROM PRIVATE_CONTRACTS WHERE ID = "+ claimId + ");"; 
@@ -331,7 +353,7 @@ public class ConnectionManager {
 
 		String createQuery = "CREATE TABLE IF NOT EXISTS CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address varchar(255), phone bigint, email varchar(255))";
 		connection.putQuery(createQuery);
-		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255))";
+		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255), phone bigint, email varchar(255))";
 		connection.putQuery(createBusinessQuery);
 
 		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), location varchar(255), next_maintenance SMALLDATETIME, car_value int)";

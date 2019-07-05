@@ -24,6 +24,13 @@ public class CheckRentalPeriod implements JavaDelegate {
 		System.out.println(returnDate+" --- Contract End Date: "+contract.getEnd()+" --- Current Date: " + endDate );
 		long diff = (returnDate.getTime() - endDate.getTime());
 	    int daysDiff = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	    
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
+		String retDate = simpleFormatter.format(returnDate);
+		String endDate1 = simpleFormatter.format(endDate);
+		System.out.println(endDate1+"ret - "+retDate);
+	    
 		ResultSet rs = ConnectionManager.getCarPirceByClaimId(contractID);
 		rs.next();    
 	    int pricePerDay = rs.getInt("PRICE_PER_DAY");
@@ -32,6 +39,8 @@ public class CheckRentalPeriod implements JavaDelegate {
             execution.setVariable("ContractExceeded", daysDiff);
             double extraCharge =  (double) (pricePerDay * daysDiff);
             execution.setVariable("ExtraCharge", extraCharge);
+            execution.setVariable("retDate", retDate);
+            execution.setVariable("endDate1", endDate1);
         } else {
         	execution.setVariable("ContractExceeded", daysDiff);
         }

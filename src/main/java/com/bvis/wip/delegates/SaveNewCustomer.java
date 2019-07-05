@@ -27,8 +27,7 @@ public class SaveNewCustomer implements JavaDelegate {
 		
 		Customer customer = new Customer(first_name, last_name);
 		customer.setAddress(address);
-		
-		
+				
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
 		
 		ConnectionManager.putCustomer(first_name, last_name, address, phone, email);

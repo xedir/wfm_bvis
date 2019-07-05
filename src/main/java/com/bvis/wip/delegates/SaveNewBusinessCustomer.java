@@ -22,14 +22,25 @@ public class SaveNewBusinessCustomer implements JavaDelegate {
 		
 		String company_name = (String) execution.getVariable("company_name");
 		String address = (String) execution.getVariable("address");
-		
-		
-		BusinessCustomer customer = new BusinessCustomer("company_name");
+		Integer Bphone = (Integer) execution.getVariable("Bphone");
+		String Bemail = (String) execution.getVariable("Bemail");
+		BusinessCustomer customer = new BusinessCustomer();
+		customer.setCompany_name(company_name);
 		customer.setAddress(address);
+		LOGGER.info("Customer Credentials: '" + customer.getCompany_name() + "'...");
+		ConnectionManager.putBusinessCustomer(company_name, address, Bphone, Bemail);
 		
+		//create the contact if not exists even if business customer
+		String fname = (String) execution.getVariable("first_name");
+		String lname = (String) execution.getVariable("last_name");
 		
-		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
-		ConnectionManager.putBusinessCustomer(company_name, address);
-		
+		ResultSet rs = ConnectionManager.askForCustomer(fname, lname);
+		if (rs.next() == false) {
+			LOGGER.info("Contact of the business customer doesn't exist...");
+			ConnectionManager.putCustomer(fname, lname, address, Bphone, Bemail);	
+		} else {
+			LOGGER.info("Contact of the business customer alreadt exists!");
+		}	
+	
 	}
 }

@@ -103,7 +103,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ntplbe" sourceRef="ExclusiveGateway_00ulvxm" targetRef="ExclusiveGateway_0vni75p" />
     <bpmn:sequenceFlow id="SequenceFlow_10vslsr" sourceRef="Task_0fsxfyy" targetRef="Task_14ol6p0" />
     <bpmn:sequenceFlow id="SequenceFlow_0wiertg" sourceRef="Task_14ol6p0" targetRef="ExclusiveGateway_00ulvxm" />
-    <bpmn:userTask id="Task_0fsxfyy" name="Rental Period Review" camunda:formKey="embedded:app:forms/period-preview.html">
+    <bpmn:userTask id="Task_0fsxfyy" name="Rental Period Review" camunda:formKey="embedded:app:forms/period-preview.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0wmsfpm</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_10vslsr</bpmn:outgoing>
     </bpmn:userTask>

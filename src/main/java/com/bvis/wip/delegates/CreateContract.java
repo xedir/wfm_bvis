@@ -108,7 +108,23 @@ public class CreateContract implements JavaDelegate {
 		customer.setAddress(address);
 		//ConnectionManager.putCarAsRented(car.getId()); //needs to run only when contract is accepted 
 		
-		Contract contract = new Contract(customer, companyId, car, start, end, duration, insurance , price);
+		// new for additional services
+		boolean outOfCountry = (boolean) execution.getVariable("outOfCountryIns");
+		boolean addDriver = (boolean) execution.getVariable("addDriver");
+		String firstNameAD = (String) execution.getVariable("firstNameAD");
+		String lastNameAD = (String) execution.getVariable("lastNameAD");
+		String fullNameAD = firstNameAD + " " + lastNameAD;
+		Date birthDateAddDriver = (Date) execution.getVariable("birthDateAddDriver");
+		String birthDateAddDr = simpleFormatter.format(birthDateAddDriver);
+		
+		Contract contract = new Contract(customer, companyId, car, start, end, duration, insurance , price, outOfCountry, addDriver, fullNameAD, birthDateAddDr);
+		/* 
+		contract.setOutOfC(outOfCountry);
+		contract.setAddDriver(addDriver);
+		contract.setFirstNameAddDriver(firstNameAddDriver);
+		contract.setLastNameAddDriver(lastNameAddDriver);
+		*/
+		
 		Integer createdContractId = contract.save();
 		execution.setVariable("contractId", createdContractId);
 	

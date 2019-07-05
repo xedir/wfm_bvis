@@ -147,10 +147,10 @@ public class ConnectionManager {
 
 
 
-	public static void putCustomer(String first_name, String last_name, String address, Integer phone, String email)
+	public static void putCustomer(String first_name, String last_name, String address, Integer phone, String email, String date_of_birth)
 			throws SQLException {
 		String queryText = "INSERT INTO CUSTOMER VALUES(default, '" + first_name + "', '" + last_name + "', '" + address
-				+ "', " + phone + ", '" + email + " ')";
+				+ "', " + phone + ", '" + email + "', '"+date_of_birth+"')";
 		connection.putQuery(queryText);
 	}
 	
@@ -171,11 +171,11 @@ public class ConnectionManager {
 	}
 
 	public static Integer putContract(String first_name, String last_name, int customerId, String address, String car,
-			int carId, String insurance, String start, String end, long duration, double price, String status, double extra_charge, int extra_days, String return_date, int companyid)
+			int carId, String insurance, String start, String end, long duration, double price, String status, double extra_charge, int extra_days, String return_date, int companyid, boolean outOfCountry, boolean addDriver, String fullNameAD, String birthDateAddDr)
 			throws SQLException {
 		String queryText = "INSERT INTO PRIVATE_CONTRACTS VALUES(default, '" + first_name + "', '" + last_name + "', '"
 				+ customerId + "', '" + address + "', '" + car + "', '" + carId + "', '" + insurance + "', '" + start
-				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+")";
+				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+", "+outOfCountry+", "+addDriver+", '"+fullNameAD+"', '"+birthDateAddDr+"')";
 		
 		Integer contractid = null;
 		try (Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -351,17 +351,19 @@ public class ConnectionManager {
 
 	public static void createDefaults() {
 
-		String createQuery = "CREATE TABLE IF NOT EXISTS CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address varchar(255), phone bigint, email varchar(255))";
+		String createQuery = "CREATE TABLE IF NOT EXISTS CUSTOMER(id bigint auto_increment, first_name varchar(255), last_name varchar(255), address varchar(255), phone bigint, email varchar(255), date_of_birth SMALLDATETIME)";
 		connection.putQuery(createQuery);
 		String createBusinessQuery = "CREATE TABLE IF NOT EXISTS BUSINESS_CUSTOMER(id bigint auto_increment, company_name varchar(255), address varchar(255), phone bigint, email varchar(255))";
 		connection.putQuery(createBusinessQuery);
 
 		String createCarsQuery = "CREATE TABLE IF NOT EXISTS CARS(id bigint auto_increment, car_name varchar(255), price_per_day int , status varchar(255), location varchar(255), next_maintenance SMALLDATETIME, car_value int)";
 		connection.putQuery(createCarsQuery);
+		
 		String createContractsQuery = "CREATE TABLE IF NOT EXISTS PRIVATE_CONTRACTS(id bigint auto_increment, "
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "
 				+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
-				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double,status varchar(255), extra_charge double, extra_days int, return_date SMALLDATETIME, companyid int)";
+				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double,status varchar(255), extra_charge double, extra_days int, return_date SMALLDATETIME, "
+				+ "companyid int, outOfCountry boolean, addDriver boolean, fullNameAD varchar(255), birthDateAddDr SMALLDATETIME)";
 		connection.putQuery(createContractsQuery);
 
 		String createMaintenanceQuery = "CREATE TABLE IF NOT EXISTS MAINTENANCE(maint_id bigint auto_increment, "

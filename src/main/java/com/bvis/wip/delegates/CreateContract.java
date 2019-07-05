@@ -26,13 +26,11 @@ public class CreateContract implements JavaDelegate {
 		String first_name = (String) execution.getVariable("first_name");
 		String last_name = (String) execution.getVariable("last_name");
 		String address = (String) execution.getVariable("address");
-	
 		StringValue typedVal2 = execution.getVariableTyped("selected_car");
 		String car_name = (String) typedVal2.getValue();
-
 		StringValue typedVal3 = execution.getVariableTyped("selected_insurance");
 		String insurance = (String) typedVal3.getValue();
-		
+	
 		Date startForm = (Date) execution.getVariable("CONTRACT_START_DATE");
 		Date endForm = (Date) execution.getVariable("CONTRACT_END_DATE");
 		
@@ -43,7 +41,22 @@ public class CreateContract implements JavaDelegate {
 		String start = simpleFormatter.format(startForm);
 		String end = simpleFormatter.format(endForm);
 		
-		Customer customer = new Customer(first_name, last_name);
+		// new for additional services
+		boolean outOfCountry = (boolean) execution.getVariable("outOfCountryIns");
+		boolean addDriver = (boolean) execution.getVariable("addDriver");
+		String firstNameAD = (String) execution.getVariable("firstNameAD");
+		String lastNameAD = (String) execution.getVariable("lastNameAD");
+		String fullNameAD = firstNameAD + " " + lastNameAD;
+		Date birthDateAddDriver = (Date) execution.getVariable("birthDateAddDriver");
+		String birthDateAddDr = simpleFormatter.format(birthDateAddDriver);
+		
+		String date_of_birth = (String) execution.getVariable("date_of_birth");
+		
+		Customer customer = new Customer();
+		customer.setFirst_name(first_name);
+		customer.setLast_name(last_name);
+		customer.setAddress(address);
+		customer.setBirth(date_of_birth);
 		
 		ResultSet rs = ConnectionManager.getFreeCar(car_name);
 		rs.next();
@@ -108,14 +121,7 @@ public class CreateContract implements JavaDelegate {
 		customer.setAddress(address);
 		//ConnectionManager.putCarAsRented(car.getId()); //needs to run only when contract is accepted 
 		
-		// new for additional services
-		boolean outOfCountry = (boolean) execution.getVariable("outOfCountryIns");
-		boolean addDriver = (boolean) execution.getVariable("addDriver");
-		String firstNameAD = (String) execution.getVariable("firstNameAD");
-		String lastNameAD = (String) execution.getVariable("lastNameAD");
-		String fullNameAD = firstNameAD + " " + lastNameAD;
-		Date birthDateAddDriver = (Date) execution.getVariable("birthDateAddDriver");
-		String birthDateAddDr = simpleFormatter.format(birthDateAddDriver);
+
 		
 		Contract contract = new Contract(customer, companyId, car, start, end, duration, insurance , price, outOfCountry, addDriver, fullNameAD, birthDateAddDr);
 		/* 

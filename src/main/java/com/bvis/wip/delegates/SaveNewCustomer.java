@@ -32,6 +32,8 @@ public class SaveNewCustomer implements JavaDelegate {
 		SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
 		String date_of_birth = simpleFormatter.format(birth_date);
 		
+		execution.setVariable("date_of_birth", date_of_birth);
+		
 		Customer customer = new Customer(first_name, last_name);
 		customer.setAddress(address);
 		customer.setBirth(date_of_birth);

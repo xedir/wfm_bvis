@@ -19,6 +19,8 @@ public class PolicySending {
 		this.car = contract.getCar().getName();
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
+		this.dateOfBirth = contract.getCustomer().getDateOfBirth();
+		
 	}
 	
 	//Attributes
@@ -30,6 +32,8 @@ public class PolicySending {
 	private String startDate;
 	@JsonProperty
 	private String endDate;
+	@JsonProperty
+	private String dateOfBirth;
 	
 	
 	public PolicySending() {

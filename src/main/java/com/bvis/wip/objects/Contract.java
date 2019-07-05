@@ -264,7 +264,7 @@ public class Contract implements Serializable{
 	}
 	
 	public Integer save() throws SQLException {
-			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid, this.outOfCountry, this.addDriver, this.fullNameAD, this.birthDate);
+			int contID = ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid, this.outOfCountry, this.addDriver, this.fullNameAD, this.birthDate);
 			LOGGER.info("Contract created: " + this.customer.getName() + " Car: " + this.car.getName() + " Duration: " + this.duration + " days, for a price of " + this.price);	
 			return contID;
 	}

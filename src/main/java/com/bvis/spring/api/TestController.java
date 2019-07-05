@@ -70,9 +70,9 @@ public class TestController {
 			return false;
 	}
 	
-	@PostMapping
-	public boolean post(@RequestBody ContractResponse status) {
-		
-		return status.isAccepted();
-	}
+//	@PostMapping
+//	public boolean post(@RequestBody ContractResponse status) {
+//		
+//		return status.isAccepted();
+//	}
 }

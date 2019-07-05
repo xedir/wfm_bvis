@@ -29,10 +29,14 @@ public class Contract {
 	int extra_days;
 	String return_date;
 	int companyid;
+	boolean outOfCountry;
+	boolean addDriver;
+	String fullNameAD;
+	String birthDate;
 	// 
 	
 	
-	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {
+	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price, boolean outOfCountry, boolean addDriver, String fullNameAD, String birthDateAddDr) throws SQLException {
 		this.customer = customer;
 		this.car = car;
 		this.carId = car.getId();
@@ -43,10 +47,17 @@ public class Contract {
 		this.price = price;
 		this.customerId = customer.getId();
 		this.status = "ongoing";
-		this.extra_charge =extra_charge;
+		this.extra_charge = extra_charge;
 		this.extra_days = extra_days;
 		this.return_date =return_date;
 		this.companyid = companyid;
+		this.outOfCountry = outOfCountry;
+		this.addDriver = addDriver;
+		this.fullNameAD = fullNameAD;
+		this.birthDate = birthDateAddDr;
+		/*
+		this.lastNameAddDriver = lastNameAddDriver;
+		*/
 		// LOGGER.info(this.getDetails());
 	}
 	
@@ -205,6 +216,39 @@ public class Contract {
 	
 		return this.customer.getName();
 	}
+
+	
+	public boolean getOutOfC() {
+		return this.outOfCountry;
+	}
+	
+	public void setOutOfC(boolean newOutOfCountry) {
+		this.outOfCountry = newOutOfCountry;
+	}
+	
+	public boolean getAddDriver() {
+		return this.addDriver;
+	}
+	
+	public void setAddDriver(boolean newAddDriver) {
+		this.addDriver = newAddDriver;
+	}
+	
+	public String getLastNameAddDriver() {
+		return this.fullNameAD;
+	}
+	
+	public void setLastNameAddDriver(String newFullNameAD) {
+		this.fullNameAD = newFullNameAD;
+	}
+	
+	public String getBirthDateAD() {
+		return this.birthDate;
+	}
+	
+	public void setBirthDateAD(String newBirthDate) {
+		this.birthDate = newBirthDate;
+	}
 	
 	public Contract getContract() {
 		return this;
@@ -217,7 +261,7 @@ public class Contract {
 	}
 	
 	public void save() throws SQLException {
-			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid);
+			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid, this.outOfCountry, this.addDriver, this.fullNameAD, this.birthDate);
 			LOGGER.info("Contract created: " + this.customer.getName() + " Car: " + this.car.getName() + " Duration: " + this.duration + " days, for a price of " + this.price);	
 	}
 	

@@ -13,6 +13,7 @@ public class Customer {
 	String type;
 	String address;
 	int id;
+	String date_of_birth;
 	List<Rent> rents;
 		
 	
@@ -22,18 +23,19 @@ public class Customer {
 		this.type = "privateCustomer";
 	}
 	
-	public Customer(String first_name, String last_name, String address, int id){
+	public Customer(String first_name, String last_name, String address, int id, String date_of_birth){
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.type = "privateCustomer";
 		this.id = id;
 		this.address = address;
+		this.date_of_birth = date_of_birth;
 	}
 	
 	public static Customer createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForCustomerByID(id);
 		rs.next();
-		return new Customer(rs.getString("FIRST_NAME"),rs.getString("LAST_NAME"),rs.getString("ADDRESS"),rs.getInt("ID")); 
+		return new Customer(rs.getString("FIRST_NAME"),rs.getString("LAST_NAME"),rs.getString("ADDRESS"),rs.getInt("ID"), rs.getString("DATE_OF_BIRTH")); 
 	}
 	
 
@@ -60,5 +62,8 @@ public class Customer {
 		this.address = address;
 	}
 	
+	public void setBirth(String date_of_birth) {
+		this.date_of_birth = date_of_birth;
+	}
 	
 }

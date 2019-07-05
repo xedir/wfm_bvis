@@ -24,6 +24,7 @@ public class SelectCustomer implements JavaDelegate {
 		String val2 = (String) execution.getVariable("last_name");
 		String val3 = (String) execution.getVariable("company_name");
 		boolean business = (boolean) execution.getVariable("business");
+		String date_of_birth = (String) execution.getVariable("birth_date");
 		
 		
 		ResultSet rs;
@@ -39,6 +40,7 @@ public class SelectCustomer implements JavaDelegate {
 			rs.next();
 			Customer test = new Customer(rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"));	
 			test.setAddress(rs.getString("ADDRESS"));
+			test.setBirth("date_of_birth");
 		}
 		
 

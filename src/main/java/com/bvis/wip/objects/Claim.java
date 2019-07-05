@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 import com.bvis.wip.db.ConnectionManager;
+import com.bvis.wip.objects.*;
 
 public class Claim {
 	

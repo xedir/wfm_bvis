@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Implements REST model to send the contract in the form Capitol requires.
+ * @JsonIgnoreProperties(ignoreUnknown = true)
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PolicySending {
 
 	

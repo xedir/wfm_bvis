@@ -28,13 +28,14 @@ public class SendContract implements JavaDelegate {
 		PolicySending policySending = new PolicySending(object, execution.getProcessInstanceId());
 		
 		// serialize policySending object
-		ObjectValue typedObject = Variables.objectValue(policySending).serializationDataFormat("application/json").create();
+		// not needed anymore, format of policySending is already conform
+		// ObjectValue typedObject = Variables.objectValue(policySending).serializationDataFormat("application/json").create();
 
 		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();
 
 		//Send contract to Capitol. No response required.
-		restTemplate.postForLocation("http://192.168.0.234:5555/", typedObject);
+		restTemplate.postForLocation("http://192.168.0.234:5555/", policySending);
 
 		
 		// LOGGER.info("Policy Send: " + policySending.toString());

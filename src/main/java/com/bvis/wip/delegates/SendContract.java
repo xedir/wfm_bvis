@@ -21,19 +21,23 @@ public class SendContract implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 
-		// Contract object = Contract.createFromID(1);
+		// Get contract object from previous process (create contract)
 		Contract object = (Contract) execution.getVariable("testAPIobject");
 		
+		// create policySending object based on contract (object)
 		PolicySending policySending = new PolicySending(object, execution.getProcessInstanceId());
-
+		
+		// serialize policySending object
 		ObjectValue typedObject = Variables.objectValue(policySending).serializationDataFormat("application/json").create();
 
+		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();
 
 		//Send contract to Capitol. No response required.
 		restTemplate.postForLocation("http://192.168.0.234:5555/", typedObject);
 
-		LOGGER.info("Policy Send: " + policySending.toString());
+		
+		// LOGGER.info("Policy Send: " + policySending.toString());
 		
 	}
 

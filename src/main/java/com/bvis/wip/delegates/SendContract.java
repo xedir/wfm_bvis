@@ -35,7 +35,7 @@ public class SendContract implements JavaDelegate {
 		RestTemplate restTemplate = new RestTemplate();
 
 		//Send contract to Capitol. No response required.
-		restTemplate.postForLocation("http://192.168.0.234:5555/", policySending);
+		restTemplate.postForLocation("http://192.168.0.123:5555/", policySending);
 
 		
 		// LOGGER.info("Policy Send: " + policySending.toString());

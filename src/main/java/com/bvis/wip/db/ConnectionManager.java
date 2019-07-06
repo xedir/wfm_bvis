@@ -58,9 +58,9 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 
-	public static ResultSet getFreeCar(String name) throws SQLException {
+	public static ResultSet getFreeCar(String name, String rentPickUpLoc) throws SQLException {
 
-		String queryText = "SELECT * FROM CARS WHERE CAR_NAME='" + name + "' AND STATUS = 'free';";
+		String queryText = "SELECT * FROM CARS WHERE CAR_NAME='" + name + "' AND STATUS = 'free' AND LOCATION = '"+rentPickUpLoc+"' ;";
 
 		return connection.askQuery(queryText);
 	}

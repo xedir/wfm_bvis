@@ -12,7 +12,16 @@ public class Car implements Serializable {
 	int dayPrice;
 	int id;
 	String status;
+	String location; 
 	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public Car() {}
 	
 	public Car(String name) {

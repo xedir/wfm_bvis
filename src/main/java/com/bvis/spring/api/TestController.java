@@ -26,13 +26,13 @@ public class TestController {
 	@Autowired
 	private RuntimeService runtimeService;
 
-
 	/**
 	 * Controller for accepting contract. Handles get request.
 	 * 
 	 * @param processInstanceId, String. Unique identifier.
 	 * @param boolean,             accepted. Acceptance status.
 	 */
+	
 	@GetMapping("/contract-accept")
 	public void ContractAccept(@PathVariable("processInstanceId") String processInstanceId, boolean accepted) {
 

@@ -2,3 +2,7 @@ target/
 **/.DS_Store
 .settings/
 .project
+/target/
+\.classpath
+camunda-db\.mv\.db
+camunda-db\.trace\.db

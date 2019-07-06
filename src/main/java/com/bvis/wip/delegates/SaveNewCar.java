@@ -15,9 +15,10 @@ public class SaveNewCar implements JavaDelegate {
 
 		String val1 = (String) execution.getVariable("car_name");
 		int val2 = (Integer) execution.getVariable("price_per_day");
+		String carLoc = (String) execution.getVariable("carloc");
+		int carValue = (Integer) execution.getVariable("car_value");	
 		
-		
-		ConnectionManager.putNewCar(val1, val2, "free");
+		ConnectionManager.putNewCar(val1, val2, "free", carLoc, carValue);
 		
 		
 	}

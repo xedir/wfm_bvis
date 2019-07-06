@@ -24,8 +24,6 @@ public class CustomerLookup implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		
-		// Create default database setups for first installation
 		ConnectionManager.createDefaults();
 		
 		String val1 = (String) execution.getVariable("first_name");
@@ -33,8 +31,12 @@ public class CustomerLookup implements JavaDelegate {
 		boolean business = (boolean) execution.getVariable("business");
 		String val3 = (String) execution.getVariable("company_name");
 		Customer customer = new Customer(val1, val2);
+		String name = customer.getName();
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
+		
+		String customer_id = execution.getProcessInstanceId();
+		LOGGER.info("Prozeess ID ist: " + customer_id);
 		
 		if(!business) {
 			ResultSet rs = ConnectionManager.askForCustomer(val1, val2);
@@ -43,6 +45,9 @@ public class CustomerLookup implements JavaDelegate {
 				execution.setVariable("CustExists", false);
 				LOGGER.info("No Customer found ...");	
 			} else {
+				execution.setVariable("date_of_birth", rs.getString(7));
+				execution.setVariable("customer_id", rs.getString(1));
+				
 				execution.setVariable("CustExists", true);
 				LOGGER.info("Customer found ...");
 			}	
@@ -55,6 +60,24 @@ public class CustomerLookup implements JavaDelegate {
 			} else {
 				execution.setVariable("CustExists", true);
 				LOGGER.info("BusinessCustomer found ...");
+				ResultSet rs1 = ConnectionManager.askForCustomer(val1, val2);
+				if(rs1.next() == false) {
+
+					String date_of_birth = "1960-10-05";
+					customer.setBirth("1960-10-05");
+					execution.setVariable("date_of_birth", "1960-10-05");
+					String email = val3 + "@gmail.com";
+					String address = "musterstraße 17";
+					int phone = 149372;
+					
+					
+					LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
+					
+					ConnectionManager.putCustomer(val1, val2, address, phone, email, date_of_birth);	
+				} else {
+					LOGGER.info("Error");
+					
+				}
 			}
 		}		
 	}

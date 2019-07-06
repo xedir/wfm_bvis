@@ -1,7 +1,7 @@
 package com.bvis.wip.objects;
 
 import java.util.List;
-
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import com.bvis.wip.db.ConnectionManager;
 
 
-public class Car {
+public class Car implements Serializable {
 	
 	String name;
 	int dayPrice;
 	int id;
 	String status;
+	
+	public Car() {}
 	
 	public Car(String name) {
 		this.name = name;
@@ -47,12 +49,13 @@ public class Car {
 		this.status = "rented";
 	}
 	
-	public void setPickedUp() {
-		this.status = "pickedup";
-	}
-	
+
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void setPickedUp() {
+		this.status = "picked up";
 	}
 	
 	public int getId() {

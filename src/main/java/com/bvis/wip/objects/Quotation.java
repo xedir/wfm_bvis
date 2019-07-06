@@ -10,43 +10,50 @@ import com.bvis.wip.db.ConnectionManager;
 public class Quotation {
 	int id;
 	int claimID;
-	//damage description
-	String damageDesc;
-	double damageCost;
+	int serviceID;
 	String damagedParts;
 	double partCosts;
+	double totalCosts;
 	
-	public Quotation(int claimID, String damageDesc, double damageCost, String damagedParts, double partCosts){
+	public Quotation(int claimID, int serviceID, String damagedParts, double partCosts){
 		this.claimID = claimID;
-		this.damageDesc = damageDesc;
-		this.damageCost = damageCost;
+		this.serviceID = serviceID;
 		this.damagedParts = damagedParts;
 		this.partCosts = partCosts;
+		this.totalCosts = sum(this.partCosts);
 	}
 	
-	public Quotation(int id, int claimID, String damageDesc, double damageCost, String damagedPart, double partCosts){
+	public Quotation(int id, int claimID, int serviceID, String damagedParts, double partCosts){
 		this.id = id;
 		this.claimID = claimID;
-		this.damageDesc = damageDesc;
-		this.damageCost = damageCost;
-		this.damagedParts = damagedPart;
+		this.serviceID = serviceID;
+		this.damagedParts = damagedParts;
 		this.partCosts = partCosts;
+		this.totalCosts = sum(this.partCosts);
 	}
 	
 	// save in data base
 	public void save() throws SQLException {
-		ConnectionManager.putQuot(this.claimID, this.damageDesc, this.damageCost, this.damagedParts, this.partCosts);
+		ConnectionManager.putQuot(this.claimID, this.serviceID, this.damagedParts, this.partCosts, this.totalCosts);
 	}
 	
 	public static Quotation createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForQuotById(id);
 		rs.next();
-		return new Quotation(id, rs.getInt("claimID"), rs.getString("damage_desc"), rs.getDouble("damage_cost"), rs.getString("damaged_parts"), rs.getDouble("part_costs"));
+		return new Quotation(id, rs.getInt("claimID"), rs.getInt("serviceID"), rs.getString("damaged_parts"), rs.getDouble("part_costs"));
+	}
+	
+	public double sum(double partCosts) {
+		return 1;
 	}
 	
 	// setter and getter
 	public int getClaimID() {
 		return this.claimID;
+	}
+	
+	public int getServiceID() {
+		return this.serviceID;
 	}
 	
 	public void setDamagedParts(String damagedParts) {
@@ -57,10 +64,20 @@ public class Quotation {
 		return this.damagedParts;
 	}
 	
-	public void setPartCosts(int partCosts) {
+	public void setPartCosts(double partCosts) {
 		this.partCosts = partCosts;
 	}
-	 public double partCosts() {
+	
+	public double getPartCosts() {
 		 return this.partCosts;
-	 } 
+	 }
+	
+	public void setTotalCosts(double totalCost) {
+		this.totalCosts = totalCosts;
+	}
+	
+	public double getTotalCosts() {
+		return this.totalCosts;
+	}
+	
 }

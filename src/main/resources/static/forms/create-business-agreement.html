@@ -1,0 +1,47 @@
+<form>
+
+	<table>
+		<tr>
+			<th>Company Name:&nbsp;</th>
+			<td><input type="text" id="company"
+				cam-variable-name="company_name" cam-variable-type="String" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Address:</th>
+			<td><input type="text" id="customerAddress"
+				cam-variable-name="address" cam-variable-type="String" class="form-control" disabled></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr>
+			<th>First Name:</th>
+			<td><input type="text" id="firstName"
+				cam-variable-name="first_name" cam-variable-type="String" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Last Name:&nbsp;</th>
+			<td><input type="text" id="lastName"
+				cam-variable-name="last_name" cam-variable-type="String" class="form-control" disabled></td>
+		</tr>
+
+
+	</table>
+	<br>
+	<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------- Business Agreement ---------</h4>
+	<br>
+	<table>
+		<tr>
+			<th></th>
+			<th align="center">&nbsp;&nbsp;&nbsp;&nbsp; 1 to 10 Cars </th>
+			<th align="center">&nbsp;&nbsp;&nbsp;&nbsp; 10 to 30 Cars </th>
+			<th align="center">&nbsp;&nbsp;&nbsp;&nbsp; 30+ Cars </th>
+		</tr>
+		<tr>
+			<th>Quantity Discounts:&nbsp; </th>
+			<td><input type="price" id="discount10"
+				cam-variable-name="discount10" cam-variable-type="Double" class="form-control"></td>
+
+			<td><input type="price" id="discount1030"
+				cam-variable-name="discount1030" cam-variable-type="Double" class="form-control"></td>
+
+			<td><input type="price" id="discount30"
+				cam-variable-name="discount30" cam-variable-type="Double" class="form-control"></td>
+		</tr>
+	</table>
+
+</form>

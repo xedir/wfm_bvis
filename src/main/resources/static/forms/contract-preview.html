@@ -1,0 +1,73 @@
+<form>	
+	
+	<table>
+		<tr>
+			<td bgcolor="#FFFFFF" style="line-height: 5px;" colspan=4><h4>Please review the contract details and set the return location and date:</h4></td>
+		</tr>
+		<tr>
+			<th>Contract ID:&nbsp;</th>
+			<td><input type="integer" id="contractID" cam-variable-name="contractID" cam-variable-type="Integer" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Contract Total:&nbsp;</th>
+			<td><input type="number" id="contractprice" cam-variable-name="contractPrice" cam-variable-type="Double" class="form-control" disabled></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height: 5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Customer: &nbsp;</th>
+			<td><input type="text" id="customerName" cam-variable-name="customer_name" cam-variable-type="String" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Company:&nbsp;</th>
+			<td><input type="text" id="companyname" cam-variable-name="CompanyName" cam-variable-type="String" class="form-control" disabled></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height: 5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Car Model:&nbsp;</th>
+			<td><input type="text" id="car" cam-variable-name="car" cam-variable-type="String" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Car ID:&nbsp;</th>
+			<td><input type="integer" id="carID" cam-variable-name="carID" cam-variable-type="Integer" class="form-control" disabled></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height: 5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Return Location:&nbsp;</th>
+			<td>
+			<select class="form-control" cam-variable-type="String" cam-variable-name="rentreturnloc">
+            <option value="Berlin">Berlin</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Budapest">Budapest</option>
+            <option value="Bielefeld">Bielefeld</option>
+            <option value="Cologne">Cologne</option>
+            <option value="Hamburg">Hamburg</option>
+            <option value="Muenster">Muenster</option>
+            <option value="Riga">Riga</option>
+            <option value="Paris">Paris</option>
+            <option value="Prague">Prague</option>
+            <option value="Venice">Venice</option>
+            <option value="Venice">Yerevan</option>
+          	</select>
+			</td>
+			<th>&nbsp;&nbsp;&nbsp;Return Date:&nbsp;</th>
+			<td>
+				<p class="input-group">
+					<input type="text" cam-variable-name="CAR_RETURN_DATE"
+						cam-variable-type="Date" class="form-control"
+						datepicker-popup="yyyy-MM-dd'T'HH:mm:ss" is-open="dateFieldOpened" />
+
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default"
+							ng-click="open($event)">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</p>
+			</td>
+
+		</tr>
+		
+		
+	</table>
+	<script cam-script type="text/form-script">
+        $scope.open = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
+          $scope.dateFieldOpened = true;
+        };
+      </script>
+</form>

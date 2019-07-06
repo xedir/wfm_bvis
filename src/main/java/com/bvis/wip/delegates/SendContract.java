@@ -1,5 +1,6 @@
 package com.bvis.wip.delegates;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -22,24 +23,45 @@ public class SendContract implements JavaDelegate {
 		// TODO Auto-generated method stub
 
 		// Get contract object from previous process (create contract)
-		Contract object = (Contract) execution.getVariable("testAPIobject");
+		Contract contract = (Contract) execution.getVariable("contractToSend");
+		boolean outOfCountry = (boolean) execution.getVariable("outOfCountryIns");
+		
+		boolean addDriver = (boolean) execution.getVariable("addDriver");
+		
+		// create new restTemplate
+		RestTemplate restTemplate = new RestTemplate();
 		
 		// create policySending object based on contract (object)
-		PolicySending policySending = new PolicySending(object, execution.getProcessInstanceId());
+		if(addDriver) {
+			// Additional Driver Information
+			String pattern = "yyyy-MM-dd";
+			SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
+			String firstNameAD = (String) execution.getVariable("firstNameAD");
+			String lastNameAD = (String) execution.getVariable("lastNameAD");
+			String fullNameAD = firstNameAD + " " + lastNameAD;
+			Date birthDateAddDriver = (Date) execution.getVariable("birthDateAddDriver");
+			String birthDateAddDr = simpleFormatter.format(birthDateAddDriver);
+			Customer addDriverObject = new Customer(firstNameAD, lastNameAD);
+			addDriverObject.setBirth(birthDateAddDr);
+			PolicySending policySending = new PolicySending(contract, execution.getProcessInstanceId(), outOfCountry, addDriverObject);
+			restTemplate.postForLocation("http://127.0.0.1:5555/", policySending);
+		} else {
+			Customer mainCustomer = (Customer) execution.getVariable("mainCustomer");
+			PolicySending policySending = new PolicySending(contract, execution.getProcessInstanceId(), outOfCountry);
+			restTemplate.postForLocation("http://127.0.0.1:5555/", policySending);
+		}
+		
 		
 		// serialize policySending object
 		// not needed anymore, format of policySending is already conform
 		// ObjectValue typedObject = Variables.objectValue(policySending).serializationDataFormat("application/json").create();
 
-		// create new restTemplate
-		RestTemplate restTemplate = new RestTemplate();
+
 
 		//Send contract to Capitol. No response required.
-		restTemplate.postForLocation("http://192.168.0.234:5555/", policySending);
-
+		//restTemplate.postForLocation("http://127.0.0.1:5555/", policySending);
 		
 		// LOGGER.info("Policy Send: " + policySending.toString());
-		
 	}
 
 }

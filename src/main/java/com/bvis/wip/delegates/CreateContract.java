@@ -6,10 +6,11 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.value.StringValue;
-
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Car;
@@ -17,6 +18,10 @@ import com.bvis.wip.objects.Contract;
 import com.bvis.wip.objects.Customer;
 
 public class CreateContract implements JavaDelegate {
+	
+	//autowire runtime service and necessary repositories
+	@Autowired
+	private RuntimeService runtimeService;
 
 	private final static Logger LOGGER = Logger.getLogger("LoggingContractCreation");
 	
@@ -40,6 +45,9 @@ public class CreateContract implements JavaDelegate {
 		SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
 		String start = simpleFormatter.format(startForm);
 		String end = simpleFormatter.format(endForm);
+		
+		String processInstanceId = execution.getProcessInstanceId();
+		System.out.println(processInstanceId);
 		
 		// new for additional services
 		boolean outOfCountry = (boolean) execution.getVariable("outOfCountryIns");
@@ -133,8 +141,9 @@ public class CreateContract implements JavaDelegate {
 		
 		Integer createdContractId = contract.save();
 		execution.setVariable("contractId", createdContractId);
+		execution.setVariable("mainCustomer", customer);
 	
-		execution.setVariable("testAPIobject", contract);
+		execution.setVariable("contractToSend", contract);
 	}
 
 }

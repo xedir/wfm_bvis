@@ -1,7 +1,9 @@
 package com.bvis.wip.delegates;
 
+import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bvis.wip.objects.Customer;
 import com.bvis.wip.db.ConnectionManager;
@@ -32,6 +34,13 @@ public class CustomerLookup implements JavaDelegate {
 		String val3 = (String) execution.getVariable("company_name");
 		Customer customer = new Customer(val1, val2);
 		String name = customer.getName();
+		
+		String pid = execution.getProcessInstanceId();
+		
+		//RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
+		//runtimeService.setVariable(pid, "testValue", "test");
+		execution.setVariable("testValue", "test");
+		
 		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
 		

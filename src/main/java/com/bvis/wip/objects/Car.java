@@ -58,6 +58,18 @@ public class Car implements Serializable {
 		return this.id;
 	}
 	
+	public int getValueByID(int id) throws SQLException {
+		ResultSet rs = ConnectionManager.askForCarByID(id);
+		rs.next();
+		return rs.getInt("CAR_VALUE");
+	}
+	
+	public int getPriceByID(int id) throws SQLException {
+		ResultSet rs = ConnectionManager.askForCarByID(id);
+		rs.next();
+		return rs.getInt("PRICE_PER_DAY");
+	}
+	
 	public static Car createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForCarByID(id);
 		rs.next();

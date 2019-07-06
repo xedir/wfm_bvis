@@ -65,6 +65,7 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 	
+	
 	public static ResultSet getCertainCustomer (String first_name, String last_name , String address) {
 		String queryText = "SELECT * FROM CUSTOMER WHERE FIRST_NAME= '" + first_name + "' AND LAST_NAME= '" + last_name + "' AND ADDRESS= '" + address + "';";
 		return connection.askQuery(queryText);

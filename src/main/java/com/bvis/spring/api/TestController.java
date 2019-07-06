@@ -39,7 +39,7 @@ public class TestController {
 		runtimeService.setVariable(processInstanceId, "response", true);
 		int contractid = (int) runtimeService.getVariable(processInstanceId, "contractId");
 		System.out.println("THE CONTROLLER PRINTER THIS CONTRACT ID: "+contractid);
-		
+
 		if (accepted) {
 			runtimeService.setVariable(processInstanceId, "contractAccepted", true);
 			try {

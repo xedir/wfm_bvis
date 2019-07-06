@@ -36,10 +36,9 @@ public class TestController {
 	@GetMapping("/contract-accept")
 	public void ContractAccept(@PathVariable("processInstanceId") String processInstanceId, boolean accepted) {
 
-		runtimeService.setVariable(processInstanceId, "response", true);
 		int contractid = (int) runtimeService.getVariable(processInstanceId, "contractId");
 		System.out.println("THE CONTROLLER PRINTER THIS CONTRACT ID: "+contractid);
-
+		
 		if (accepted) {
 			runtimeService.setVariable(processInstanceId, "contractAccepted", true);
 			try {
@@ -57,6 +56,8 @@ public class TestController {
 				e.printStackTrace();
 			}
 		}
+		runtimeService.setVariable(processInstanceId, "response", true);
+
 	}
 
 

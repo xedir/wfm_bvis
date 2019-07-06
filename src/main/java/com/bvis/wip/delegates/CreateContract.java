@@ -120,11 +120,6 @@ public class CreateContract implements JavaDelegate {
 			}
 		}
 		
-		if(insurance.equalsIgnoreCase("A")) {
-			price = price * 1.2;
-		} else if (insurance.equalsIgnoreCase("B")) {
-			price = price * 1.1;
-		}
 		
 		customer.setAddress(address);
 		//ConnectionManager.putCarAsRented(car.getId()); //needs to run only when contract is accepted 

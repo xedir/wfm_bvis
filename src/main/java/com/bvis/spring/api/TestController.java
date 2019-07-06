@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Car;
-
+import com.bvis.wip.db.ConnectionManager;
 @RestController
 @RequestMapping("/{processInstanceId}")
 public class TestController {
@@ -58,6 +57,44 @@ public class TestController {
 		}
 
 		runtimeService.setVariable(processInstanceId, "response", true);
+	}
+	
+	@GetMapping("/contract")
+	public void Contract(@RequestBody PolicySending policy) {
+		String pid = policy.getProcessID();
+		boolean accepted;
+		
+		System.out.println("policy status is: " + policy.getStatus().equalsIgnoreCase("accepted"));
+		
+		if(policy.getStatus().equalsIgnoreCase("accepted")) {
+			accepted = true;
+		} else {
+			accepted = false;
+		}
+		
+		
+		int contractid = (int) runtimeService.getVariable(pid, "contractId");
+		System.out.println("THE CONTROLLER PRINTER THIS CONTRACT ID: "+contractid);
+		
+		if (accepted) {
+			runtimeService.setVariable(pid, "contractAccepted", true);
+			try {
+				ConnectionManager.putContractAsOngoing(contractid);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			runtimeService.setVariable(pid, "contractAccepted", false);
+			try {
+				ConnectionManager.putContractAsRejected(contractid);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		runtimeService.setVariable(pid, "response", true);
 	}
 
 

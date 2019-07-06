@@ -17,11 +17,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @JsonIgnoreProperties(ignoreUnknown = true)
  */
 public class PolicySending {
-	
-	
-	
+		
 	//(customer, car, start, end, duration, insurance , price)
 	
+	/**
+	 * @return the processID
+	 */
+	public String getProcessID() {
+		return processID;
+	}
+
+
+	/**
+	 * @return the insuranceNumber
+	 */
+	public String getInsuranceNumber() {
+		return insuranceNumber;
+	}
+
+
+	/**
+	 * @return the price
+	 */
+	public int getPrice() {
+		return price;
+	}
+
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+
 	public PolicySending(Contract contract, String pid, boolean outOfCountry, Customer adDriver) throws SQLException {
 		super();
 		this.processID = pid;
@@ -52,12 +82,10 @@ public class PolicySending {
 		this.status = "requested";
 		this.coverage = new Coverage(contract.getInsurance(), outOfCountry);
 
-			this.driver = new Driver[1];
-			int mainCustomerLicenseID = contract.getCustomer().getId() + 81604;
-			driver[0] = new Driver(contract.getCustomer().getFirst_name(), contract.getCustomer().getLast_name(), mainCustomerLicenseID, contract.getCustomer().getDateOfBirth());
+		this.driver = new Driver[1];
+		int mainCustomerLicenseID = contract.getCustomer().getId() + 81604;
+		driver[0] = new Driver(contract.getCustomer().getFirst_name(), contract.getCustomer().getLast_name(), mainCustomerLicenseID, contract.getCustomer().getDateOfBirth());
 		}
-
-	
 	
 	//Attributes
 	@JsonProperty
@@ -91,6 +119,8 @@ public class PolicySending {
 
 // Coverage Object to send within the policy, gets created by default with dynamic value for outOfCountry as only this value is individual for each rent
 class Coverage {
+	
+	Coverage(){}
 	
 	@JsonProperty
 	int coPay;
@@ -129,6 +159,8 @@ class Coverage {
 
 
 class Driver{
+	
+	Driver(){}
 		
 	@JsonProperty
 	String firstName;

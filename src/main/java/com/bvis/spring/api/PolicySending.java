@@ -31,7 +31,7 @@ public class PolicySending {
 		this.price = contract.getCar().getPriceByID(contract.getCar().getId());
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
-		this.coverage = new Coverage(outOfCountry);
+		this.coverage = new Coverage(contract.getInsurance(), outOfCountry);
 
 		//Additional Driver Information	
 		this.driver = new Driver[2];
@@ -50,7 +50,7 @@ public class PolicySending {
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
 		this.status = "requested";
-		this.coverage = new Coverage(outOfCountry);
+		this.coverage = new Coverage(contract.getInsurance(), outOfCountry);
 
 			this.driver = new Driver[1];
 			int mainCustomerLicenseID = contract.getCustomer().getId() + 81604;
@@ -111,8 +111,17 @@ class Coverage {
 		this.outOfCountry = value;
 	}
 	
-	Coverage(boolean outOfCountry){
-		this.coPay=500;
+	Coverage(String insurance ,boolean outOfCountry){
+		System.out.println(insurance);
+		if(insurance.equalsIgnoreCase("A") ) {
+			this.coPay=500;
+		} else if (insurance.equalsIgnoreCase("B")) {
+			this.coPay=1000;
+		} else {
+			this.coPay = 1500;
+			
+		}
+		
 		this.outOfCountry = outOfCountry;
 		this.maxCoverage = 1000000;
 	}

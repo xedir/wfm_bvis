@@ -56,8 +56,8 @@ public class TestController {
 				e.printStackTrace();
 			}
 		}
-		runtimeService.setVariable(processInstanceId, "response", true);
 
+		runtimeService.setVariable(processInstanceId, "response", true);
 	}
 
 

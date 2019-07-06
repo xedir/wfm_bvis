@@ -65,8 +65,9 @@ public class CreateContract implements JavaDelegate {
 		customer.setLast_name(last_name);
 		customer.setAddress(address);
 		customer.setBirth(date_of_birth);
+		String rentPickUpLoc = (String) execution.getVariable("rentpickuploc");
 		
-		ResultSet rs = ConnectionManager.getFreeCar(car_name);
+		ResultSet rs = ConnectionManager.getFreeCar(car_name, rentPickUpLoc);
 		rs.next();
 		
 		Car car = Car.createFromID(rs.getInt("ID"));

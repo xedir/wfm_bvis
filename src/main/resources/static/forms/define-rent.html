@@ -10,7 +10,7 @@
 			<td><input type="text" id="lastName"
 				cam-variable-name="last_name" cam-variable-type="String" class="form-control" disabled></td>
 		</tr>
-		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
 		<tr>
 			<th>Company:&nbsp;</th>
 			<td><input type="text" id="company"
@@ -19,22 +19,17 @@
 			<td><input type="text" id="customerAddress"
 				cam-variable-name="address" cam-variable-type="String" class="form-control" disabled></td>
 		</tr>
-	</table>
-
-	<br>
-	<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------	Rental details ---------</h4>
-
-
-	<table>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4><h3>--------------------------------- Rent Details ---------------------------------</h3></td></tr>
 		<tr>
 			<th>Select Car:&nbsp;</th>
 			<td><select cam-variable-name="selected_car"
 				cam-variable-type="String" cam-choices="Available_Cars" class="form-control"></select></td>
-			<th>&nbsp;&nbsp;&nbsp;Select Insurance:&nbsp;</th>
+			<th>&nbsp;&nbsp;&nbsp;Insurance:&nbsp;</th>
 			<td><select cam-variable-name="selected_insurance"
 				cam-variable-type="String" cam-choices="Available_Insurance" class="form-control"></select></td>
 		</tr>
-		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+
 		<tr>
 		
 			<th>Start Date:&nbsp;</th>
@@ -66,27 +61,30 @@
 					</span>
 				</p></td>
 		</tr>
-		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Pickup Location:&nbsp;</th>
+			<td>
+			<select class="form-control" cam-variable-type="String" cam-variable-name="rentpickuploc">
+            <option value="Muenster">Muenster</option>
+            <option value="Cologne">Cologne</option>
+            <option value="Bielefeld">Bielefeld</option>
+          	</select>
+			</td>
+			<th>&nbsp;</th>
+			<td>&nbsp;</td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4><h4>------------------------------------------- Additional Services -------------------------------------------</h4></td></tr>
 		<tr>
 			<th>Out of Country Insurance? &nbsp;</th>
 			<td><input type="checkbox" cam-variable-name="outOfCountryIns" cam-variable-type="Boolean" name="outOfCountryIns" class="form-control" /></td>
 		</tr>
-		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:7px;" colspan=4>&nbsp;</td></tr>
 		<tr>
-			<th>&nbsp;&nbsp;&nbsp;Additional Driver? &nbsp;</th>
+			<th>Additional Driver? (AD)&nbsp;</th>
 			<td><input type="checkbox" cam-variable-name="addDriver" cam-variable-type="Boolean" name="addDriver" class="form-control" /></td>
-		</tr>
-		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=2>&nbsp;</td></tr>
-		<tr>
-			<th>First Name of additional Driver:&nbsp;</th>
-			<td><input type="text" id="first_NameAD"
-				cam-variable-name="firstNameAD" cam-variable-type="String" class="form-control"></td>
-			<th>&nbsp;&nbsp;&nbsp;Last Name of additional Driver:&nbsp;</th>
-			<td><input type="text" id="last_NameAD"
-				cam-variable-name="lastNameAD" cam-variable-type="String" class="form-control"></td>
-		</tr>
-		<tr>
-		<th>&nbsp;&nbsp;&nbsp;Birth Date of additional Driver:&nbsp;</th>
+			<th>&nbsp;&nbsp;&nbsp;Birth Date (AD):&nbsp;</th>
 			<td><p class="input-group">
 					<input type="text" cam-variable-name="birthDateAddDriver"
 						cam-variable-type="Date" class="form-control"
@@ -100,8 +98,15 @@
 					</span>
 				</p></td>
 		</tr>
-		
-		
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>First Name (AD):&nbsp;</th>
+			<td><input type="text" id="first_NameAD"
+				cam-variable-name="firstNameAD" cam-variable-type="String" class="form-control"></td>
+			<th>&nbsp;&nbsp;&nbsp;Last Name (AD):&nbsp;</th>
+			<td><input type="text" id="last_NameAD"
+				cam-variable-name="lastNameAD" cam-variable-type="String" class="form-control"></td>
+		</tr>
 	</table>
 
 

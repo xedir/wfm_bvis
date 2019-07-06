@@ -12,9 +12,23 @@ public class Car implements Serializable {
 	int dayPrice;
 	int id;
 	String status;
+	String location; 
+	String licensePlate;
 	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public Car() {}
 	
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
 	public Car(String name) {
 		this.name = name;
 		this.status = "free";
@@ -75,6 +89,13 @@ public class Car implements Serializable {
 		rs.next();
 		
 		return new Car(rs.getString("CAR_NAME"), rs.getInt("PRICE_PER_DAY"), rs.getInt("ID"), rs.getString("STATUS"));
+	}
+
+	public void setLicensePlate(int id) {
+		// TODO Auto-generated method stub
+		int x = id + 12345;
+		String Lic = "DE-"+String.valueOf(x);
+		this.licensePlate = Lic;
 	}
 	
 }

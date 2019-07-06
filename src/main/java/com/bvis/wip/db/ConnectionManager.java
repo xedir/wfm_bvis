@@ -58,9 +58,9 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 
-	public static ResultSet getFreeCar(String name) throws SQLException {
+	public static ResultSet getFreeCar(String name, String rentPickUpLoc) throws SQLException {
 
-		String queryText = "SELECT * FROM CARS WHERE CAR_NAME='" + name + "' AND STATUS = 'free';";
+		String queryText = "SELECT * FROM CARS WHERE CAR_NAME='" + name + "' AND STATUS = 'free' AND LOCATION = '"+rentPickUpLoc+"' ;";
 
 		return connection.askQuery(queryText);
 	}
@@ -130,19 +130,7 @@ public class ConnectionManager {
 
 	public static ResultSet getNeedMaintenanceCars() throws SQLException {
 
-		String queryText = "SELECT * FROM CARS WHERE STATUS = 'free' AND NEXT_MAINTENANCE <=  DATEADD(DAY, 7, CURRENT_DATE);"; // For final
-																											// verion,
-																											// this
-																											// should be
-																											// == not <=
-																											// so that
-																											// we are 7
-																											// days
-																											// ahead of
-																											// maintance
-																											// without
-																											// double
-																											// count.
+		String queryText = "SELECT * FROM CARS WHERE STATUS = 'free' AND NEXT_MAINTENANCE <=  DATEADD(DAY, 7, CURRENT_DATE);"; 
 		return connection.askQuery(queryText);
 	}
 
@@ -304,7 +292,6 @@ public class ConnectionManager {
 			while (rs.next()) 
 			{
 				maintid = rs.getInt(1);
-			   System.out.println("ID of generated maint: "+ rs.getString(1));
 			}
 		}
 		return maintid;

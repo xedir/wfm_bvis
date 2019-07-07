@@ -104,7 +104,7 @@ public class TestController {
 	}
 	
 	
-	@PostMapping("/realPickupMessage")
+	@PostMapping("/pickupMessage")
 	public void pickupMessage(@RequestBody PickupMessage pickup) {
 		//runtimeService.setVariable(pickup.getProcessId(), "pickupDate", pickup.getPickupDate());
 			
@@ -117,15 +117,21 @@ public class TestController {
 		runtimeService.setVariable(quotation.getProcessId(), "recieveQuotation", true);
 	}
 	
-
-	@PostMapping("/pickupMessage")
-	public void pickupMessage(@PathVariable("processInstanceId") String processInstanceId, int claimId) {
-
-		runtimeService.setVariable(processInstanceId, "pickedup", true);
-		runtimeService.setVariable(processInstanceId, "uselessId", claimId);
-		System.out.println("pickup Message received for process id "+processInstanceId);
-				
+	@PostMapping("/insuranceCoverage")
+	public void insuranceCoverage(@PathVariable("processInstanceId") String processInstanceId) {
+		runtimeService.setVariable(processInstanceId, "answerCapitol", true);
 	}
+	
+	
+
+//	@PostMapping("/pickupMessage")
+//	public void pickupMessage(@PathVariable("processInstanceId") String processInstanceId, int claimId) {
+//
+//		runtimeService.setVariable(processInstanceId, "pickedup", true);
+//		runtimeService.setVariable(processInstanceId, "uselessId", claimId);
+//		System.out.println("pickup Message received for process id "+processInstanceId);
+//				
+//	}
 	
 //	@PostMapping("/quotation")
 //	public void quotation(@PathVariable("processInstanceId") String processInstanceId, int claimId) {

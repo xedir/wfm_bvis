@@ -17,8 +17,9 @@ public class SendQuotationToCapitol implements JavaDelegate {
 
 		Quotation quotation = (Quotation) execution.getVariable("quotationSave");
 		RealClaim claim = (RealClaim) execution.getVariable("claim");
+		String processId = (String) execution.getProcessInstanceId();
 		
-		InsuranceClaiming insuranceClaiming = new InsuranceClaiming(claim, quotation);
+		InsuranceClaiming insuranceClaiming = new InsuranceClaiming(claim, quotation, processId);
 		
 		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();

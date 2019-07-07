@@ -59,15 +59,20 @@ public class InsuranceClaiming implements Serializable{
 	}
 
 
-	public InsuranceClaiming(RealClaim claim, Quotation quotation) {
+	public InsuranceClaiming(RealClaim claim, Quotation quotation, String processId) {
 		super();
+		this.processId = processId;
 		this.vehicleId = Integer.toString(claim.getCarId());
 		System.out.println(vehicleId);
-		this.claimDate = "2019-07-12T09:12:33.001Z";
+		this.claimDate = claim.getClaimDate();
 		this.claimStatus = "pending";
-		this.damages = quotation.getServiceEvaluation();
+		
+		this.damages = Damage.convertFromJob(quotation.getJobDetails());
 	}
 	
+	
+	@JsonProperty
+	private String processId;
 	@JsonProperty
 	private String vehicleId;
 	@JsonProperty
@@ -77,8 +82,8 @@ public class InsuranceClaiming implements Serializable{
 	@JsonProperty
 	private Damage[] damages;
 	
-	public void setDamages(Damage[] damages) {
-		this.damages = damages;
+	public void setDamages(Damage[] jobDetails) {
+		this.damages = jobDetails;
 	}
 	
 	public Damage[] getDamages() {
@@ -90,6 +95,21 @@ public class InsuranceClaiming implements Serializable{
 class Damage implements Serializable{
 	
 	public Damage(){}
+	
+	public static Damage[] convertFromJob(JobDetails[] jobDetails) {
+		int length = jobDetails.length;
+		Damage[] damage = new Damage[length];
+		for(int i = 0; i < length; i++ ) {
+			
+			Damage damageObject = new Damage();
+			damageObject.setPart(jobDetails[i].getServiceName());
+			damageObject.setPrice(jobDetails[i].getParticularCost());
+			damageObject.setCovered(false);
+			damage[i] = damageObject;
+		}
+		
+		return damage;
+	}
 	
 	public Damage(String part, int price) {
 		this.part = part;
@@ -104,10 +124,54 @@ class Damage implements Serializable{
 		
 	}
 	
+	/**
+	 * @return the part
+	 */
+	public String getPart() {
+		return part;
+	}
+
+	/**
+	 * @param part the part to set
+	 */
+	public void setPart(String part) {
+		this.part = part;
+	}
+
+
+
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return price;
+	}
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	/**
+	 * @return the covered
+	 */
+	public boolean isCovered() {
+		return covered;
+	}
+
+	/**
+	 * @param covered the covered to set
+	 */
+	public void setCovered(boolean covered) {
+		this.covered = covered;
+	}
+
 	@JsonProperty
 	public String part;
 	@JsonProperty
-	public int price;
+	public double price;
 	@JsonProperty
 	public boolean covered;
 	

@@ -12,6 +12,7 @@ import com.bvis.wip.objects.Car;
 import com.bvis.wip.objects.Claim;
 import com.bvis.wip.objects.Contract;
 import com.bvis.wip.objects.Customer;
+import com.bvis.wip.objects.RealClaim;
 
 public class CreateClaim implements JavaDelegate {
 	
@@ -20,40 +21,62 @@ public class CreateClaim implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
+
 		
-		// get the name and address from text fields
-		String first_name = (String) execution.getVariable("first_name");
-		String last_name = (String) execution.getVariable("last_name");
-		String address = (String) execution.getVariable("address");
-		String damageDesc= (String) execution.getVariable("damageDesc");
-		String carLocation = (String) execution.getVariable("carLocation");
-		// get claimType from selectfield
-		StringValue typedValue = execution.getVariableTyped("selected_claimType");
-		String claimType = (String) typedValue.getValue();
-		// get the customer based on previous values
-		ResultSet rsCustomer = ConnectionManager.getCertainCustomer(first_name, last_name , address);
-		rsCustomer.next();
-		Customer customer = Customer.createFromID(rsCustomer.getInt("ID"));
 		
-		// get the contract for that customer
-		ResultSet rsContract = ConnectionManager.askForPrivateContractByCustomerID(customer.getId());
-		rsContract.next();
-		Contract contract = Contract.createFromID(rsContract.getInt("ID"));
-		// get the car that is considered in the claim
-		Car car = contract.getCar();
-		int customerID = customer.getId();
-		// create and set Claim to ongoing based on the previous sourced values
-		Claim claim = new Claim(contract, customer, car, claimType, "to be clarified", "ongoing", damageDesc, carLocation);
-		claim.save();
-		// set claimID for later tasks
-		ResultSet rsClaim = ConnectionManager.getClaimIDdatabase(customerID, claimType);
-		rsClaim.next();
-		int claimID = rsClaim.getInt("ID");
-		execution.setVariable("ClaimID", claimID);
-		LOGGER.info("ClaimID: " + claimID);
 		
-		// Contract ID noch einfügen, weil sonst nur eine miete möglich ist
+		int contractId = (int) execution.getVariable("contractId");
+		System.out.println(1);
+		String problemDescription = (String) execution.getVariable("problemDescription");
+		System.out.println(2);
+		Contract contract = Contract.createFromIDAll(contractId);
+		System.out.println(3);
+		String pid = execution.getProcessInstanceId();
+		System.out.println(4);
+		RealClaim claim = new RealClaim(contract, problemDescription, pid);
+		System.out.println(5);
+		execution.setVariable("claim", claim);
+		System.out.println(6);
 		
+
+		
+		
+		
+		
+		
+		
+//		// get the name and address from text fields
+//		String first_name = (String) execution.getVariable("first_name");
+//		String last_name = (String) execution.getVariable("last_name");
+//		String address = (String) execution.getVariable("address");
+//		String damageDesc= (String) execution.getVariable("damageDesc");
+//		String carLocation = (String) execution.getVariable("carLocation");
+//		// get claimType from selectfield
+//		StringValue typedValue = execution.getVariableTyped("selected_claimType");
+//		String claimType = (String) typedValue.getValue();
+//		// get the customer based on previous values
+//		ResultSet rsCustomer = ConnectionManager.getCertainCustomer(first_name, last_name , address);
+//		rsCustomer.next();
+//		Customer customer = Customer.createFromID(rsCustomer.getInt("ID"));
+//		
+//		// get the contract for that customer
+//		ResultSet rsContract = ConnectionManager.askForPrivateContractByCustomerID(customer.getId());
+//		rsContract.next();
+//		Contract contract = Contract.createFromID(rsContract.getInt("ID"));
+//		// get the car that is considered in the claim
+//		Car car = contract.getCar();
+//		int customerID = customer.getId();
+//		// create and set Claim to ongoing based on the previous sourced values
+//		Claim claim = new Claim(contract, customer, car, claimType, "to be clarified", "ongoing", damageDesc, carLocation);
+//		claim.save();
+//		// set claimID for later tasks
+//		ResultSet rsClaim = ConnectionManager.getClaimIDdatabase(customerID, claimType);
+//		rsClaim.next();
+//		int claimID = rsClaim.getInt("ID");
+//		execution.setVariable("ClaimID", claimID);
+//		LOGGER.info("ClaimID: " + claimID);
+//		
+//		// Contract ID noch einfügen, weil sonst nur eine miete möglich ist
 	}
 
 }

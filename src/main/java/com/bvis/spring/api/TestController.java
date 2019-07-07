@@ -102,6 +102,15 @@ public class TestController {
 
 		runtimeService.setVariable(pid, "response", true);
 	}
+	
+	
+	@PostMapping("/realPickupMessage")
+	public void pickupMessage(@RequestBody PickupMessage pickup) {
+
+
+				
+	}
+	
 
 	@PostMapping("/pickupMessage")
 	public void pickupMessage(@PathVariable("processInstanceId") String processInstanceId, int claimId) {

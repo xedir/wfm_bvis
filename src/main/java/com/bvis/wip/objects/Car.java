@@ -19,9 +19,24 @@ public class Car implements Serializable {
 	String status;
 	String location; 
 	String licensePlate;
+	int value;
 	
 	
 	
+	/**
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(int value) {
+		this.value = value;
+	}
+
 	public Car() {
 		
 	}
@@ -98,8 +113,11 @@ public class Car implements Serializable {
 	public static Car createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForCarByID(id);
 		rs.next();
+		Car car = new Car(rs.getString("CAR_NAME"), rs.getInt("PRICE_PER_DAY"), rs.getInt("ID"), rs.getString("STATUS"));
+		car.setLocation(rs.getString("LOCATION"));
+		car.setValue(rs.getInt("CAR_VALUE"));
 		
-		return new Car(rs.getString("CAR_NAME"), rs.getInt("PRICE_PER_DAY"), rs.getInt("ID"), rs.getString("STATUS"));
+		return car;
 	}
 
 	public void setLicensePlate(int id) {

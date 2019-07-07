@@ -86,6 +86,13 @@ public class Contract implements Serializable{
 		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")),rs.getInt("COMPANYID"), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
 	}
 	
+	public static Contract createFromIDAll(int id) throws SQLException {
+		ResultSet rs = ConnectionManager.askForPrivateContractByIDAll(id);
+		rs.next();
+		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")),rs.getInt("COMPANYID"), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
+	}
+	
+	
 	
 	/**
 	 * @return the customer

@@ -99,6 +99,11 @@ public class ConnectionManager {
 		return connection.askQuery(queryText);
 	}
 	
+	public static ResultSet askForPrivateContractByIDAll(int id) {
+		String queryText = "SELECT * FROM PRIVATE_CONTRACTS WHERE ID="+ id + "; ";
+		return connection.askQuery(queryText);
+	}
+	
 
 	// new Andre
 	public static ResultSet askForClaimByID(int id) {

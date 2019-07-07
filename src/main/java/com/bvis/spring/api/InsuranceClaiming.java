@@ -13,7 +13,6 @@ public class InsuranceClaiming {
 		this.vehicleId = Integer.toString(claim.getCar().getId());
 		this.claimDate = "2019-07-12T09:12:33.001Z";
 		this.claimStatus = "pending";
-		
 	}
 	
 	@JsonProperty

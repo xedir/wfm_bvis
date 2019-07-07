@@ -82,11 +82,7 @@ public class Car implements Serializable {
 	public String getStatus() {
 		return this.status;
 	}
-	
-	public int getId() {
-		return this.id;
-	}
-	
+		
 	public int getValueByID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForCarByID(id);
 		rs.next();

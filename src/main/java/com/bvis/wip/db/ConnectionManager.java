@@ -387,5 +387,22 @@ public class ConnectionManager {
 		String createInvoiceQuery = "CREATE TABLE IF NOT EXISTS Invoices(ID bigint auto_increment, " 
 				+ "claimID int, jobType varchar(255), services varchar(255), partCosts double, totalCosts double)"; 
 		connection.putQuery(createInvoiceQuery);
+		
+		String fillCars = "INSERT INTO CARS VALUES(default, 'Porsche 911', '200' ,'free', 'Muenster', DATEADD(MONTH, 3, CURRENT_DATE), 110000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'VW Polo', '70' ,'free', 'Muenster', DATEADD(MONTH, 3, CURRENT_DATE), 40000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'BMW 118i', '130' ,'free', 'Muenster', DATEADD(MONTH, 3, CURRENT_DATE), 90000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'Tesla S', '250' ,'free', 'Muenster', DATEADD(MONTH, 3, CURRENT_DATE), 150000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'Porsche 911', '200' ,'free', 'Cologne', DATEADD(MONTH, 3, CURRENT_DATE), 110000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'VW Polo', '70' ,'free', 'Cologne', DATEADD(MONTH, 3, CURRENT_DATE), 40000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'BMW 118i', '130' ,'free', 'Cologne', DATEADD(MONTH, 3, CURRENT_DATE), 90000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'Tesla S', '250' ,'free', 'Cologne', DATEADD(MONTH, 3, CURRENT_DATE), 150000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'Porsche 911', '200' ,'free', 'Bielefeld', DATEADD(MONTH, 3, CURRENT_DATE), 110000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'VW Polo', '70' ,'free', 'Bielefeld', DATEADD(MONTH, 3, CURRENT_DATE), 40000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'BMW 118i', '130' ,'free', 'Bielefeld', DATEADD(MONTH, 3, CURRENT_DATE), 90000);\r\n" + 
+				"INSERT INTO CARS VALUES(default, 'Tesla S', '250' ,'free', 'Bielefeld', DATEADD(MONTH, 3, CURRENT_DATE), 150000);";
+		connection.putQuery(fillCars);
+		connection.putQuery(fillCars);
+		connection.putQuery(fillCars);
+		connection.putQuery(fillCars);
 	}
 }

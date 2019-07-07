@@ -7,7 +7,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.value.IntegerValue;
 
 import com.bvis.wip.objects.Claim;
-import com.bvis.wip.objects.Quotation;
+import com.bvis.wip.objects.OldQuotation;
 
 public class ReceiveQuotationCC implements JavaDelegate {
 
@@ -22,7 +22,7 @@ public class ReceiveQuotationCC implements JavaDelegate {
 		String damagedParts = "engine";
 		double partCosts = 11;
 		// claimID, damageDesc, totalCosts, damagedParts, partCosts - will damagedParts and partCosts be arrays?
-		Quotation quotation = new Quotation(claimID, serviceID, damagedParts, partCosts);
+		OldQuotation quotation = new OldQuotation(claimID, serviceID, damagedParts, partCosts);
 		quotation.save();
 		// take its ClaimID to create the claim accordingly
 		claimID = quotation.getClaimID();

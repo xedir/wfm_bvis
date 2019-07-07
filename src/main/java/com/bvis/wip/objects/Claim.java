@@ -22,7 +22,7 @@ public class Claim implements Serializable {
 	String status;
 	String damageDesc;
 	String carLocation;
-	Quotation quotation;
+	OldQuotation quotation;
 	String damagedParts;
 	double partCosts;
 	double totalCosts;
@@ -93,11 +93,11 @@ public class Claim implements Serializable {
 		this.car = car;
 	}
 	
-	public Quotation getQuotation() {
+	public OldQuotation getQuotation() {
 		return this.quotation;
 	}
 	
-	public void setQuotation(Quotation givenQuotation) {
+	public void setQuotation(OldQuotation givenQuotation) {
 		this.quotation = givenQuotation;
 		this.damagedParts = givenQuotation.getDamagedParts();
 		this.partCosts = givenQuotation.getPartCosts();

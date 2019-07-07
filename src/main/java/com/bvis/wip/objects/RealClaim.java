@@ -17,8 +17,8 @@ public class RealClaim implements Serializable{
 		
 	}
 	
-	public RealClaim(Contract contract, String problemDescription, String pid) throws SQLException {
-		this.pid = pid;
+	public RealClaim(Contract contract, String problemDescription, String processId) throws SQLException {
+		this.processId = processId;
 		this.contract = contract;
 		this.carId = contract.carId;
 		this.vehicleId = Integer.toString(contract.carId);
@@ -35,18 +35,18 @@ public class RealClaim implements Serializable{
 	 * @return the pid
 	 */
 	public String getPid() {
-		return pid;
+		return processId;
 	}
 
 	/**
 	 * @param pid the pid to set
 	 */
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setPid(String processId) {
+		this.processId = processId;
 	}
 
 	
-	public String pid;
+	public String processId;
 	public Contract contract;
 	public int carId;
 	public Car car;

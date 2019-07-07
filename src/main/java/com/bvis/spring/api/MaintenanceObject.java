@@ -15,10 +15,10 @@ public class MaintenanceObject {
 	private String processId;
 	
 	@JsonProperty
-	private String maintenanceId;
+	private String requestId;
 	
 	@JsonProperty
-	private Car car;
+	private Car2 car;
 	
 	@JsonProperty
 	private String jobType;
@@ -29,8 +29,8 @@ public class MaintenanceObject {
 	public MaintenanceObject(Car maintcar, String jt, String pd, int maintid, String pid) {
 		super();
 		this.processId = pid;
-		this.maintenanceId = String.valueOf(maintid);
-		this.car = maintcar;
+		this.requestId = String.valueOf(maintid);
+		this.car = new Car2(maintcar.getId(), maintcar.getLocation());
 		this.jobType = jt;
 		this.problemDescription = pd;
 	}
@@ -38,3 +38,4 @@ public class MaintenanceObject {
 
 
 }
+

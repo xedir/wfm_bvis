@@ -10,41 +10,39 @@ public class ServiceRequesting {
 	public ServiceRequesting() {}
 	
 	public ServiceRequesting(RealClaim claim) {
-		this.pid = claim.getPid();
-		this.car = new Car(claim.getVehicleId(), claim.getVehicleId(), claim.getLocation());
+		this.processId = claim.getPid();
+		this.car = new Car2(claim.getCar().getId(), claim.getCar().getLocation());
 		this.jobType = "REPAIR";
 		this.problemDescription = claim.getProblemDescription();
-		
 	}
+
 	
 	@JsonProperty
-	public String pid;
+	public String processId;
 	@JsonProperty
-	public Car car;
+	public Car2 car;
 	@JsonProperty
 	public String jobType;
 	@JsonProperty
 	public String problemDescription;
 	
-	
-	
-	
 }
 
 
-class Car{
+class Car2{
 	
-	Car(){}
-	Car(String carId, String licensePlate, String location){
+	Car2(){}
+	Car2(int carId, String location){
 		this.carId = carId;
-		int x = Integer.getInteger(carId) + 26745;
+		int x = carId + 26745;
 		String Lic = "DE-"+String.valueOf(x);
 		this.licensePlate = Lic;; 	
 		this.location = location;
 	}
 	
+	
 	@JsonProperty
-	public String carId;
+	public int carId;
 	@JsonProperty
 	public String licensePlate;
 	@JsonProperty

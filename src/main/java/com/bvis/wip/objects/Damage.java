@@ -1,8 +1,10 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
+
 import spinjar.com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Damage {
+public class Damage implements Serializable{
 
 	
 	public Damage(){}

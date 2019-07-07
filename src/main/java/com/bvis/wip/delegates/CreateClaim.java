@@ -30,9 +30,10 @@ public class CreateClaim implements JavaDelegate {
 		System.out.println(2);
 		Contract contract = Contract.createFromIDAll(contractId);
 		System.out.println(3);
-		String pid = execution.getProcessInstanceId();
+		String processId = execution.getProcessInstanceId();
+		execution.setVariable("car", contract.getCar());
 		System.out.println(4);
-		RealClaim claim = new RealClaim(contract, problemDescription, pid);
+		RealClaim claim = new RealClaim(contract, problemDescription, processId);
 		System.out.println(5);
 		execution.setVariable("claim", claim);
 		System.out.println(6);

@@ -1,18 +1,71 @@
 package com.bvis.spring.api;
 
-import com.bvis.wip.objects.Claim;
+import java.io.Serializable;
+
+import com.bvis.wip.objects.RealClaim;
 
 import spinjar.com.fasterxml.jackson.annotation.JsonProperty;
 
-public class InsuranceClaiming {
+public class InsuranceClaiming implements Serializable{
 
 	public InsuranceClaiming() {}
 	
 	
-	public InsuranceClaiming(Claim claim) {
-		this.vehicleId = Integer.toString(claim.getCar().getId());
+	/**
+	 * @return the vehicleId
+	 */
+	public String getVehicleId() {
+		return vehicleId;
+	}
+
+
+	/**
+	 * @param vehicleId the vehicleId to set
+	 */
+	public void setVehicleId(String vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
+
+	/**
+	 * @return the claimDate
+	 */
+	public String getClaimDate() {
+		return claimDate;
+	}
+
+
+	/**
+	 * @param claimDate the claimDate to set
+	 */
+	public void setClaimDate(String claimDate) {
+		this.claimDate = claimDate;
+	}
+
+
+	/**
+	 * @return the claimStatus
+	 */
+	public String getClaimStatus() {
+		return claimStatus;
+	}
+
+
+	/**
+	 * @param claimStatus the claimStatus to set
+	 */
+	public void setClaimStatus(String claimStatus) {
+		this.claimStatus = claimStatus;
+	}
+
+
+	public InsuranceClaiming(RealClaim claim, Quotation quotation) {
+		super();
+		this.vehicleId = Integer.toString(claim.getCarId());
+		System.out.println(vehicleId);
 		this.claimDate = "2019-07-12T09:12:33.001Z";
 		this.claimStatus = "pending";
+		this.damages = quotation.getServiceEvaluation();
 	}
 	
 	@JsonProperty
@@ -34,7 +87,7 @@ public class InsuranceClaiming {
 	
 }
 
-class Damage{
+class Damage implements Serializable{
 	
 	public Damage(){}
 	

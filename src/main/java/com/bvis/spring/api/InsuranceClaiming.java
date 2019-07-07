@@ -1,7 +1,9 @@
 package com.bvis.spring.api;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 
+import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.RealClaim;
 
 import spinjar.com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,10 +30,42 @@ public class InsuranceClaiming implements Serializable{
 
 
 	/**
+	 * @return the processId
+	 */
+	public String getProcessId() {
+		return processId;
+	}
+
+
+	/**
+	 * @param processId the processId to set
+	 */
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+
+
+	/**
 	 * @return the claimDate
 	 */
 	public String getClaimDate() {
 		return claimDate;
+	}
+
+
+	/**
+	 * @return the insuranceNumber
+	 */
+	public int getInsuranceNumber() {
+		return insuranceNumber;
+	}
+
+
+	/**
+	 * @param insuranceNumber the insuranceNumber to set
+	 */
+	public void setInsuranceNumber(int insuranceNumber) {
+		this.insuranceNumber = insuranceNumber;
 	}
 
 
@@ -59,9 +93,10 @@ public class InsuranceClaiming implements Serializable{
 	}
 
 
-	public InsuranceClaiming(RealClaim claim, Quotation quotation, String processId) {
+	public InsuranceClaiming(RealClaim claim, Quotation quotation, String processId) throws SQLException {
 		super();
 		this.processId = processId;
+		this.insuranceNumber = ConnectionManager.askForContractInsuranceNumber(claim.getContract().getId());
 		this.vehicleId = Integer.toString(claim.getCarId());
 		System.out.println(vehicleId);
 		this.claimDate = claim.getClaimDate();
@@ -73,6 +108,8 @@ public class InsuranceClaiming implements Serializable{
 	
 	@JsonProperty
 	private String processId;
+	@JsonProperty
+	private int insuranceNumber;
 	@JsonProperty
 	private String vehicleId;
 	@JsonProperty

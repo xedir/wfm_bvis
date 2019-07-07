@@ -61,6 +61,7 @@ public class PolicySending {
 		this.price = contract.getCar().getPriceByID(contract.getCar().getId());
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
+		this.status = "requested";
 		this.coverage = new Coverage(contract.getInsurance(), outOfCountry);
 
 		//Additional Driver Information	
@@ -72,6 +73,14 @@ public class PolicySending {
 		}
 	
 	
+	/**
+	 * @param insuranceNumber the insuranceNumber to set
+	 */
+	public void setInsuranceNumber(String insuranceNumber) {
+		this.insuranceNumber = insuranceNumber;
+	}
+
+
 	public PolicySending(Contract contract, String pid, boolean outOfCountry) throws SQLException {
 		super();
 		this.processID = pid;

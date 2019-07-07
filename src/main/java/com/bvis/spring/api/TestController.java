@@ -74,7 +74,6 @@ public class TestController {
 			accepted = false;
 		}
 		
-		
 		int contractid = (int) runtimeService.getVariable(pid, "contractId");
 		System.out.println("THE CONTROLLER PRINTER THIS CONTRACT ID: "+contractid);
 		
@@ -86,6 +85,7 @@ public class TestController {
 			try {
 				ConnectionManager.putContractAsOngoing(contractid);
 				ConnectionManager.putContractInsurancePriceUpdate(price, contractid);
+				ConnectionManager.putContractInsuranceNumberUpdate(policy.getInsuranceNumber(), contractid);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -117,9 +117,17 @@ public class TestController {
 		runtimeService.setVariable(quotation.getProcessId(), "recieveQuotation", true);
 	}
 	
+//	@PostMapping("/insuranceCoverage")
+//	public void insuranceCoverage(@PathVariable("processInstanceId") String processInstanceId) {
+//		runtimeService.setVariable(processInstanceId, "answerCapitol", true);
+//	}
+	
 	@PostMapping("/insuranceCoverage")
-	public void insuranceCoverage(@PathVariable("processInstanceId") String processInstanceId) {
-		runtimeService.setVariable(processInstanceId, "answerCapitol", true);
+	public void insuranceCoverage(@RequestBody InsuranceClaiming insuranceClaim) {
+		
+		runtimeService.setVariable(insuranceClaim.getProcessId(), "ReturnClaimCapitol", insuranceClaim);
+		
+		runtimeService.setVariable(insuranceClaim.getProcessId(), "answerCapitol", true);
 	}
 	
 	

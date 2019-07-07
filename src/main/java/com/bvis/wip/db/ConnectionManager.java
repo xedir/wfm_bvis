@@ -169,7 +169,7 @@ public class ConnectionManager {
 			throws SQLException {
 		String queryText = "INSERT INTO PRIVATE_CONTRACTS VALUES(default, '" + first_name + "', '" + last_name + "', '"
 				+ customerId + "', '" + address + "', '" + car + "', '" + carId + "', '" + insurance + "', '" + start
-				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+", "+outOfCountry+", "+addDriver+", '"+fullNameAD+"', '"+birthDateAddDr+"', "+ 0 +"  )";
+				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+", "+outOfCountry+", "+addDriver+", '"+fullNameAD+"', '"+birthDateAddDr+"', "+ 0 +", 'numberPending' )";
 		
 		Integer contractid = null;
 		try (Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -195,6 +195,19 @@ public class ConnectionManager {
 		String queryText = "UPDATE PRIVATE_CONTRACTS  SET INSURANCEPRICE = " + price + " WHERE ID = " + contractid + ";";
 		connection.putQuery(queryText);
 	}
+	
+	public static void putContractInsuranceNumberUpdate(String number, int contractid) throws SQLException {
+		String queryText = "UPDATE PRIVATE_CONTRACTS  SET INSURANCENUMBER = " + number + " WHERE ID = " + contractid + ";";
+		connection.putQuery(queryText);
+	}
+	
+	public static int askForContractInsuranceNumber(int contractid) throws SQLException {
+		String queryText = "SELECT INSURANCENUMBER FROM PRIVATE_CONTRACTS WHERE ID = " + contractid + ";";
+		ResultSet rs = connection.askQuery(queryText);
+		rs.next();
+		return rs.getInt("INSURANCENUMBER");
+	}
+	
 	
 	
 	public static void putContractAsRejected(int contractid) throws SQLException {
@@ -263,6 +276,11 @@ public class ConnectionManager {
 
 	public static void putCarAsFree(int id) {
 		String queryText = "UPDATE CARS SET STATUS='free' WHERE id=" + id + ";";
+		connection.putQuery(queryText);
+	}
+	
+	public static void putCarAsInRepair(int id) {
+		String queryText = "UPDATE CARS SET STATUS='in repair' WHERE id=" + id + ";";
 		connection.putQuery(queryText);
 	}
 
@@ -362,7 +380,7 @@ public class ConnectionManager {
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "
 				+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
 				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double,status varchar(255), extra_charge double, extra_days int, return_date SMALLDATETIME, "
-				+ "companyid int, outOfCountry boolean, addDriver boolean, fullNameAD varchar(255), birthDateAddDr SMALLDATETIME, insurancePrice int)";
+				+ "companyid int, outOfCountry boolean, addDriver boolean, fullNameAD varchar(255), birthDateAddDr SMALLDATETIME, insurancePrice int, insuranceNumber varchar(255))";
 		connection.putQuery(createContractsQuery);
 
 		String createMaintenanceQuery = "CREATE TABLE IF NOT EXISTS MAINTENANCE(maint_id bigint auto_increment, "

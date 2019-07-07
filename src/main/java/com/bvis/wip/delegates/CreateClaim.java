@@ -21,9 +21,6 @@ public class CreateClaim implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 
-		
-		
-		
 		int contractId = (int) execution.getVariable("contractID");
 		System.out.println(1);
 		String problemDescription = (String) execution.getVariable("damageDesc");
@@ -37,12 +34,8 @@ public class CreateClaim implements JavaDelegate {
 		System.out.println(5);
 		execution.setVariable("claim", claim);
 		System.out.println(6);
-		
+		ConnectionManager.putCarAsInRepair(contract.getCar().getId());
 
-		
-		
-		
-		
 		
 		
 //		// get the name and address from text fields

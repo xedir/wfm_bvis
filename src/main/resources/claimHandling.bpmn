@@ -16,7 +16,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0bxruma" sourceRef="StartEvent_1" targetRef="Task_0v1p84s" />
     <bpmn:sequenceFlow id="SequenceFlow_1mwtdr4" sourceRef="Task_0v1p84s" targetRef="Task_1mozv7p" />
     <bpmn:endEvent id="EndEvent_1jyceui">
-      <bpmn:incoming>SequenceFlow_1egthdj</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1bz4597</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0erwd9v" sourceRef="Task_1s0556b" targetRef="IntermediateThrowEvent_1tuna1l" />
     <bpmn:sequenceFlow id="SequenceFlow_1kxmmwn" sourceRef="IntermediateThrowEvent_1tuna1l" targetRef="Task_06qew7q" />
@@ -57,11 +57,21 @@
         <bpmn:condition xsi:type="bpmn:tFormalExpression">#{answerCapitol}</bpmn:condition>
       </bpmn:conditionalEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1egthdj" sourceRef="Task_1fzmxcq" targetRef="EndEvent_1jyceui" />
+    <bpmn:sequenceFlow id="SequenceFlow_1egthdj" sourceRef="Task_1fzmxcq" targetRef="Task_04gynbi" />
     <bpmn:sendTask id="Task_1fzmxcq" name="Tell c&#38;c what to repair and who pays it" camunda:class="com.bvis.wip.delegates.SendConfirmationToCC">
       <bpmn:incoming>SequenceFlow_05ehgc2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1egthdj</bpmn:outgoing>
     </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0okuj5m" sourceRef="Task_04gynbi" targetRef="Task_0apyx9j" />
+    <bpmn:userTask id="Task_04gynbi" name="Confirm return of repaird car" camunda:formKey="embedded:app:forms/freeup-car-after-repair.html" camunda:assignee="demo">
+      <bpmn:incoming>SequenceFlow_1egthdj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0okuj5m</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1bz4597" sourceRef="Task_0apyx9j" targetRef="EndEvent_1jyceui" />
+    <bpmn:serviceTask id="Task_0apyx9j" name="Mark Car as free in database" camunda:class="com.bvis.wip.delegates.FreeUpCarInDb">
+      <bpmn:incoming>SequenceFlow_0okuj5m</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1bz4597</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:textAnnotation id="TextAnnotation_0ajk6pq">
       <bpmn:text>Request</bpmn:text>
     </bpmn:textAnnotation>
@@ -98,7 +108,7 @@
         <di:waypoint x="687" y="119" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1jyceui_di" bpmnElement="EndEvent_1jyceui">
-        <dc:Bounds x="1555" y="207" width="36" height="36" />
+        <dc:Bounds x="2052" y="207" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0erwd9v_di" bpmnElement="SequenceFlow_0erwd9v">
         <di:waypoint x="667" y="225" />
@@ -109,12 +119,12 @@
         <di:waypoint x="828" y="225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0jboqdj_di" bpmnElement="SequenceFlow_0jboqdj">
-        <di:waypoint x="1033" y="225" />
-        <di:waypoint x="1086" y="225" />
+        <di:waypoint x="1044" y="225" />
+        <di:waypoint x="1097" y="225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_16eybf4_di" bpmnElement="SequenceFlow_16eybf4">
         <di:waypoint x="928" y="225" />
-        <di:waypoint x="997" y="225" />
+        <di:waypoint x="1008" y="225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0c45b8y_di" bpmnElement="Task_06qew7q">
         <dc:Bounds x="828" y="185" width="100" height="80" />
@@ -123,9 +133,9 @@
         <dc:Bounds x="567" y="185" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_0xaburf_di" bpmnElement="IntermediateThrowEvent_1pgsmmr">
-        <dc:Bounds x="997" y="207" width="36" height="36" />
+        <dc:Bounds x="1008" y="207" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="971" y="250" width="88" height="14" />
+          <dc:Bounds x="982" y="250" width="88" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_08vibbt_di" bpmnElement="IntermediateThrowEvent_1tuna1l">
@@ -135,28 +145,42 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SendTask_0wdvik7_di" bpmnElement="Task_1ivk6dv">
-        <dc:Bounds x="1086" y="185" width="100" height="80" />
+        <dc:Bounds x="1097" y="185" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0q0goc7_di" bpmnElement="SequenceFlow_0q0goc7">
-        <di:waypoint x="1186" y="225" />
-        <di:waypoint x="1260" y="225" />
+        <di:waypoint x="1197" y="225" />
+        <di:waypoint x="1271" y="225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_05ehgc2_di" bpmnElement="SequenceFlow_05ehgc2">
-        <di:waypoint x="1296" y="225" />
-        <di:waypoint x="1364" y="225" />
+        <di:waypoint x="1307" y="225" />
+        <di:waypoint x="1375" y="225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_1gk37f4_di" bpmnElement="IntermediateThrowEvent_1w2bize">
-        <dc:Bounds x="1260" y="207" width="36" height="36" />
+        <dc:Bounds x="1271" y="207" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1237" y="250" width="83" height="27" />
+          <dc:Bounds x="1248" y="250" width="83" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1egthdj_di" bpmnElement="SequenceFlow_1egthdj">
-        <di:waypoint x="1464" y="225" />
-        <di:waypoint x="1555" y="225" />
+        <di:waypoint x="1475" y="225" />
+        <di:waypoint x="1570" y="225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="SendTask_10xnf7i_di" bpmnElement="Task_1fzmxcq">
-        <dc:Bounds x="1364" y="185" width="100" height="80" />
+        <dc:Bounds x="1375" y="185" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0okuj5m_di" bpmnElement="SequenceFlow_0okuj5m">
+        <di:waypoint x="1670" y="225" />
+        <di:waypoint x="1747" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1g1en7s_di" bpmnElement="Task_04gynbi">
+        <dc:Bounds x="1570" y="185" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1bz4597_di" bpmnElement="SequenceFlow_1bz4597">
+        <di:waypoint x="1847" y="225" />
+        <di:waypoint x="2052" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1p317vt_di" bpmnElement="Task_0apyx9j">
+        <dc:Bounds x="1747" y="185" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

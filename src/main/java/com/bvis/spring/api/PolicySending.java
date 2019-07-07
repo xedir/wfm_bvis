@@ -86,6 +86,8 @@ public class PolicySending {
 		this.processID = pid;
 		this.insuranceNumber = "";
 		this.vehicleID = Integer.toString(contract.getCar().getId());
+		this.carValue = contract.getCar().getValueByID(contract.getCar().getId());
+		this.price = contract.getCar().getPriceByID(contract.getCar().getId());
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
 		this.status = "requested";

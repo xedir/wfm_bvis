@@ -16,7 +16,7 @@ public class MaintenanceReturn implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 			
-		int maintid = (int) execution.getVariable("maintcar");
+		int maintid = (int) execution.getVariable("maintid");
 		String loc = (String) execution.getVariable("returnloc");
 		
 		ConnectionManager.putMaintReturn(maintid, loc);

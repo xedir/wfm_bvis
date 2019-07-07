@@ -164,7 +164,7 @@ public class ConnectionManager {
 			throws SQLException {
 		String queryText = "INSERT INTO PRIVATE_CONTRACTS VALUES(default, '" + first_name + "', '" + last_name + "', '"
 				+ customerId + "', '" + address + "', '" + car + "', '" + carId + "', '" + insurance + "', '" + start
-				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+", "+outOfCountry+", "+addDriver+", '"+fullNameAD+"', '"+birthDateAddDr+"')";
+				+ "', '" + end + "', '" + duration + "', '" + price + "', '" + status +"', "+extra_charge+ ", "+extra_days+ ", "+return_date+  ", "+companyid+", "+outOfCountry+", "+addDriver+", '"+fullNameAD+"', '"+birthDateAddDr+"', "+ 0 +"  )";
 		
 		Integer contractid = null;
 		try (Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
@@ -185,6 +185,12 @@ public class ConnectionManager {
 		String queryText = "UPDATE PRIVATE_CONTRACTS  SET STATUS = 'ongoing' WHERE ID = " + contractid + ";";
 		connection.putQuery(queryText);
 	}
+	
+	public static void putContractInsurancePriceUpdate(int price, int contractid) throws SQLException {
+		String queryText = "UPDATE PRIVATE_CONTRACTS  SET INSURANCEPRICE = " + price + " WHERE ID = " + contractid + ";";
+		connection.putQuery(queryText);
+	}
+	
 	
 	public static void putContractAsRejected(int contractid) throws SQLException {
 		String queryText = "UPDATE PRIVATE_CONTRACTS  SET STATUS = 'rejected' WHERE ID = " + contractid + ";";
@@ -351,7 +357,7 @@ public class ConnectionManager {
 				+ "first_name varchar(255), last_name varchar(255), customerId int, "
 				+ "address varchar(255), car varchar(255), carId int,insurance varchar(255), "
 				+ "start SMALLDATETIME, end SMALLDATETIME, duration bigint, price double,status varchar(255), extra_charge double, extra_days int, return_date SMALLDATETIME, "
-				+ "companyid int, outOfCountry boolean, addDriver boolean, fullNameAD varchar(255), birthDateAddDr SMALLDATETIME)";
+				+ "companyid int, outOfCountry boolean, addDriver boolean, fullNameAD varchar(255), birthDateAddDr SMALLDATETIME, insurancePrice int)";
 		connection.putQuery(createContractsQuery);
 
 		String createMaintenanceQuery = "CREATE TABLE IF NOT EXISTS MAINTENANCE(maint_id bigint auto_increment, "

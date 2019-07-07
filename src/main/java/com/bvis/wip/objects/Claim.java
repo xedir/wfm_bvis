@@ -26,6 +26,8 @@ public class Claim implements Serializable {
 	String damagedParts;
 	double partCosts;
 	double totalCosts;
+	//Damage[] Array to be filled later
+	Damage[] damages;
 	
 	// for "CreateClaim"
 	public Claim(Contract contract, Customer customer, Car car, String claimType, String isCovered, String status, String damageDesc, String carLocation) {

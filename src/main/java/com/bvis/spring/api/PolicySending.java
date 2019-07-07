@@ -120,7 +120,7 @@ public class PolicySending {
 // Coverage Object to send within the policy, gets created by default with dynamic value for outOfCountry as only this value is individual for each rent
 class Coverage {
 	
-	Coverage(){}
+	public Coverage(){}
 	
 	@JsonProperty
 	int coPay;
@@ -160,7 +160,7 @@ class Coverage {
 
 class Driver{
 	
-	Driver(){}
+	public Driver(){}
 		
 	@JsonProperty
 	String firstName;

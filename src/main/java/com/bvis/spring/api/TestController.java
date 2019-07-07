@@ -78,8 +78,12 @@ public class TestController {
 		
 		if (accepted) {
 			runtimeService.setVariable(pid, "contractAccepted", true);
+			runtimeService.setVariable(pid, "insuranceNumber", policy.getInsuranceNumber());
+			int price = policy.getPrice();
+			
 			try {
 				ConnectionManager.putContractAsOngoing(contractid);
+				ConnectionManager.putContractInsurancePriceUpdate(price, contractid);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

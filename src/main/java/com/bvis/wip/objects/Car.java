@@ -5,15 +5,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bvis.wip.db.ConnectionManager;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
+@JsonPropertyOrder({ "carId", "licensePlate", "location" })
 public class Car implements Serializable {
 	
 	String name;
 	int dayPrice;
-	int id;
+	int carId;
 	String status;
 	String location; 
 	String licensePlate;
+	
+	
+	
+	public Car() {
+		
+	}
+	
+	@JsonProperty("carId")
+	public int getId() {
+		return this.carId;
+	}
+	
+	public String getLicensePlate() {
+		return licensePlate;
+	}
 	
 	public String getLocation() {
 		return location;
@@ -21,12 +41,6 @@ public class Car implements Serializable {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public Car() {}
-	
-	public String getLicensePlate() {
-		return licensePlate;
 	}
 
 	public Car(String name) {
@@ -37,12 +51,12 @@ public class Car implements Serializable {
 	public Car(String name, int dayPrice, int id, String status) {
 		this.name = name;
 		this.dayPrice = dayPrice;
-		this.id = id;
+		this.carId = id;
 		this.status = status;
 		
 	}
 	
-	
+	@JsonIgnore
 	public String getName() {
 		return this.name;
 	}
@@ -57,21 +71,18 @@ public class Car implements Serializable {
 	}
 	
 	public void setId(int id) {
-		this.id = id;
+		this.carId = id;
 	}
 	
 	public void setPickedUp() {
 		this.status = "picked up";
 	}
 	
+	@JsonIgnore
 	public String getStatus() {
 		return this.status;
 	}
-	
-	public int getId() {
-		return this.id;
-	}
-	
+		
 	public static Car createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForCarByID(id);
 		rs.next();
@@ -81,7 +92,7 @@ public class Car implements Serializable {
 
 	public void setLicensePlate(int id) {
 		// TODO Auto-generated method stub
-		int x = id + 12345;
+		int x = id + 26745;
 		String Lic = "DE-"+String.valueOf(x);
 		this.licensePlate = Lic;
 	}

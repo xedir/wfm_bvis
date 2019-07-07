@@ -303,10 +303,6 @@ public class Contract implements Serializable{
 
 	public void setCompanyid(int companyid) {
 		this.companyid = companyid;
-	}
-
-	
-	
-	
+	}	
 
 }

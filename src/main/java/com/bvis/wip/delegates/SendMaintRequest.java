@@ -10,6 +10,7 @@ import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.springframework.web.client.RestTemplate;
 
+import com.bvis.spring.api.MaintenanceObject;
 import com.bvis.spring.api.PolicySending;
 import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Car;
@@ -18,33 +19,38 @@ import com.bvis.wip.objects.Customer;
 
 public class SendMaintRequest implements JavaDelegate {
 	
-	private final static Logger LOGGER = Logger.getLogger("LoggingSelect");
-
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 
-		String process_id = execution.getProcessInstanceId();
-		String activity_id = execution.getActivityInstanceId();
-		int maintid = (int) execution.getVariable("maintcar");
+		int maintid = (int) execution.getVariable("maintid");
 		execution.setVariable("maintid", maintid);
-
+		String process_id = execution.getProcessInstanceId();
+		String jobType = "MAINTENANCE";
+		String problemDescription = "Regular Maintenance";
+		
 		ResultSet maintCar = ConnectionManager.getCarInMaint(maintid);
 		while (maintCar.next()){
 		execution.setVariable("maintcarid", maintCar.getString("ID"));
 		execution.setVariable("maintcarname", maintCar.getString("CAR_NAME"));
 
-		String jobType = "MAINTENANCE";
-		String problemDescription = "Regular Maintenance";
-		
 		// Create Car object
 		Car MaintCar = new Car();
 		MaintCar.setId(maintCar.getInt("ID"));
 		MaintCar.setLicensePlate(maintCar.getInt("ID"));
 		MaintCar.setLocation(maintCar.getString("LOCATION"));
-		System.out.println(process_id+" - "+activity_id+" Send Maintenance Request for maintenance id: "+ maintid+" Car License Plate: "+MaintCar.getLicensePlate() +" - ID: "+MaintCar.getId()+" - Loc: "+MaintCar.getLocation());
-			
+		System.out.println(process_id+" Send Maintenance Request for maintenance id: "+ maintid+" Car License Plate: "+MaintCar.getLicensePlate() +" - ID: "+MaintCar.getId()+" - Loc: "+MaintCar.getLocation());
+
+		MaintenanceObject maintObject = new MaintenanceObject(MaintCar,jobType, problemDescription, maintid, process_id);
+		
+		// create new restTemplate
+		RestTemplate restTemplate = new RestTemplate();
+
+		//Send contract to Capitol. No response required.
+		restTemplate.postForLocation("http://127.0.0.1:5555/", maintObject);
+		
+		
+		
 		}
 	}
-
 }

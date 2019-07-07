@@ -107,10 +107,10 @@ public class TestController {
 	@PostMapping("/pickupMessage")
 	public void pickupMessage(@RequestBody PickupMessage pickup) {
 		//runtimeService.setVariable(pickup.getProcessId(), "pickupDate", pickup.getPickupDate());
-			
+		System.out.println("pickup Message received for process id "+pickup.getProcessId());
 		runtimeService.setVariable(pickup.getProcessId(), "pickedUp", true);
 	}
-	
+
 	@PostMapping("/quotation")
 	public void quotationReciever(@RequestBody Quotation quotation) {
 		runtimeService.setVariable(quotation.getProcessId(), "quotationSave", quotation);

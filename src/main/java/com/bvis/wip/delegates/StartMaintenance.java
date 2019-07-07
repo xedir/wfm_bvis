@@ -48,11 +48,10 @@ public class StartMaintenance implements JavaDelegate {
 				execution.setVariable("ResponseCode", 200);
 			}
 			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-			String output;
-			System.out.println("Success: 200 - Output from Server ....");
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
-			}
+//			String output;
+//			while ((output = br.readLine()) != null) {
+//				//System.out.println(output);
+//			}
 
 			os.close();
 			conn.disconnect();

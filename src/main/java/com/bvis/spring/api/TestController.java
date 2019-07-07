@@ -1,6 +1,8 @@
 package com.bvis.spring.api;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -101,8 +103,24 @@ public class TestController {
 		runtimeService.setVariable(pid, "response", true);
 	}
 
+	@PostMapping("/pickupMessage")
+	public void pickupMessage(@PathVariable("processInstanceId") String processInstanceId, int claimId) {
 
+		runtimeService.setVariable(processInstanceId, "pickedup", true);
+		runtimeService.setVariable(processInstanceId, "uselessId", claimId);
+		System.out.println("pickup Message received for process id "+processInstanceId);
+				
+	}
 	
+//	@PostMapping("/quotation")
+//	public void quotation(@PathVariable("processInstanceId") String processInstanceId, int claimId) {
+//
+//		runtimeService.setVariable(processInstanceId, "pickedup", true);
+//		runtimeService.setVariable(processInstanceId, "uselessId", claimId);
+//		System.out.println("Quotation received for process id "+processInstanceId);
+//				
+//	}
+//	
 	
 	@GetMapping
 	public boolean get(@RequestParam String name) {

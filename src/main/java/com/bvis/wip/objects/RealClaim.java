@@ -1,5 +1,6 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,7 +8,7 @@ import java.util.Date;
 
 import com.bvis.wip.db.ConnectionManager;
 
-public class RealClaim {
+public class RealClaim implements Serializable{
 
 	
 	
@@ -44,6 +45,7 @@ public class RealClaim {
 		this.pid = pid;
 	}
 
+	
 	public String pid;
 	public Contract contract;
 	public int carId;

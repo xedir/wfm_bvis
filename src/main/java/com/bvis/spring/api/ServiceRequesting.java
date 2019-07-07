@@ -37,7 +37,9 @@ class Car{
 	Car(){}
 	Car(String carId, String licensePlate, String location){
 		this.carId = carId;
-		this.licensePlate = licensePlate;
+		int x = Integer.getInteger(carId) + 26745;
+		String Lic = "DE-"+String.valueOf(x);
+		this.licensePlate = Lic;; 	
 		this.location = location;
 	}
 	

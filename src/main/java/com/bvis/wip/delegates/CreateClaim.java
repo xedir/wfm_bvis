@@ -9,7 +9,6 @@ import org.camunda.bpm.engine.variable.value.StringValue;
 
 import com.bvis.wip.db.ConnectionManager;
 import com.bvis.wip.objects.Car;
-import com.bvis.wip.objects.Claim;
 import com.bvis.wip.objects.Contract;
 import com.bvis.wip.objects.Customer;
 import com.bvis.wip.objects.RealClaim;
@@ -25,9 +24,9 @@ public class CreateClaim implements JavaDelegate {
 		
 		
 		
-		int contractId = (int) execution.getVariable("contractId");
+		int contractId = (int) execution.getVariable("contractID");
 		System.out.println(1);
-		String problemDescription = (String) execution.getVariable("problemDescription");
+		String problemDescription = (String) execution.getVariable("damageDesc");
 		System.out.println(2);
 		Contract contract = Contract.createFromIDAll(contractId);
 		System.out.println(3);

@@ -8,43 +8,36 @@ public class ServiceResponseCCMaint implements Serializable {
 
 	ServiceResponseCCMaint(){}
 	
-	
-	public ServiceResponseCCMaint(InsuranceClaiming returnedClaim, Quotation quotation){
+	public ServiceResponseCCMaint(String processId, Quotation quotation){
 		super();
-		this.processId = returnedClaim.getProcessId();
-		this.serviceResponsibility = ServiceResponsibility.convertFromDamagesToServiceResponsibility(returnedClaim.getDamages(), quotation.getJobDetails());
+		this.processId = processId;
+		this.serviceResponsibility = ServiceResponsibilityMaint.convertToServiceResponsibility(quotation.getJobDetails());
 	}
 	
 	@JsonProperty
 	public String processId;
 	@JsonProperty
-	public ServiceResponsibility[] serviceResponsibility;
-	
-	
+	public ServiceResponsibilityMaint[] serviceResponsibility;
 	
 }
 
 
 class ServiceResponsibilityMaint implements Serializable{
+
+	@JsonProperty
+	public String serviceID;
 	
 	@JsonProperty
-	public String serviceIDMaint;
-	@JsonProperty
-	public String serviceResponsibilityMaint;
+	public String serviceResponsibility;
 	
-	public static ServiceResponsibilityMaint[] convertFromDamagesToServiceResponsibilityMaint(Damage[] damages, JobDetails[] jobs) {
-		int length = damages.length;
+	public static ServiceResponsibilityMaint[] convertToServiceResponsibility(JobDetails[] jobs) {
+		int length = jobs.length;
 		ServiceResponsibilityMaint[] services = new ServiceResponsibilityMaint[length];
 		
 		for(int i = 0; i < length; i++ ) {			
 			ServiceResponsibilityMaint serviceObject = new ServiceResponsibilityMaint();
-			serviceObject.setServiceIDMaint(Integer.toString(jobs[i].getServiceId()));
-			if (damages[i].isCovered()) {
-				serviceObject.setServiceResponsibilityMaint("CAPITOL_PAYMENT");
-			} else {
-				serviceObject.setServiceResponsibilityMaint("BVIS_PAYMENT");
-			}
-			
+			serviceObject.setServiceID(Integer.toString(jobs[i].getServiceId()));
+			serviceObject.setServiceResponsibility("BVIS_PAYMENT");
 			services[i] = serviceObject;
 		}
 		return services;
@@ -53,32 +46,29 @@ class ServiceResponsibilityMaint implements Serializable{
 	/**
 	 * @return the serviceIDMaint
 	 */
-	public String getServiceIDMaint() {
-		return serviceIDMaint;
+	public String getServiceID() {
+		return serviceID;
 	}
 
 	/**
 	 * @param serviceIDMaint the serviceIDMaint to set
 	 */
-	public void setServiceIDMaint(String serviceIDMaint) {
-		this.serviceIDMaint = serviceIDMaint;
+	public void setServiceID(String serviceIDMaint) {
+		this.serviceID = serviceIDMaint;
 	}
 
 	/**
 	 * @return the serviceResponsibilityMaint
 	 */
-	public String getServiceResponsibilityMaint() {
-		return serviceResponsibilityMaint;
+	public String getServiceResponsibility() {
+		return serviceResponsibility;
 	}
 
 	/**
 	 * @param serviceResponsibilityMaint the serviceResponsibilityMaint to set
 	 */
-	public void setServiceResponsibilityMaint(String serviceResponsibilityMaint) {
-		this.serviceResponsibilityMaint = serviceResponsibilityMaint;
+	public void setServiceResponsibility(String serviceResponsibilityMaint) {
+		this.serviceResponsibility = serviceResponsibilityMaint;
 	}
-
-
-	
 	
 }

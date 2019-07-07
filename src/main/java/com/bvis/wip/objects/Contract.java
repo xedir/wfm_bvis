@@ -259,8 +259,6 @@ public class Contract implements Serializable{
 	
 	public static void finalizeContract(Contract contract) {
 		ConnectionManager.putFinalizeContract(contract.getId());
-		contract.getCar().setFree();
-		
 	}
 	
 	public Integer save() throws SQLException {

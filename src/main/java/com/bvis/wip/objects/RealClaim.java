@@ -10,12 +10,7 @@ import com.bvis.wip.db.ConnectionManager;
 
 public class RealClaim implements Serializable{
 
-	
-	
-	
-	public RealClaim() {
-		
-	}
+	public RealClaim() {}
 	
 	public RealClaim(Contract contract, String problemDescription, String processId) throws SQLException {
 		this.processId = processId;
@@ -31,19 +26,6 @@ public class RealClaim implements Serializable{
 		
 	}
 
-	/**
-	 * @return the pid
-	 */
-	public String getPid() {
-		return processId;
-	}
-
-	/**
-	 * @param pid the pid to set
-	 */
-	public void setPid(String processId) {
-		this.processId = processId;
-	}
 
 	
 	public String processId;
@@ -59,7 +41,21 @@ public class RealClaim implements Serializable{
 	//Damage[] Array to be filled later
 	public Damage[] damages;
 	
+
 	
+	/**
+	 * @return the pid
+	 */
+	public String getPid() {
+		return processId;
+	}
+	
+	/**
+	 * @param pid the pid to set
+	 */
+	public void setPid(String processId) {
+		this.processId = processId;
+	}
 	
 	/**
 	 * @return the claimType

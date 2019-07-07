@@ -38,6 +38,7 @@ public class CreateClaim implements JavaDelegate {
 
 		
 		
+		
 //		// get the name and address from text fields
 //		String first_name = (String) execution.getVariable("first_name");
 //		String last_name = (String) execution.getVariable("last_name");

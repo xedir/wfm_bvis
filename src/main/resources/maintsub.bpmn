@@ -44,7 +44,7 @@
       </bpmn:conditionalEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0303yfu" sourceRef="IntermediateThrowEvent_1yfsr1k" targetRef="Task_0ub2d4d" />
-    <bpmn:serviceTask id="Task_0ub2d4d" name="Response to Quotation" camunda:class="">
+    <bpmn:serviceTask id="Task_0ub2d4d" name="Response to Quotation" camunda:class="com.bvis.wip.delegates.SendConfirmationToCCMaint">
       <bpmn:incoming>SequenceFlow_0303yfu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07qpf0o</bpmn:outgoing>
     </bpmn:serviceTask>

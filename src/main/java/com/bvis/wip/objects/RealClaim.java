@@ -86,9 +86,18 @@ public class RealClaim implements Serializable{
 	}
 
 	private String createMyDate() {
-		Date today = Calendar.getInstance().getTime();
+		// Date today = Calendar.getInstance().getTime();
+		
+		Date today = new Date();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(today); 
+		c.add(Calendar.DATE, 2);
+		today = c.getTime();
+		
+		
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
+		System.out.println(simpleFormatter.format(today));
 		return  simpleFormatter.format(today);
 	}
 	

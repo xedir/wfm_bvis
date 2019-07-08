@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("")
 public class InvoiceController {
 	
-	@PostMapping("/Invoice")
+	@PostMapping("/invoice")
 	public void pickupMessage() {
 		//runtimeService.setVariable(pickup.getProcessId(), "pickupDate", pickup.getPickupDate());
 		

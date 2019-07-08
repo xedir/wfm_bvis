@@ -106,10 +106,11 @@ public class TestController {
 	
 	@PostMapping("/insuranceCoverage")
 	public void insuranceCoverage(@RequestBody InsuranceClaiming insuranceClaim) {
-		
-		runtimeService.setVariable(insuranceClaim.getProcessId(), "ReturnClaimCapitol", insuranceClaim);
-		
-		runtimeService.setVariable(insuranceClaim.getProcessId(), "answerCapitol", true);
+		String pid = insuranceClaim.getProcessId();
+		System.out.println("Got return from capitol id is:" + pid);
+		pengine.getRuntimeService().setVariable(pid, "InsuranceCoverageSave", insuranceClaim);
+		pengine.getRuntimeService().setVariable(pid, "answerCapitol", true);
+
 	}
 	
 	

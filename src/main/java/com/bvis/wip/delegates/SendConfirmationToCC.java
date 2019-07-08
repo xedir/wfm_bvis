@@ -14,7 +14,7 @@ public class SendConfirmationToCC implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 
-		InsuranceClaiming returnedClaim = (InsuranceClaiming) execution.getVariable("ReturnClaimCapitol");
+		InsuranceClaiming returnedClaim = (InsuranceClaiming) execution.getVariable("InsuranceCoverageSave");
 		Quotation quotation = (Quotation) execution.getVariable("quotationSave");
 		
 		ServiceResponseCC confirmation = new ServiceResponseCC(returnedClaim, quotation);
@@ -22,10 +22,9 @@ public class SendConfirmationToCC implements JavaDelegate {
 		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();
 		
-		restTemplate.postForLocation("http://127.0.0.1:5555/", confirmation);
+		restTemplate.postForLocation("http://10.67.20.255:8080/serviceResponse", confirmation);
 		
 		System.out.println("blabla");
 		
 	}
-
 }

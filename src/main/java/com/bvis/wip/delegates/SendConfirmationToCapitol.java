@@ -20,7 +20,7 @@ public class SendConfirmationToCapitol implements JavaDelegate {
 		
 		PolicySending policy = (PolicySending) execution.getVariable("policeRecieved");
 		
-		restTemplate.postForLocation("http://10.67.51.65:8080/contract", policy);
+		restTemplate.postForLocation("http://10.65.7.165:8080/contract", policy);
 		
 	}
 

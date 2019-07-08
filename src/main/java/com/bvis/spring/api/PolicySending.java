@@ -1,5 +1,6 @@
 package com.bvis.spring.api;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,15 +17,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Implements REST model to send the contract in the form Capitol requires.
  * @JsonIgnoreProperties(ignoreUnknown = true)
  */
-public class PolicySending {
+public class PolicySending implements Serializable{
+	
 		
 	//(customer, car, start, end, duration, insurance , price)
 	
 	/**
 	 * @return the processID
 	 */
-	public String getProcessID() {
-		return processID;
+	public String getProcessId() {
+		return processId;
 	}
 
 
@@ -32,7 +34,7 @@ public class PolicySending {
 	 * @return the insuranceNumber
 	 */
 	public String getInsuranceNumber() {
-		return insuranceNumber;
+		return id;
 	}
 
 
@@ -41,6 +43,91 @@ public class PolicySending {
 	 */
 	public int getPrice() {
 		return price;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String getVehicleId() {
+		return vehicleId;
+	}
+
+
+	public void setVehicleId(String vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
+
+	public int getCarValue() {
+		return carValue;
+	}
+
+
+	public void setCarValue(int carValue) {
+		this.carValue = carValue;
+	}
+
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+
+	public Coverage getCoverage() {
+		return coverage;
+	}
+
+
+	public void setCoverage(Coverage coverage) {
+		this.coverage = coverage;
+	}
+
+
+	public Driver[] getDrivers() {
+		return drivers;
+	}
+
+
+	public void setDrivers(Driver[] drivers) {
+		this.drivers = drivers;
+	}
+
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 
@@ -54,22 +141,25 @@ public class PolicySending {
 
 	public PolicySending(Contract contract, String pid, boolean outOfCountry, Customer adDriver) throws SQLException {
 		super();
-		this.processID = pid;
-		this.insuranceNumber = "";
-		this.vehicleID = Integer.toString(contract.getCar().getId());
+		this.processId = pid;
+		this.id = null;
+		this.vehicleId = Integer.toString(contract.getCar().getId());
 		this.carValue = contract.getCar().getValueByID(contract.getCar().getId());
 		this.price = contract.getCar().getPriceByID(contract.getCar().getId());
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
-		this.status = "requested";
+		this.status = "Requested";
 		this.coverage = new Coverage(contract.getInsurance(), outOfCountry);
 
 		//Additional Driver Information	
-		this.driver = new Driver[2];
+		this.drivers = new Driver[2];
 		int mainCustomerLicenseID = contract.getCustomer().getId() + 81604;
 		int addCustomerLicenseID = 2 * contract.getCustomer().getId() + 81604;
-		driver[0] = new Driver(contract.getCustomer().getFirst_name(), contract.getCustomer().getLast_name(), mainCustomerLicenseID, contract.getCustomer().getDateOfBirth());
-		driver[1] = new Driver(adDriver.getFirst_name(), adDriver.getLast_name(), addCustomerLicenseID, adDriver.getDateOfBirth());
+		
+		String bdateDriver = (contract.getCustomer().getDateOfBirth()).substring(0, 10);
+		
+		drivers[0] = new Driver(contract.getCustomer().getFirst_name(), contract.getCustomer().getLast_name(), mainCustomerLicenseID, bdateDriver);
+		drivers[1] = new Driver(adDriver.getFirst_name(), adDriver.getLast_name(), addCustomerLicenseID, adDriver.getDateOfBirth());
 		}
 	
 	
@@ -77,34 +167,38 @@ public class PolicySending {
 	 * @param insuranceNumber the insuranceNumber to set
 	 */
 	public void setInsuranceNumber(String insuranceNumber) {
-		this.insuranceNumber = insuranceNumber;
+		this.id = insuranceNumber;
 	}
 
 
 	public PolicySending(Contract contract, String pid, boolean outOfCountry) throws SQLException {
 		super();
-		this.processID = pid;
-		this.insuranceNumber = "";
-		this.vehicleID = Integer.toString(contract.getCar().getId());
+		this.processId = pid;
+		this.id = null;
+		this.vehicleId = Integer.toString(contract.getCar().getId());
 		this.carValue = contract.getCar().getValueByID(contract.getCar().getId());
 		this.price = contract.getCar().getPriceByID(contract.getCar().getId());
 		this.startDate = contract.getStart() + "T00:00:00.001Z";
 		this.endDate = contract.getEnd() + "T00:00:00.001Z";
-		this.status = "requested";
+		this.status = "Requested";
 		this.coverage = new Coverage(contract.getInsurance(), outOfCountry);
 
-		this.driver = new Driver[1];
+
+		String bdateDriver = (contract.getCustomer().getDateOfBirth()).substring(0, 10);
+		System.out.println(bdateDriver);
+		
+		this.drivers = new Driver[1];
 		int mainCustomerLicenseID = contract.getCustomer().getId() + 81604;
-		driver[0] = new Driver(contract.getCustomer().getFirst_name(), contract.getCustomer().getLast_name(), mainCustomerLicenseID, contract.getCustomer().getDateOfBirth());
+		drivers[0] = new Driver(contract.getCustomer().getFirst_name(), contract.getCustomer().getLast_name(), mainCustomerLicenseID, bdateDriver);
 		}
 	
 	//Attributes
 	@JsonProperty
-	private String processID;
+	private String processId;
 	@JsonProperty
-	private String insuranceNumber;
+	private String id;
 	@JsonProperty
-	private String vehicleID;
+	private String vehicleId;
 	@JsonProperty
 	private int carValue;
 	@JsonProperty
@@ -118,7 +212,7 @@ public class PolicySending {
 	@JsonProperty
 	private Coverage coverage;
 	@JsonProperty
-	private Driver[] driver;
+	private Driver[] drivers;
 
 	
 	
@@ -129,8 +223,40 @@ public class PolicySending {
 }
 
 // Coverage Object to send within the policy, gets created by default with dynamic value for outOfCountry as only this value is individual for each rent
-class Coverage {
+class Coverage implements Serializable{
 	
+
+
+	public int getCoPay() {
+		return coPay;
+	}
+
+
+	public void setCoPay(int coPay) {
+		this.coPay = coPay;
+	}
+
+
+	public boolean isOutOfCountry() {
+		return outOfCountry;
+	}
+
+
+	public void setOutOfCountry(boolean outOfCountry) {
+		this.outOfCountry = outOfCountry;
+	}
+
+
+	public int getMaxCoverage() {
+		return maxCoverage;
+	}
+
+
+	public void setMaxCoverage(int maxCoverage) {
+		this.maxCoverage = maxCoverage;
+	}
+
+
 	public Coverage(){}
 	
 	@JsonProperty
@@ -140,17 +266,6 @@ class Coverage {
 	@JsonProperty
 	int maxCoverage;
 	
-	public void setcoPay(int value) {
-		this.coPay = value;
-	}
-	
-	public void setmaxCoverage(int value) {
-		this.maxCoverage = value;
-	}
-	
-	public void setoutOfCountry(boolean value) {
-		this.outOfCountry = value;
-	}
 	
 	Coverage(String insurance ,boolean outOfCountry){
 		System.out.println(insurance);
@@ -169,8 +284,40 @@ class Coverage {
 }
 
 
-class Driver{
+class Driver implements Serializable{
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getDriverLicenseNumber() {
+		return driverLicenseNumber;
+	}
+
+	public void setDriverLicenseNumber(int driverLicenseNumber) {
+		this.driverLicenseNumber = driverLicenseNumber;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
 	public Driver(){}
 		
 	@JsonProperty

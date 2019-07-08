@@ -48,9 +48,12 @@ public class SendContract implements JavaDelegate {
 		} else {
 			Customer mainCustomer = (Customer) execution.getVariable("mainCustomer");
 			PolicySending policySending = new PolicySending(contract, execution.getProcessInstanceId(), outOfCountry);
-			restTemplate.postForLocation("http://127.0.0.1:5555/", policySending);
+			restTemplate.postForLocation("http://10.67.51.65:8080/contract", policySending);
+			execution.setVariable("policyObject", policySending);
 		}
 		
+		
+
 		
 		// serialize policySending object
 		// not needed anymore, format of policySending is already conform

@@ -19,9 +19,6 @@ import com.bvis.wip.objects.Customer;
 
 public class CreateContract implements JavaDelegate {
 	
-	//autowire runtime service and necessary repositories
-	@Autowired
-	private RuntimeService runtimeService;
 
 	private final static Logger LOGGER = Logger.getLogger("LoggingContractCreation");
 	
@@ -135,7 +132,11 @@ public class CreateContract implements JavaDelegate {
 		contract.setLastNameAddDriver(lastNameAddDriver);
 		*/
 		
-		Integer createdContractId = contract.save();
+		RuntimeService runTimeService = execution.getProcessEngineServices().getRuntimeService();
+		String pid = execution.getProcessInstanceId();
+		
+		int createdContractId = contract.save();
+		System.out.println(createdContractId);
 		execution.setVariable("contractId", createdContractId);
 		execution.setVariable("mainCustomer", customer);
 	

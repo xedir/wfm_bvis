@@ -9,13 +9,11 @@ public class PickupMessage {
 	PickupMessage(){}
 	
 	
-	
 	@JsonProperty
 	public String processId;
 	
 	
-//	@JsonProperty
-//	public String pickupDate;
+
 	/**
 	 * @return the processId
 	 */

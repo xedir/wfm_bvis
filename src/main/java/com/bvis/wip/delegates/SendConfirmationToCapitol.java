@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.web.client.RestTemplate;
 
 import com.bvis.spring.api.ConfirmationSending;
+import com.bvis.spring.api.PolicySending;
 
 public class SendConfirmationToCapitol implements JavaDelegate {
 
@@ -17,11 +18,9 @@ public class SendConfirmationToCapitol implements JavaDelegate {
 		
 		String insuranceNumber = (String) execution.getVariable("insuranceNumber");
 		
+		PolicySending policy = (PolicySending) execution.getVariable("policeRecieved");
 		
-		
-		ConfirmationSending confirmationSending = new ConfirmationSending(insuranceNumber);
-		
-		restTemplate.postForLocation("http://127.0.0.1:5555/", confirmationSending);
+		restTemplate.postForLocation("http://10.67.51.65:8080/contract", policy);
 		
 	}
 

@@ -53,21 +53,6 @@ public class InsuranceClaiming implements Serializable{
 	}
 
 
-	/**
-	 * @return the insuranceNumber
-	 */
-	public int getInsuranceNumber() {
-		return insuranceNumber;
-	}
-
-
-	/**
-	 * @param insuranceNumber the insuranceNumber to set
-	 */
-	public void setInsuranceNumber(int insuranceNumber) {
-		this.insuranceNumber = insuranceNumber;
-	}
-
 
 	/**
 	 * @param claimDate the claimDate to set
@@ -96,7 +81,6 @@ public class InsuranceClaiming implements Serializable{
 	public InsuranceClaiming(RealClaim claim, Quotation quotation, String processId) throws SQLException {
 		super();
 		this.processId = processId;
-		this.insuranceNumber = ConnectionManager.askForContractInsuranceNumber(claim.getContract().getId());
 		this.vehicleId = Integer.toString(claim.getCarId());
 		System.out.println(vehicleId);
 		this.claimDate = claim.getClaimDate();
@@ -108,8 +92,6 @@ public class InsuranceClaiming implements Serializable{
 	
 	@JsonProperty
 	private String processId;
-	@JsonProperty
-	private int insuranceNumber;
 	@JsonProperty
 	private String vehicleId;
 	@JsonProperty

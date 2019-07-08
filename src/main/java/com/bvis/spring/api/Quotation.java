@@ -1,13 +1,18 @@
 package com.bvis.spring.api;
 
 import java.io.Serializable;
-
 import spinjar.com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Quotation implements Serializable{
 
 	Quotation(){}
 	
+	Quotation(String processId, JobDetails[] jobDetails){
+		super();
+		this.processId = processId;
+		this.jobDetails = jobDetails;
+	}
 	
 	@JsonProperty
 	public String processId;
@@ -57,6 +62,7 @@ class JobDetails implements Serializable{
 	public String serviceName;
 	@JsonProperty
 	public double particularCost;
+	
 	/**
 	 * @return the serviceId
 	 */

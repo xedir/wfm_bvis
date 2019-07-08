@@ -26,7 +26,7 @@ public class InformCC implements JavaDelegate {
 		System.out.println(9);
 		ServiceRequesting serviceRequesting = new ServiceRequesting(claim);
 		System.out.println(10);
-		restTemplate.postForLocation("http://127.0.0.1:5555/", serviceRequesting);
+		restTemplate.postForLocation("http://10.67.20.255:8080/requestService", serviceRequesting);
 		System.out.println(11);
 		
 		

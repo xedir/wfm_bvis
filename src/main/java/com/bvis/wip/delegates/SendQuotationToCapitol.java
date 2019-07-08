@@ -21,13 +21,13 @@ public class SendQuotationToCapitol implements JavaDelegate {
 		
 		InsuranceClaiming insuranceClaiming = new InsuranceClaiming(claim, quotation, processId);
 		
+		execution.setVariable("InsuranceClaimingCapitol", insuranceClaiming);
+		
 		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();
 		System.out.println(quotation.getProcessId());	
 		
-		restTemplate.postForLocation("http://127.0.0.1:5555/", insuranceClaiming);
-		
-		
+		restTemplate.postForLocation("http://10.67.51.65:8080/insuranceClaim", insuranceClaiming);
+		//restTemplate.postForLocation("http://localhost:5555", insuranceClaiming);
 	}
-
 }

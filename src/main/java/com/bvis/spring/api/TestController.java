@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -16,17 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.bvis.wip.objects.Car;
 import com.bvis.wip.db.ConnectionManager;
+import com.bvis.spring.api.Quotation;
+
 @RestController
 @RequestMapping("/{processInstanceId}")
 public class TestController {
 
 	// autowire runtime service and necessary repositories
+	
 	@Autowired
 	private RuntimeService runtimeService;
-
+	@Autowired
+	private ProcessEngine pengine;
+	
 	/**
 	 * Controller for accepting contract. Handles get request.
 	 * 
@@ -34,7 +41,7 @@ public class TestController {
 	 * @param boolean,             accepted. Acceptance status.
 	 */
 	
-	@GetMapping("/contract-accept")
+	@PostMapping("/contract-accept")
 	public void ContractAccept(@PathVariable("processInstanceId") String processInstanceId, boolean accepted) {
 
 		int contractid = (int) runtimeService.getVariable(processInstanceId, "contractId");
@@ -61,46 +68,16 @@ public class TestController {
 		runtimeService.setVariable(processInstanceId, "response", true);
 	}
 	
-	@GetMapping("/contract")
+	@PostMapping("/contract")
 	public void Contract(@RequestBody PolicySending policy) {
-		String pid = policy.getProcessID();
-		boolean accepted;
 		
-		System.out.println("policy status is: " + policy.getStatus().equalsIgnoreCase("accepted"));
+		String pid = policy.getProcessId();
 		
-		if(policy.getStatus().equalsIgnoreCase("accepted")) {
-			accepted = true;
-		} else {
-			accepted = false;
-		}
+		pengine.getRuntimeService().setVariable(pid, "policeRecieved", policy);
 		
-		int contractid = (int) runtimeService.getVariable(pid, "contractId");
-		System.out.println("THE CONTROLLER PRINTER THIS CONTRACT ID: "+contractid);
+	//	runtimeService.setVariable(pid, "response", true);
+		pengine.getRuntimeService().createMessageCorrelation("Message_contract").processInstanceId(pid).correlate();
 		
-		if (accepted) {
-			runtimeService.setVariable(pid, "contractAccepted", true);
-			runtimeService.setVariable(pid, "insuranceNumber", policy.getInsuranceNumber());
-			int price = policy.getPrice();
-			
-			try {
-				ConnectionManager.putContractAsOngoing(contractid);
-				ConnectionManager.putContractInsurancePriceUpdate(price, contractid);
-				ConnectionManager.putContractInsuranceNumberUpdate(policy.getInsuranceNumber(), contractid);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			runtimeService.setVariable(pid, "contractAccepted", false);
-			try {
-				ConnectionManager.putContractAsRejected(contractid);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		runtimeService.setVariable(pid, "response", true);
 	}
 	
 	
@@ -111,12 +88,15 @@ public class TestController {
 		runtimeService.setVariable(pickup.getProcessId(), "pickedUp", true);
 	}
 	
-	
 
 	@PostMapping("/quotation")
-	public void quotationReciever(@RequestBody Quotation quotation) {
-		runtimeService.setVariable(quotation.getProcessId(), "quotationSave", quotation);
-		runtimeService.setVariable(quotation.getProcessId(), "recieveQuotation", true);
+	public void quotationReciever(@RequestBody Quotation quotation) {	
+		String pid = quotation.getProcessId();
+		System.out.println(pid);
+		pengine.getRuntimeService().setVariable(pid, "quotationSave", quotation);
+		pengine.getRuntimeService().setVariable(pid, "recieveQuotation", true);
+//		runtimeService.setVariable(quotation.getProcessId(), "quotationSave", quotation);
+//		runtimeService.setVariable(quotation.getProcessId(), "recieveQuotation", true);
 	}
 	
 //	@PostMapping("/insuranceCoverage")

@@ -44,10 +44,16 @@ public class SendContract implements JavaDelegate {
 			Customer addDriverObject = new Customer(firstNameAD, lastNameAD);
 			addDriverObject.setBirth(birthDateAddDr);
 			PolicySending policySending = new PolicySending(contract, execution.getProcessInstanceId(), outOfCountry, addDriverObject);
+			
+			// Capitol IP
 			restTemplate.postForLocation("http://10.65.7.165:8080/contract", policySending);
+			
+			
 		} else {
 			Customer mainCustomer = (Customer) execution.getVariable("mainCustomer");
 			PolicySending policySending = new PolicySending(contract, execution.getProcessInstanceId(), outOfCountry);
+			
+			// Capitol IP
 			restTemplate.postForLocation("http://10.65.7.165:8080/contract", policySending);
 			execution.setVariable("policyObject", policySending);
 		}

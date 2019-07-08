@@ -22,9 +22,10 @@ public class SendConfirmationToCC implements JavaDelegate {
 		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();
 		
+		// Cars and Co IP:
 		restTemplate.postForLocation("http://10.67.20.255:8080/serviceResponse", confirmation);
 		
-		System.out.println("blabla");
+		System.out.println("Claim settled, insurance payment responsibilities send to Cars and Co.");
 		
 	}
 }

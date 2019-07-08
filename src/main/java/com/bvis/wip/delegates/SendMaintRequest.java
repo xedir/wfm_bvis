@@ -46,7 +46,7 @@ public class SendMaintRequest implements JavaDelegate {
 		// create new restTemplate
 		RestTemplate restTemplate = new RestTemplate();
 
-		//Send contract to Capitol. No response required.
+		// Capitol IP:
 		restTemplate.postForLocation("http://10.67.20.255:8080/requestService", maintObject);
 		
 		

@@ -20,6 +20,9 @@ public class SendConfirmationToCapitol implements JavaDelegate {
 		
 		PolicySending policy = (PolicySending) execution.getVariable("policeRecieved");
 		
+		
+		
+		// Capitol IP
 		restTemplate.postForLocation("http://10.65.7.165:8080/contract", policy);
 		
 	}

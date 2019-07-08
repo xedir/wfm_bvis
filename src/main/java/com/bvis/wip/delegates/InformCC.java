@@ -19,15 +19,15 @@ public class InformCC implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		System.out.println(7);
+
 		RestTemplate restTemplate = new RestTemplate();
-		System.out.println(8);
 		RealClaim claim = (RealClaim) execution.getVariable("claim");
-		System.out.println(9);
 		ServiceRequesting serviceRequesting = new ServiceRequesting(claim);
-		System.out.println(10);
+
+		// Cars and Co IP:
 		restTemplate.postForLocation("http://10.67.20.255:8080/requestService", serviceRequesting);
-		System.out.println(11);
+		
+		System.out.println("C&C informed.");
 		
 		
 //		// TODO Auto-generated method stub

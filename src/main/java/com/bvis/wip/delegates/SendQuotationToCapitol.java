@@ -27,6 +27,7 @@ public class SendQuotationToCapitol implements JavaDelegate {
 		RestTemplate restTemplate = new RestTemplate();
 		System.out.println(quotation.getProcessId());	
 		
+		// Capitol IP:
 		restTemplate.postForLocation("http://10.65.7.165:8080/insuranceClaim", insuranceClaiming);
 		//restTemplate.postForLocation("http://localhost:5555", insuranceClaiming);
 	}

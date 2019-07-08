@@ -24,7 +24,6 @@ public class SendConfirmationToCCMaint implements JavaDelegate {
 		
 		restTemplate.postForLocation("http://localhost:5555", confirmation);
 		restTemplate.postForLocation("http://10.67.20.255:8080/serviceResponse", confirmation);
-
 	}
 
 }

@@ -1,7 +1,9 @@
 package com.bvis.wip.delegates;
 
+import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bvis.wip.objects.Customer;
 import com.bvis.wip.db.ConnectionManager;
@@ -33,7 +35,17 @@ public class CustomerLookup implements JavaDelegate {
 		Customer customer = new Customer(val1, val2);
 		String name = customer.getName();
 		
+		String pid = execution.getProcessInstanceId();
+		
+		//RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
+		//runtimeService.setVariable(pid, "testValue", "test");
+		execution.setVariable("testValue", "test");
+		
+		
 		LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
+		
+		String customer_id = execution.getProcessInstanceId();
+		LOGGER.info("Prozeess ID ist: " + customer_id);
 		
 		if(!business) {
 			ResultSet rs = ConnectionManager.askForCustomer(val1, val2);
@@ -42,6 +54,9 @@ public class CustomerLookup implements JavaDelegate {
 				execution.setVariable("CustExists", false);
 				LOGGER.info("No Customer found ...");	
 			} else {
+				execution.setVariable("date_of_birth", rs.getString(7));
+				execution.setVariable("customer_id", rs.getString(1));
+				
 				execution.setVariable("CustExists", true);
 				LOGGER.info("Customer found ...");
 			}	
@@ -54,6 +69,24 @@ public class CustomerLookup implements JavaDelegate {
 			} else {
 				execution.setVariable("CustExists", true);
 				LOGGER.info("BusinessCustomer found ...");
+				ResultSet rs1 = ConnectionManager.askForCustomer(val1, val2);
+				if(rs1.next() == false) {
+
+					String date_of_birth = "1960-10-05";
+					customer.setBirth("1960-10-05");
+					execution.setVariable("date_of_birth", "1960-10-05");
+					String email = val3 + "@gmail.com";
+					String address = "musterstraße 17";
+					int phone = 149372;
+					
+					
+					LOGGER.info("Customer Credentials: '" + customer.getName() + "'...");
+					
+					ConnectionManager.putCustomer(val1, val2, address, phone, email, date_of_birth);	
+				} else {
+					LOGGER.info("Error");
+					
+				}
 			}
 		}		
 	}

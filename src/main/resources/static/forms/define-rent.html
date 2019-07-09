@@ -1,0 +1,136 @@
+<form>
+
+
+	<table>
+		<tr>
+			<th>First Name:&nbsp;</th>
+			<td><input type="text" id="firstName"
+				cam-variable-name="first_name" cam-variable-type="String" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Last Name:&nbsp;</th>
+			<td><input type="text" id="lastName"
+				cam-variable-name="last_name" cam-variable-type="String" class="form-control" disabled></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Company:&nbsp;</th>
+			<td><input type="text" id="company"
+				cam-variable-name="company_name" cam-variable-type="String" class="form-control" disabled></td>
+			<th>&nbsp;&nbsp;&nbsp;Address:&nbsp;</th>
+			<td><input type="text" id="customerAddress"
+				cam-variable-name="address" cam-variable-type="String" class="form-control" disabled></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4><h3>--------------------------------- Rent Details ---------------------------------</h3></td></tr>
+		<tr>
+			<th>Select Car:&nbsp;</th>
+			<td><select cam-variable-name="selected_car"
+				cam-variable-type="String" cam-choices="Available_Cars" class="form-control"></select></td>
+			<th>&nbsp;&nbsp;&nbsp;Insurance:&nbsp;</th>
+			<td><select cam-variable-name="selected_insurance"
+				cam-variable-type="String" cam-choices="Available_Insurance" class="form-control"></select></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+
+		<tr>
+		
+			<th>Start Date:&nbsp;</th>
+			<td>
+				<p class="input-group">
+					<input type="text" cam-variable-name="CONTRACT_START_DATE"
+						cam-variable-type="Date" class="form-control"
+						datepicker-popup="yyyy-MM-dd'T'HH:mm:ss" is-open="dateFieldOpened" />
+
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default"
+							ng-click="open($event)">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</p>
+			</td>
+
+			<th>&nbsp;&nbsp;&nbsp;End Date:&nbsp;</th>
+			<td><p class="input-group">
+					<input type="text" cam-variable-name="CONTRACT_END_DATE"
+						cam-variable-type="Date" class="form-control"
+						datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
+						is-open="dateFieldOpened2" /> <span class="input-group-btn">
+						<button type="button" class="btn btn-default"
+							ng-click="open2($event)">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</p></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Pickup Location:&nbsp;</th>
+			<td>
+			<select class="form-control" cam-variable-type="String" cam-variable-name="rentpickuploc">
+            <option value="Muenster">Muenster</option>
+            <option value="Cologne">Cologne</option>
+            <option value="Bielefeld">Bielefeld</option>
+          	</select>
+			</td>
+			<th>&nbsp;</th>
+			<td>&nbsp;</td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4><h4>------------------------------------------- Additional Services -------------------------------------------</h4></td></tr>
+		<tr>
+			<th>Out of Country Insurance? &nbsp;</th>
+			<td><input type="checkbox" cam-variable-name="outOfCountryIns" cam-variable-type="Boolean" name="outOfCountryIns" class="form-control" /></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:7px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>Additional Driver? (AD)&nbsp;</th>
+			<td><input type="checkbox" cam-variable-name="addDriver" cam-variable-type="Boolean" name="addDriver" class="form-control" /></td>
+			<th>&nbsp;&nbsp;&nbsp;Birth Date (AD):&nbsp;</th>
+			<td><p class="input-group">
+					<input type="text" cam-variable-name="birthDateAddDriver"
+						cam-variable-type="Date" class="form-control"
+						datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
+						is-open="dateFieldOpened3" /> 
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default"
+							ng-click="open3($event)">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</p></td>
+		</tr>
+		<tr><td bgcolor="#FFFFFF" style="line-height:5px;" colspan=4>&nbsp;</td></tr>
+		<tr>
+			<th>First Name (AD):&nbsp;</th>
+			<td><input type="text" id="first_NameAD"
+				cam-variable-name="firstNameAD" cam-variable-type="String" class="form-control"></td>
+			<th>&nbsp;&nbsp;&nbsp;Last Name (AD):&nbsp;</th>
+			<td><input type="text" id="last_NameAD"
+				cam-variable-name="lastNameAD" cam-variable-type="String" class="form-control"></td>
+		</tr>
+	</table>
+
+
+	<script cam-script type="text/form-script">
+        $scope.open = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
+      
+          $scope.dateFieldOpened = true;
+        };
+
+        $scope.open2 = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        
+            $scope.dateFieldOpened2 = true;
+          };
+          
+          $scope.open3 = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        
+            $scope.dateFieldOpened3 = true;
+          };
+      </script>
+
+</form>

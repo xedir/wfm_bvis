@@ -16,15 +16,16 @@ public class MaintenancePickUp implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		int maintid = (int) execution.getVariable("maintcar");
-		execution.setVariable("maintid", maintid);
-
-		Date PDate = (Date) execution.getVariable("maintpickupdate");
+		int maintid = (int) execution.getVariable("maintid");
+		
+		//Date PDate = (Date) execution.getVariable("maintpickupdate"); //used with user task from form
+			
+		Date Pdate = new Date(); 		
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleFormatter = new SimpleDateFormat(pattern);
-		String pickupDate = simpleFormatter.format(PDate);
+		String pickupDate = simpleFormatter.format(Pdate);
 		ConnectionManager.putMaintPickeUp(maintid, pickupDate);
-		System.out.println(pickupDate+"Set date for : "+maintid);
+		System.out.println(pickupDate+" set date for : "+maintid);
 		
 	}
 }

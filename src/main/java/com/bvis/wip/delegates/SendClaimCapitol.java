@@ -26,7 +26,7 @@ public class SendClaimCapitol implements JavaDelegate {
 		Claim claim = Claim.createFromID(claimID);
 		LOGGER.info("Claim ID: '" + claim.getClaimID() + "'...");
 
-		// here the Rest API is required to send it to CC
+		// here the Rest API is required to send it to Capitol
 	}
 
 }

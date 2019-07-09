@@ -1,8 +1,9 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +11,7 @@ import java.util.logging.Logger;
 
 import com.bvis.wip.db.ConnectionManager;
 
-public class Contract {
+public class Contract implements Serializable{
 	
 	private final static Logger LOGGER = Logger.getLogger("LoggingContract");
 	
@@ -26,10 +27,22 @@ public class Contract {
 	int customerId;
 	String status;
 	int contractID;
+	double extra_charge;
+	int extra_days;
+	String return_date;
+	int companyid;
+	boolean outOfCountry;
+	boolean addDriver;
+	String fullNameAD;
+	String birthDate;
+	// 
+	
+	public Contract(){}
 	
 	
-	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price) throws SQLException {
+	public Contract(Customer customer, int companyid, Car car, String start, String end, long duration,String insurance, double price, boolean outOfCountry, boolean addDriver, String fullNameAD, String birthDateAddDr) throws SQLException {
 		this.customer = customer;
+		this.companyid = companyid;
 		this.car = car;
 		this.carId = car.getId();
 		this.start = start;
@@ -38,11 +51,20 @@ public class Contract {
 		this.insurance = insurance;
 		this.price = price;
 		this.customerId = customer.getId();
-		this.status = "ongoing";
+		this.status = "pending";
+		this.outOfCountry = outOfCountry;
+		this.addDriver = addDriver;
+		this.fullNameAD = fullNameAD;
+		this.birthDate = birthDateAddDr;
+		/*
+		this.lastNameAddDriver = lastNameAddDriver;
+		*/
 		// LOGGER.info(this.getDetails());
 	}
 	
-	public Contract(Customer customer, Car car, String start, String end, long duration,String insurance, double price, int contractID) throws SQLException {
+	
+	
+	public Contract(Customer customer, int companyid, Car car, String start, String end, long duration,String insurance, double price, int contractID) throws SQLException {
 		this.customer = customer;
 		this.car = car;
 		this.carId = car.getId();
@@ -54,6 +76,7 @@ public class Contract {
 		this.customerId = customer.getId();
 		this.status = "ongoing";
 		this.contractID = contractID;
+		this.companyid = companyid;
 		// LOGGER.info(this.getDetails());
 	}
 	
@@ -61,21 +84,16 @@ public class Contract {
 	public static Contract createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForPrivateContractByID(id);
 		rs.next();
-		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
+		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")),rs.getInt("COMPANYID"), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
 	}
 	
-	public static List<Contract> findAllContracts() throws SQLException {
-		LOGGER.info("inside findAllContracts()");
-		List<Contract> result = new ArrayList<>();
-		ResultSet rs = ConnectionManager.findAllContracts();
-		while (rs.next()) {
-			
-			Contract currentContract = new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
-			LOGGER.info("Adding contract=" + currentContract.getId());
-			result.add(currentContract);
-		}
-		return result;
+	public static Contract createFromIDAll(int id) throws SQLException {
+		ResultSet rs = ConnectionManager.askForPrivateContractByIDAll(id);
+		rs.next();
+		return new Contract(Customer.createFromID(rs.getInt("CUSTOMERID")),rs.getInt("COMPANYID"), Car.createFromID(rs.getInt("CARID")), rs.getString("START"), rs.getString("END"), rs.getLong("DURATION"), rs.getString("INSURANCE"), rs.getDouble("PRICE"), rs.getInt("ID"));
 	}
+	
+	
 	
 	/**
 	 * @return the customer
@@ -129,7 +147,7 @@ public class Contract {
 	public String getEnd() {
 		return end;
 	}
-
+	
 	/**
 	 * @param end the end to set
 	 */
@@ -209,6 +227,39 @@ public class Contract {
 	
 		return this.customer.getName();
 	}
+
+	
+	public boolean getOutOfC() {
+		return this.outOfCountry;
+	}
+	
+	public void setOutOfC(boolean newOutOfCountry) {
+		this.outOfCountry = newOutOfCountry;
+	}
+	
+	public boolean getAddDriver() {
+		return this.addDriver;
+	}
+	
+	public void setAddDriver(boolean newAddDriver) {
+		this.addDriver = newAddDriver;
+	}
+	
+	public String getLastNameAddDriver() {
+		return this.fullNameAD;
+	}
+	
+	public void setLastNameAddDriver(String newFullNameAD) {
+		this.fullNameAD = newFullNameAD;
+	}
+	
+	public String getBirthDateAD() {
+		return this.birthDate;
+	}
+	
+	public void setBirthDateAD(String newBirthDate) {
+		this.birthDate = newBirthDate;
+	}
 	
 	public Contract getContract() {
 		return this;
@@ -216,22 +267,48 @@ public class Contract {
 	
 	public static void finalizeContract(Contract contract) {
 		ConnectionManager.putFinalizeContract(contract.getId());
-		contract.getCar().setFree();
-		
 	}
 	
-	public void save() throws SQLException {
-			ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status);
+	public int save() throws SQLException {
+			int contID = ConnectionManager.putContract(this.customer.first_name, this.customer.last_name, this.customer.getId(), this.customer.address, this.car.getName(), this.car.getId(), this.insurance, this.start, this.end, this.duration, this.price, this.status, this.extra_charge, this.extra_days, this.return_date, this.companyid, this.outOfCountry, this.addDriver, this.fullNameAD, this.birthDate);
 			LOGGER.info("Contract created: " + this.customer.getName() + " Car: " + this.car.getName() + " Duration: " + this.duration + " days, for a price of " + this.price);	
+			return contID;
 	}
 	
 	public void setInsurance(String insurance) {
 		this.insurance = insurance;
 	}
 	
+	public double getExtra_charge() {
+		return extra_charge;
+	}
 
-	
-	
-	
+	public void setExtra_charge(double extra_charge) {
+		this.extra_charge = extra_charge;
+	}
+
+	public int getExtra_days() {
+		return extra_days;
+	}
+
+	public void setExtra_days(int extra_days) {
+		this.extra_days = extra_days;
+	}
+
+	public String getReturn_date() {
+		return return_date;
+	}
+
+	public void setReturn_date(String return_date) {
+		this.return_date = return_date;
+	}
+
+	public int getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(int companyid) {
+		this.companyid = companyid;
+	}	
 
 }

@@ -5,8 +5,11 @@ import java.util.logging.Logger;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.value.IntegerValue;
+import org.springframework.web.client.RestTemplate;
 
-import com.bvis.wip.objects.Claim;
+import com.bvis.spring.api.PolicySending;
+import com.bvis.spring.api.ServiceRequesting;
+import com.bvis.wip.objects.RealClaim;
 import com.bvis.wip.objects.RequestCC;
 
 public class InformCC implements JavaDelegate {
@@ -15,17 +18,33 @@ public class InformCC implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
-		// get the processVariable claimID that was set in "CreateClaim"
-		IntegerValue typedVal = execution.getVariableTyped("ClaimID");
-		int claimID = (int) typedVal.getValue();
-		// to proceed with the created Claim in order to inform CC
-		Claim claim = Claim.createFromID(claimID);
-		// create a request with the information of the claim
-		RequestCC request = new RequestCC(claim);
-		LOGGER.info("Car ID of the Request: '" + request.getCarID() + "'...");
 		
-		/* here, the request must be sent */
+
+		RestTemplate restTemplate = new RestTemplate();
+		RealClaim claim = (RealClaim) execution.getVariable("claim");
+		ServiceRequesting serviceRequesting = new ServiceRequesting(claim);
+
+		// Cars and Co IP:
+		restTemplate.postForLocation("http://10.67.20.255:8080/requestService", serviceRequesting);
+		
+		System.out.println("C&C informed.");
+		
+		
+//		// TODO Auto-generated method stub
+//		// get the processVariable claimID that was set in "CreateClaim"
+//		IntegerValue typedVal = execution.getVariableTyped("ClaimID");
+//		int claimID = (int) typedVal.getValue();
+//		// to proceed with the created Claim in order to inform CC
+//		Claim claim = Claim.createFromID(claimID);
+//		// create a request with the information of the claim
+//		RequestCC request = new RequestCC(claim);
+//		request.save();
+//		/* here, the request must be sent with the following data*/
+//		int sendClaimID = claimID;
+//		int carID = request.getCarID();
+//		String jobType = request.getJobType();
+//		String damageDesc = request.getDescription();
+//		String location = request.getLocation();
 	}
 
 }

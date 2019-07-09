@@ -22,6 +22,7 @@ public class OfferCars implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 	
+		//String rentPickUpLoc = (String) execution.getVariable("rentpickuploc");
 		List<String> availableCars = new ArrayList();
 		ResultSet freeCars = ConnectionManager.getAllFreeCars();
 		while (freeCars.next()){

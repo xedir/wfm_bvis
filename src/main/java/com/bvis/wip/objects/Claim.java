@@ -1,19 +1,20 @@
 package com.bvis.wip.objects;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 import com.bvis.wip.db.ConnectionManager;
+import com.bvis.wip.objects.*;
 
-public class Claim {
+public class Claim implements Serializable {
 	
 	private final static Logger LOGGER = Logger.getLogger("LoggingClaim");
 	
 	Customer customer;
 	Contract contract;
 	Car car;
-	Quotation quotation;
 	int ID;
 	int contractID;
 	String claimType;
@@ -21,6 +22,12 @@ public class Claim {
 	String status;
 	String damageDesc;
 	String carLocation;
+	OldQuotation quotation;
+	String damagedParts;
+	double partCosts;
+	double totalCosts;
+	//Damage[] Array to be filled later
+	Damage[] damages;
 	
 	// for "CreateClaim"
 	public Claim(Contract contract, Customer customer, Car car, String claimType, String isCovered, String status, String damageDesc, String carLocation) {
@@ -58,9 +65,9 @@ public class Claim {
 	public static Claim createFromID(int id) throws SQLException {
 		ResultSet rs = ConnectionManager.askForClaimByID(id);
 		rs.next();
-		return new Claim(id, Contract.createFromID(rs.getInt("contractID")),Customer.createFromID(rs.getInt("customerId")), Car.createFromID(rs.getInt("carId")), rs.getString("claimType"), rs.getString("isCovered"), rs.getString("status"), rs.getString("damageDesc"), rs.getString("carLocation"));
+		return new Claim(id, Contract.createFromID(rs.getInt("contractID")), Customer.createFromID(rs.getInt("customerId")), Car.createFromID(rs.getInt("carId")), rs.getString("claimType"), rs.getString("isCovered"), rs.getString("status"), rs.getString("damageDesc"), rs.getString("carLocation"));
 	}
-	
+
 	// getter and setter
 	
 	public Customer getCustomer() {
@@ -87,12 +94,15 @@ public class Claim {
 		this.car = car;
 	}
 	
-	public Quotation getQuotation() {
+	public OldQuotation getQuotation() {
 		return this.quotation;
 	}
 	
-	public void setQuotation(Quotation quotation) {
-		this.quotation = quotation;
+	public void setQuotation(OldQuotation givenQuotation) {
+		this.quotation = givenQuotation;
+		this.damagedParts = givenQuotation.getDamagedParts();
+		this.partCosts = givenQuotation.getPartCosts();
+		this.totalCosts = givenQuotation.getTotalCosts();
 	}
 	
 	public int getClaimID() {
@@ -150,6 +160,11 @@ public class Claim {
 	public void setLocation(String carLocation) {
 		this.carLocation = carLocation;
 	}
+	
+	public String getDamagedParts() {
+		return this.damagedParts;
+	}
+	
 	public Claim getClaim() {
 		return this;
 	}

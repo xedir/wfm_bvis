@@ -40,7 +40,7 @@ public class connection {
 		int rs = stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.info("ERROR putQuery >>>"+e);
 		}
 		
 		//return rs;
